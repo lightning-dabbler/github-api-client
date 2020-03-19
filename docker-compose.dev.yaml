@@ -1,0 +1,17 @@
+version: '3.7'
+services: 
+    github_api:
+        container_name: gh_api
+        image: gh_api
+        build: 
+            context: ./api
+            dockerfile: Dockerfile-dev
+        environment:
+            PYTHONPATH: /api/modules
+            GITHUB_API: https://api.github.com
+        volumes:
+            - ./api:/api
+        ports:
+            - "5064:2064"
+        stdin_open: true
+        tty: true

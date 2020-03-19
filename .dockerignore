@@ -1,0 +1,8 @@
+Dockerfile*
+node_modules
+dist
+**/.DS_Store
+data
+lab
+modules
+tests 
