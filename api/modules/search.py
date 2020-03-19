@@ -4,20 +4,35 @@ import requests
 GITHUB_API = os.getenv('GITHUB_API')
 
 
-def get_users(query,sort=None,order=None,page=1,per_page=100,strict=False):
+def search(endpoint,query,sort=None,order=None,page=1,per_page=100,strict=False):
     """
+    `endpoint:str = 'users','repositories','commits'`
+
+    `query:str`
+    
+    - users:
+    ------
     https://developer.github.com/v3/search/#search-users
     https://help.github.com/en/github/searching-for-information-on-github/searching-users
-
+    
+    - repositories:
+    -----
+    https://developer.github.com/v3/search/#search-repositories
+    https://help.github.com/en/github/searching-for-information-on-github/searching-for-repositories
+    
+    - commits:
+    -----
+    https://developer.github.com/v3/search/#search-commits
+    https://help.github.com/en/github/searching-for-information-on-github/searching-commits
     """
     header = {'Content-Type': 'application/json'}
-    url = f'{GITHUB_API}/search/users?q={query}&per_page={per_page}'
+    url = f'{GITHUB_API}/search/{endpoint}?q={query}&per_page={per_page}'
     if sort:
         url = f'{url}&sort={sort}'
     if order:
         url = f'{url}&order={order}'
     
-    users =[]
+    results =[]
     if not strict:
         done = False
         total_returned = 0
@@ -28,10 +43,10 @@ def get_users(query,sort=None,order=None,page=1,per_page=100,strict=False):
             status_code = response.status_code
             response = response.json()
             if status_code != 200:
-                return status_code,users,headers
+                return status_code,results,headers
             total_count = response['total_count']
             page+=1
-            users.extend(response['items'])
+            results.extend(response['items'])
             total_returned+=per_page
             if total_returned >= total_count:
                 done = True
@@ -42,18 +57,33 @@ def get_users(query,sort=None,order=None,page=1,per_page=100,strict=False):
         status_code = response.status_code
         response = response.json()
         if status_code != 200:
-            return status_code,users,headers
+            return status_code,results,headers
         return status_code,response['items'],headers
-    return status_code,users,headers
+    return status_code,results,headers
 
-def get_users_lazy(query,sort=None,order=None,page=1,per_page=100):
+def search_lazy(endpoint,query,sort=None,order=None,page=1,per_page=100):
     """
+    `endpoint:str = 'users','repositories','commits'`
+
+    `query:str`
+    
+    - users:
+    ------
     https://developer.github.com/v3/search/#search-users
     https://help.github.com/en/github/searching-for-information-on-github/searching-users
-
+    
+    - repositories:
+    -----
+    https://developer.github.com/v3/search/#search-repositories
+    https://help.github.com/en/github/searching-for-information-on-github/searching-for-repositories
+    
+    - commits:
+    -----
+    https://developer.github.com/v3/search/#search-commits
+    https://help.github.com/en/github/searching-for-information-on-github/searching-commits
     """
     header = {'Content-Type': 'application/json'}
-    url = f'{GITHUB_API}/search/users?q={query}&per_page={per_page}'
+    url = f'{GITHUB_API}/search/{endpoint}?q={query}&per_page={per_page}'
     if sort:
         url = f'{url}&sort={sort}'
     if order:
@@ -73,8 +103,8 @@ def get_users_lazy(query,sort=None,order=None,page=1,per_page=100):
             return
         total_count = response['total_count']
         page+=1
-        users = response['items']
-        yield status_code,users,headers
+        results = response['items']
+        yield status_code,results,headers
         total_returned+=per_page
         if total_returned >= total_count:
             done = True
