@@ -26,12 +26,6 @@ def get_users(query,sort=None,order=None,page=1,per_page=100,strict=False):
             headers = response.headers
             status_code = response.status_code
             response = response.json()
-            # print(type(headers))
-            # print(headers)
-            # print(type(status_code))
-            # print(status_code)
-            # print(type(response))
-            # print(response)
             if status_code != 200:
                 return status_code,users
             total_count = response['total_count']
@@ -46,12 +40,6 @@ def get_users(query,sort=None,order=None,page=1,per_page=100,strict=False):
         headers = response.headers
         status_code = response.status_code
         response = response.json()
-        print(type(headers))
-        print(headers)
-        print(type(status_code))
-        print(status_code)
-        print(type(response))
-        print(response)
         if status_code != 200:
             return status_code,users
         return status_code,response['items']
