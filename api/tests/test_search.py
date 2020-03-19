@@ -1,3 +1,4 @@
 import search
 
-search.get_users('lightning+repos:>200','stars','asc')
+x = search.get_users('light+repos:>5','stars','asc')
+print(x[0],len(x[1]))
