@@ -1,9 +1,9 @@
 import search
 from mamba import description,context,it
 
-with description('Get Users') as self:
-    with context('Function utilizes /search/users endpoint'):
-        with it('Returns a tuple: tuple[0]-> status code & tuple[0] -> list of dictionaries of metadata'):
+with description('Module: Search') as self:
+    with context('get_users: Function utilizes /search/users endpoint'):
+        with it('Returns a tuple; tuple[0]-> status code & tuple[0] -> list of dictionaries of metadata'):
             x = search.get_users('lightn+repos:>5','stars','desc')
             assert type(x[0]) == int
             assert type(x[1]) == list
@@ -17,8 +17,8 @@ with description('Get Users') as self:
             if x[1]: assert type(x[1][0]) == dict 
             print(f'\tstatus code = {x[0]};\titem list size = {len(x[1])}')
 
-
-        with it('Lazy Form'):
+    with context('get_users_lazy: Function utilizes /search/users endpoint'):
+        with it('Lazy Form: Lazily Returns a tuple; tuple[0]-> status code & tuple[0] -> list of dictionaries of metadata'):
             x = search.get_users_lazy('light+repos:>5','stars','desc')
             for i in x:
                 status_code,items = i
