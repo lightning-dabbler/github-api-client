@@ -18,4 +18,11 @@ with description('Get Users') as self:
             print(f'\tstatus code = {x[0]};\titem list size = {len(x[1])}')
 
 
-            
+        with it('Lazy Form'):
+            x = search.get_users_lazy('light+repos:>5','stars','desc')
+            for i in x:
+                status_code,items = i
+                assert type(status_code) == int
+                assert type(items) == list
+                print(f'\tstatus code = {status_code};\titem list size = {len(items)}')
+                
