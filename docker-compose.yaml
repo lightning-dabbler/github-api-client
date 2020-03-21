@@ -1,8 +1,8 @@
 version: '3.7'
 services: 
-    github_api-dev:
-        container_name: gh_api-dev
-        image: gh_api-dev
+    github_api:
+        container_name: gh_api
+        image: gh_api
         build: 
             context: ./api
             dockerfile: Dockerfile
@@ -13,5 +13,7 @@ services:
             - ./api:/api
         ports:
             - "5064:2064"
-        stdin_open: true
-        tty: true
+        entrypoint: 
+            - sh
+            - /api/entrypoint.sh
+        
