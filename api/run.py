@@ -18,8 +18,11 @@ def query_search(endpoint,query):
     
     sort = request.args.get('sort',None)
     order = request.args.get('order',None)
+
+    # "+" becomes \s so replace to + so API can read correctly
     if type(sort) == str: sort = re.sub(r'\s+|\++','+',sort,flags=re.IGNORECASE)
     if type(order) == str: order = re.sub(r'\s+|\++','+',order,flags=re.IGNORECASE)
+    
     per_page = int(request.args.get('per_page',100))
     page = int(request.args.get('page',1))
     strict = bool(request.args.get('strict',False))
