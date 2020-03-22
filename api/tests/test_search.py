@@ -46,7 +46,7 @@ with description('Module: Search') as self:
     
     with context('search (repositories): Function utilizes /search/repositories endpoint'):
         with it('Returns tuple(status_code:int,items:list(dict[n]),headers:dict)'):
-            time.sleep(60) # Unauthenticated: Max 10 search requests per min
+            time.sleep(61) # Unauthenticated: Max 10 search requests per min
             x = search.search('repositories','stars:>1+forks:>1','stars+forks','desc')
             assert type(x[0]) == int
             assert type(x[1]) == list
@@ -54,4 +54,14 @@ with description('Module: Search') as self:
             if x[1]: assert type(x[1][0]) == dict
             print(f'\tstatus code = {x[0]};\titem list size = {len(x[1])}; num of headers = {len(x[2])}')
 
+    with context('search(commits): Function utilizes /search/commits endpoint'):
+        with it('Returns tuple(status_code:int,items:list(dict[n]),headers:dict)'):
+            time.sleep(61) # Unauthenticated: Max 10 search requests per min
+            x = search.search('commits','test+repo:vuejs/vue')
+            assert type(x[0]) == int
+            assert type(x[1]) == list
+            assert type(x[2]) == dict
+            if x[1]: assert type(x[1][0]) == dict
+            print(f'\tstatus code = {x[0]};\titem list size = {len(x[1])}; num of headers = {len(x[2])}')
+        
         
