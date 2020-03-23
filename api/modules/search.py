@@ -27,6 +27,7 @@ def search_lazy(endpoint,query,sort=None,order=None,page=1,per_page=100):
     `returns generator`
     """
     header = {'Content-Type': 'application/json'}
+    if endpoint == 'repositories': header['Accept'] = 'application/vnd.github.mercy-preview+json'
     if endpoint == 'commits': header['Accept'] = 'application/vnd.github.cloak-preview'
     url = f'{GITHUB_API}/search/{endpoint}?q={query}&per_page={per_page}'
     if sort:
