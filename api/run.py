@@ -1,5 +1,5 @@
 from flask import Flask,jsonify,request
-import search
+import search,emojis
 import re
 import sys
 
@@ -105,6 +105,28 @@ def query_search(endpoint,query):
         __search_helper(search_generators,search_results,endpoint=endpoint,**current_search_params)        
 
     return jsonify(search_results[endpoint])
+
+@app.route('/emojis',methods=['GET'])
+def query_emojis():
+    status_code,response,headers = emojis.emojis()
+    emoji = request.args.get('emoji',None)
+    if emoji: emoji = __url_arg_fix(emoji)
+
+    results = {
+        'headers':headers,
+        'status_code':status_code,
+        'items':response
+    }
+    if emoji and emoji in response:
+        results = {
+            'headers':headers,
+            'status_code':status_code,
+            emoji:response[emoji]
+        }
+    return jsonify(results)
+    
+
+
 
 if __name__ == '__main__':
     # http://localhost:5064/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc

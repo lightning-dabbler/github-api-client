@@ -1,7 +1,5 @@
-import os
 import requests
-
-GITHUB_API = os.getenv('GITHUB_API')
+from constants import GITHUB_API
 
 def search_lazy(endpoint,query,sort=None,order=None,page=1,per_page=100):
     """
