@@ -9,6 +9,7 @@ services:
         environment:
             PYTHONPATH: /api/modules
             GITHUB_API: https://api.github.com
+            GITHUB_TRENDING_URL: https://github.com/trending
         volumes:
             - ./api:/api
         ports:

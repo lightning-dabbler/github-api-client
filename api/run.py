@@ -1,5 +1,5 @@
 from flask import Flask,jsonify,request
-import search,emojis
+import search,emojis,trending
 import re
 import sys
 
@@ -124,6 +124,29 @@ def query_emojis():
             emoji:response[emoji]
         }
     return jsonify(results)
+
+@app.route('/trending',methods=['GET'])
+def query_trending():
+    request_body = {}
+    developers = bool(request.args.get('developers',False))
+    since = request.args.get('since',None)
+    if developers:
+        request_body['developers'] = developers
+    if since:
+        request_body['since'] = since
+    if request_body:
+        status_code,items,headers = trending.trending(**request_body)
+    else:
+        status_code,items,headers = trending.trending()
+    results = {
+        'headers':headers,
+        'status_code':status_code,
+        'items':items
+    }
+    return jsonify(results)
+    
+
+
     
 
 
