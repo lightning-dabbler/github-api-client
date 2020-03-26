@@ -72,13 +72,6 @@ def __construct_developer_data(base_url,item,html_tag):
     if repo_details:
         item['popular_repository'] = repo_details
 
-    
-    
-
-
-
-
-
 def __construct_repository_data(base_url,item,html_tag):
     p_tag = html_tag.find('p')
     a_tag = html_tag.select_one('h1>a')
@@ -139,10 +132,7 @@ def __construct_repository_data(base_url,item,html_tag):
         builders.append(property_)
     item['built_by'] = builders
         
-
         
-    
-
 if __name__ == '__main__':
     print(*trending(),sep=f'\n{"-"*50}\n')
     print(*trending(since='monthly'),sep=f'\n{"-"*50}\n')

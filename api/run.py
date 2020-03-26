@@ -160,5 +160,10 @@ if __name__ == '__main__':
 
     # http://localhost:5064/search/commits/test+repo:vuejs/vue
     # http://localhost:5064/search/commits/test+repo:vuejs/vue?refresh=true
+
+    # http://localhost:5064/emojis?emoji=octocat
+
+    #http://localhost:5064/trending?since=weekly
+    #http://localhost:5064/trending/developers
     app.run(host='0.0.0.0',port=2064,debug=True)
 
