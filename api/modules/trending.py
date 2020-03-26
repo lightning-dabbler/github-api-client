@@ -48,7 +48,7 @@ def __construct_repository_data(base_url,item,html_tag):
     star_svg = html_tag.select_one('div a svg.octicon.octicon-star')
     fork_svg = html_tag.select_one('div a svg.octicon.octicon-repo-forked')
     freq_star_svg = html_tag.select_one('div span svg.octicon.octicon-star')
-    repo_builders = html_tag.select('div>span>a')
+    repo_builders = html_tag.select('div>span:contains("Built by")>a')
 
     if p_tag:
         item['description'] = p_tag.text.strip()
