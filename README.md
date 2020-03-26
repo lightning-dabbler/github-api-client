@@ -10,7 +10,7 @@ docker-compose up
 
 APIs
 ---
-- api/modules/ 
+- [api/modules/] 
     - [emojis.py] & [search.py] utilizes [GitHub REST API v3]
     - [trending.py] scrapes data from https://github.com for trending repositories/developers
 
@@ -36,3 +36,4 @@ Author
 [emojis.py]:./api/modules/emojis.py
 [search.py]:./api/modules/search.py
 [trending.py]:./api/modules/trending.py
+[api/modules/]:./api/modules/
