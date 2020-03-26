@@ -34,13 +34,50 @@ def __parse_html_response(html,developer_flag):
     for article in articles:
         item = {}
         if developer_flag:
-            #TODO: __construct_developer_data()
-            continue
+            __construct_developer_data(base_url,item,article)
         else:
             __construct_repository_data(base_url,item,article)
 
         results.append(item)
     return results
+
+def __construct_developer_data(base_url,item,html_tag):
+    img_tag = html_tag.select_one('div > a > img.rounded-1')
+    name = html_tag.select_one('div h1.h3 > a')
+    repo_a_tag = html_tag.select_one('article h1.h4 > a')
+    repo_description = html_tag.select_one('article div.f6.mt-1')
+    repo_details = {}
+    if img_tag:
+        avatar = img_tag.get('src').strip()
+        item['avatar'] = splitquery(avatar)[0]
+        if img_tag.parent and img_tag.parent.name == 'a':
+            href = img_tag.parent.get('href').strip().split('/')
+            if len(href) == 2:
+                username = href[-1].strip()
+                profile = f'{base_url}/{username}'
+                item['username'] = username
+                item['profile'] = profile
+    if name:
+        name = name.text.strip()
+        item['name'] = name
+    if repo_a_tag:
+        href = repo_a_tag.get('href').strip().split('/')
+        if len(href) == 3:
+            repo_details['name'] = href[-1].strip()
+            url = f'{base_url}{"/".join(href)}'
+            repo_details['url'] = url
+    if repo_description:
+        description = repo_description.text.strip()
+        repo_details['description'] = description
+    if repo_details:
+        item['popular_repository'] = repo_details
+
+    
+    
+
+
+
+
 
 def __construct_repository_data(base_url,item,html_tag):
     p_tag = html_tag.find('p')
@@ -92,10 +129,10 @@ def __construct_repository_data(base_url,item,html_tag):
     builders = []
     for builder in repo_builders:
         property_ = {}
-        href = builder.get('href').split('/')
+        href = builder.get('href').strip().split('/')
         if len(href)==2:
-            property_['username'] = href[-1]
-            property_['profile'] = f'{base_url}/{href[-1]}'
+            property_['username'] = href[-1].strip()
+            property_['profile'] = f'{base_url}/{href[-1].strip()}'
             img_tag = builder.find('img')
             if img_tag:
                 property_['avatar'] = splitquery(img_tag.get('src').strip())[0] #remove eveything after ? inclusively
@@ -109,4 +146,5 @@ def __construct_repository_data(base_url,item,html_tag):
 if __name__ == '__main__':
     print(*trending(),sep=f'\n{"-"*50}\n')
     print(*trending(since='monthly'),sep=f'\n{"-"*50}\n')
+    print(*trending(developers=True,since='weekly'),sep=f'\n{"-"*50}\n')
     
