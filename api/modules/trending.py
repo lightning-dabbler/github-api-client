@@ -30,9 +30,11 @@ def __parse_html_response(html,developer_flag):
     results = []
     articles = html_class.select('article.Box-row')
     base_url = 'https://github.com'
+    
     for article in articles:
         item = {}
         if developer_flag:
+            #TODO: __construct_developer_data()
             continue
         else:
             __construct_repository_data(base_url,item,article)
