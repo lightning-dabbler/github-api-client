@@ -1,6 +1,6 @@
-# GitHub API Client
+<h1 align="center">GitHub API Client</h1>
 
-> [GitHub REST API v3]
+> :octocat: [GitHub REST API v3]
 
 Run Flask server:
 ```bash
