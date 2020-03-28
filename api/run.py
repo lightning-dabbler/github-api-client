@@ -1,9 +1,11 @@
 from flask import Flask,jsonify,request
+from flask_cors import CORS
 import search,emojis,trending
 import re
 import sys
 
 app = Flask(__name__)
+CORS(app)
 
 # Search Globals
 search_generators = {}
@@ -42,6 +44,7 @@ def __search_helper(search_generators,search_results,**kwargs):
 def __url_arg_fix(arg):
     return re.sub(r'\s+|\++','+',arg,flags=re.IGNORECASE)
 
+# API ROUTES
 @app.route('/',methods=['GET'])
 def home():
     response = {
@@ -145,11 +148,6 @@ def query_trending():
     }
     return jsonify(results)
     
-
-
-    
-
-
 
 if __name__ == '__main__':
     # http://localhost:5064/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc

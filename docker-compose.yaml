@@ -1,5 +1,6 @@
 version: '3.7'
 services: 
+
     github_api:
         container_name: gh_api
         image: gh_api
@@ -14,7 +15,28 @@ services:
             - ./api:/api
         ports:
             - "5064:2064"
+        networks: 
+            - web
         entrypoint: 
             - sh
             - /api/entrypoint.sh
-        
+
+    github_web:
+        container_name: gh_client_side
+        image: gh_client_side
+        build: 
+            context: ./client
+            dockerfile: Dockerfile
+        ports:
+            - "8089:8080"
+        depends_on:
+            - github_api
+        volumes: 
+            - ./client:/client
+        networks: 
+            - web
+        stdin_open: true
+        tty: true   
+
+networks: 
+    web:

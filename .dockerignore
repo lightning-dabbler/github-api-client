@@ -6,3 +6,6 @@ data
 lab
 modules
 tests 
+run_tests.sh
+text*.js
+yarn-error.log

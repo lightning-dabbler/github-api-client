@@ -8,6 +8,7 @@ Flask="*"
 mamba="*"
 requests="*"
 beautifulsoup4="*"
+Flask-Cors="*"
 
 [requires]
 python_version = "3.7"
