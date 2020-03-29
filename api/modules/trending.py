@@ -38,7 +38,8 @@ def __parse_html_response(html,developer_flag):
         else:
             __construct_repository_data(base_url,item,article)
 
-        results.append(item)
+        if item:
+            results.append(item)
     return results
 
 def __construct_developer_data(base_url,item,html_tag):
@@ -129,7 +130,8 @@ def __construct_repository_data(base_url,item,html_tag):
             img_tag = builder.find('img')
             if img_tag:
                 property_['avatar'] = splitquery(img_tag.get('src').strip())[0] #remove eveything after ? inclusively
-        builders.append(property_)
+        if property_:
+            builders.append(property_)
     item['built_by'] = builders
         
         
