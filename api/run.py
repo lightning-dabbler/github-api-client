@@ -54,7 +54,7 @@ def home():
     }
     return jsonify(response)
 
-@app.route('/search/<string:endpoint>/<path:query>',methods=['GET'])
+@app.route('/api/search/<string:endpoint>/<path:query>',methods=['GET'])
 def query_search(endpoint,query):
     global generators,search_query_params,search_results
 
@@ -109,7 +109,7 @@ def query_search(endpoint,query):
 
     return jsonify(search_results[endpoint])
 
-@app.route('/emojis',methods=['GET'])
+@app.route('/api/emojis',methods=['GET'])
 def query_emojis():
     status_code,response,headers = emojis.emojis()
     emoji = request.args.get('emoji',None)
@@ -128,7 +128,7 @@ def query_emojis():
         }
     return jsonify(results)
 
-@app.route('/trending',methods=['GET'])
+@app.route('/api/trending',methods=['GET'])
 def query_trending():
     request_body = {}
     developers = bool(request.args.get('developers',False))
@@ -150,18 +150,19 @@ def query_trending():
     
 
 if __name__ == '__main__':
-    # http://localhost:5064/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc
-    # http://localhost:5064/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc&refresh=true
+    # http://localhost:5064/api/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc
+    # http://localhost:5064/api/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc&refresh=true
     
-    # http://localhost:5064/search/users/lightn?
-    # http://localhost:5064/search/users/lightn?refresh=true
+    # http://localhost:5064/api/search/users/lightn?
+    # http://localhost:5064/api/search/users/lightn?refresh=true
 
-    # http://localhost:5064/search/commits/test+repo:vuejs/vue
-    # http://localhost:5064/search/commits/test+repo:vuejs/vue?refresh=true
+    # http://localhost:5064/api/search/commits/test+repo:vuejs/vue
+    # http://localhost:5064/api/search/commits/test+repo:vuejs/vue?refresh=true
 
-    # http://localhost:5064/emojis?emoji=octocat
+    # http://localhost:5064/api/emojis?emoji=octocat
 
-    #http://localhost:5064/trending?since=weekly
-    #http://localhost:5064/trending/developers
+    #http://localhost:5064/api/trending?since=weekly
+    #http://localhost:5064/api/trending/developers
+    
     app.run(host='0.0.0.0',port=2064,debug=True)
 

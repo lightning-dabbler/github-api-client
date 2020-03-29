@@ -18,29 +18,29 @@ API Usage Examples
 ----
 ## Search 
 ### Repositories
-- [Example 1a](http://localhost:5064/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc)
-- [Example 1b](http://localhost:5064/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc&refresh=true)
+- [Example 1a](http://localhost:5064/api/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc)
+- [Example 1b](http://localhost:5064/api/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc&refresh=true)
 
 ### Users    
-- [Example 2a](http://localhost:5064/search/users/lightn?)
-- [Example 2b](http://localhost:5064/search/users/lightn?refresh=true)
+- [Example 2a](http://localhost:5064/api/search/users/lightn?)
+- [Example 2b](http://localhost:5064/api/search/users/lightn?refresh=true)
 
 ### Commits
-- [Example 3a](http://localhost:5064/search/commits/test+repo:vuejs/vue)
-- [Example 3b](http://localhost:5064/search/commits/test+repo:vuejs/vue?refresh=true)
+- [Example 3a](http://localhost:5064/api/search/commits/test+repo:vuejs/vue)
+- [Example 3b](http://localhost:5064/api/search/commits/test+repo:vuejs/vue?refresh=true)
 
 ## GitHub Emojis
-- [Example 4a](http://localhost:5064/emojis)
-- [Example 4b](http://localhost:5064/emojis?emoji=octocat)
+- [Example 4a](http://localhost:5064/api/emojis)
+- [Example 4b](http://localhost:5064/api/emojis?emoji=octocat)
 
 ## Trending
 ### Repositories
-- [Example 5a](http://localhost:5064/trending)
-- [Example 5b](http://localhost:5064/trending?since=weekly)
+- [Example 5a](http://localhost:5064/api/trending)
+- [Example 5b](http://localhost:5064/api/trending?since=weekly)
 
 ### Developers
-- [Example 6a](http://localhost:5064/trending/developers)
-- [Example 6b](http://localhost:5064/trending/developers?since=monthly)
+- [Example 6a](http://localhost:5064/api/trending/developers)
+- [Example 6b](http://localhost:5064/api/trending/developers?since=monthly)
 
 
 Tech 

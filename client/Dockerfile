@@ -1,6 +1,6 @@
 FROM node:12.16.1-slim
 
-EXPOSE 8080
+EXPOSE 8089
 
 WORKDIR /client
 

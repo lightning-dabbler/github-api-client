@@ -28,7 +28,7 @@ services:
             context: ./client
             dockerfile: Dockerfile
         ports:
-            - "8089:8080"
+            - "8089:8089"
         depends_on:
             - github_api
         volumes: 
