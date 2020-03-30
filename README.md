@@ -50,6 +50,7 @@ Tech
 * [beautifulsoup4]
 * [Docker]
 * [Docker-Compose]
+* [Redis]
 
 Author
 --------
@@ -65,3 +66,4 @@ Author
 [search.py]:./api/modules/search.py
 [trending.py]:./api/modules/trending.py
 [api/modules/]:./api/modules/
+[Redis]: https://redis.io/
