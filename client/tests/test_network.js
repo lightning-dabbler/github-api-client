@@ -10,6 +10,7 @@ const setAsync = promisify(client.set).bind(client)
 const keysAsync = promisify(client.keys).bind(client)
 const delAsync = promisify(client.del).bind(client)
 const quitAsync = promisify(client.quit).bind(client)
+const existsAsync =promisify(client.exists).bind(client)
 
 let response = {}
 async function quitConnection(){
@@ -66,19 +67,20 @@ async function getFromAPI(apiPath) {
     })
 }
 
-async function queryKeys(pattern){
-  return keysAsync(pattern).then(results => {
-    console.log(results, typeof results)
-    return results
-  }).catch(error => {
-    console.error(error)
-    return []
+async function keyExists(key){
+  return existsAsync(key).then(res => {
+    console.log(res)
+    return res
+  }).catch(err => {
+    console.error(err)
+    return false
   })
 }
-async function testTrendFetch(apiPath, key) {
-  const keys = await queryKeys('trending*')
 
-  if (keys.includes(key)) {
+async function testTrendFetch(apiPath, key) {
+  const exists = await keyExists(key)
+
+  if (exists) {
     const data = await redisGet(key)
     await redisDel(key)
     await quitConnection()
