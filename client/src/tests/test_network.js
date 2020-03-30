@@ -1,20 +1,19 @@
+const client = require('../lib/redis-client')
+const Config = require('../lib/config')
+const apiPath = `${Config.api_url}/api/trending`
 const axios = require('axios')
-const redis = require('redis')
-const { promisify } = require('util')
-
-const client = redis.createClient(process.env.REDIS_URL_NET)
-const apiPath = `${process.env.GITHUB_API_NET}/api/trending`
-
-const getAsync = promisify(client.get).bind(client)
-const setAsync = promisify(client.set).bind(client)
-const keysAsync = promisify(client.keys).bind(client)
-const delAsync = promisify(client.del).bind(client)
-const quitAsync = promisify(client.quit).bind(client)
-const existsAsync =promisify(client.exists).bind(client)
 
 let response = {}
-async function quitConnection(){
-  quitAsync().then(result => {
+
+async function expireKey(key, seconds) {
+  client.expireAsync(key, seconds).then(res => {
+    console.log(`EXPIRATION FOR KEY "${key}" @ ${seconds}: ${res}`)
+  }).catch(err => {
+    console.log(err)
+  })
+}
+async function quitConnection() {
+  client.quitAsync().then(result => {
     console.log(`${result}: CONNECTION OFF`)
   }).catch(error => {
     console.error(error)
@@ -22,16 +21,16 @@ async function quitConnection(){
   })
 }
 
-async function redisDel(key){
-  delAsync(key).then(done => {
+async function redisDel(key) {
+  client.delAsync(key).then(done => {
     console.log(`KEY REMOVED ${done}`)
-  }).catch(err =>{
+  }).catch(err => {
     console.error(err)
   })
 }
 
-async function redisSet(key,data){
-  setAsync(key,JSON.stringify(data)).then(res =>{
+async function redisSet(key, data) {
+  client.setAsync(key, JSON.stringify(data)).then(res => {
     console.log(`${res}: DATA SET`)
   }).catch(err => {
     console.error('NO DATA SET')
@@ -40,7 +39,7 @@ async function redisSet(key,data){
 }
 
 async function redisGet(key) {
-  return getAsync(key).then(data => {
+  return client.getAsync(key).then(data => {
     console.log('DATA FROM REDIS')
     return data
   }).catch(error => {
@@ -67,8 +66,8 @@ async function getFromAPI(apiPath) {
     })
 }
 
-async function keyExists(key){
-  return existsAsync(key).then(res => {
+async function keyExists(key) {
+  return client.existsAsync(key).then(res => {
     console.log(res)
     return res
   }).catch(err => {
@@ -88,13 +87,13 @@ async function testTrendFetch(apiPath, key) {
   }
   else {
     const data = await getFromAPI(apiPath)
-    await redisSet(key,data)
+    await redisSet(key, data)
     await quitConnection()
-    return data 
+    return data
   }
 }
-async function results(response, apiPath,key) {
+async function results(response, apiPath, key) {
   response.data = await testTrendFetch(apiPath, key)
   console.log(response)
 }
-results(response, apiPath,'trending_repo_daily')
+results(response, apiPath, 'trending_repo_daily')

@@ -32,6 +32,9 @@ services:
         environment:
             GITHUB_API_NET: http://github_api:2064
             REDIS_URL_NET: redis://redis:6379
+            GITHUB_API_WEB: http://localhost:5064
+            REDIS_URL_WEB: http://localhost:6379
+                
 
         depends_on:
             - github_api
