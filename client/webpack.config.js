@@ -72,7 +72,7 @@ module.exports = env => (
             new VueLoaderPlugin(),
             new CopyWebpackPlugin([
                 { from: 'src/static/', to: 'static/' },
-                { from: 'src/ie.html' },
+                { from: 'src/ie.html' }
             ])
         ],
         optimization:
@@ -96,7 +96,8 @@ module.exports = env => (
             historyApiFallback: true,
             contentBase: 'dist',
             compress: true,
-            host: '0.0.0.0'
+            host: '0.0.0.0',
+            port: 8089
         }
     }
 );
