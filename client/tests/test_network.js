@@ -1,6 +1,6 @@
 const client = require('../lib/redis-client')
-const Config = require('../lib/config')
-const apiPath = `${Config.api_url}/api/trending`
+const config = require('../lib/config')
+const apiPath = `${config.api_url}/api/trending`
 const axios = require('axios')
 
 let response = {}

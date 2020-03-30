@@ -38,7 +38,7 @@
   "scripts": {
     "devserver": "webpack-dev-server --env.development=true --config webpack.config.js",
     "build": "webpack --env.production=true --progress --config webpack.config.js",
-    "test": "NODE_ENV=dev node src/tests/test_network.js"
+    "test": "NODE_ENV=dev node tests/test_network.js"
   },
   "repository": {
     "type": "git",
