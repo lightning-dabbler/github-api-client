@@ -23,7 +23,7 @@ async function pingAPI(retry,seconds,api_url){
     }
     else {
         console.error(`Failure Ping to API: ${api_url}`)
-        assert (status === 200)
+        assert (false)
     }
 }
 
