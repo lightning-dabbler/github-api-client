@@ -9,9 +9,10 @@ async function expireKey(key, seconds) {
   client.expireAsync(key, seconds).then(res => {
     console.log(`EXPIRATION FOR KEY "${key}" @ ${seconds}: ${res}`)
   }).catch(err => {
-    console.log(err)
+    console.error(err)
   })
 }
+
 async function quitConnection() {
   client.quitAsync().then(result => {
     console.log(`${result}: CONNECTION OFF`)
@@ -55,12 +56,10 @@ async function getFromAPI(apiPath) {
       const data = res.data
 
       console.log(`REQUEST COMPLETE ! STATUS CODE: ${data.status_code}`)
-      // console.log(data.items[0].built_by)
       return data
 
     })
     .catch((error) => {
-      // eslint-disable-next-line
       console.error(error);
       return {}
     })
