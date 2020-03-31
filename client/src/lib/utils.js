@@ -26,7 +26,7 @@ async function setKey(key, data, seconds) {
    * @return {undefined}
    */
 
-  client.setAsync(key, JSON.stringify(data)).then(res => {
+  client.setAsync(key, JSON.stringify(data)).then(async res => {
     console.log(`Success - function: setKey --> Data set at Key; Response = ${res}`)
     await setKeyExpiration(key, seconds)
   }).catch(err => {
@@ -46,7 +46,7 @@ async function getKey(key, uri) {
   return client.getAsync(key).then(data => {
     console.log('Success - function: getKey --> KEY INDEXED')
     return JSON.parse(data)
-  }).catch(err => {
+  }).catch(async err => {
     console.error(`Failure - function: getKey --> NO KEY TO INDEX !\n${err}`)
     const data = await retrieveInternalData(uri)
     return data
@@ -79,7 +79,7 @@ async function retrieveInternalData(key, uri,seconds) {
    * @return {object}
    */
   return axios.get(uri)
-    .then((res) => {
+    .then( async (res) => {
       const data = res.data
       console.log(`REQUEST COMPLETE ! STATUS CODE: ${data.status_code}`)
       await setKey(key, data,seconds)

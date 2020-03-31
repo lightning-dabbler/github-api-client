@@ -10,6 +10,7 @@ const delAsync = promisify(client.del).bind(client)
 const quitAsync = promisify(client.quit).bind(client)
 const existsAsync = promisify(client.exists).bind(client)
 const expireAsync = promisify(client.expire).bind(client)
+const flushdbAsync = promisify(client.flushdb).bind(client)
 
 module.exports = {
     ...client,
@@ -18,5 +19,6 @@ module.exports = {
     delAsync,
     quitAsync,
     existsAsync,
-    expireAsync
+    expireAsync,
+    flushdbAsync
 }

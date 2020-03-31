@@ -39,8 +39,8 @@ API Usage Examples
 - [Example 5b](http://localhost:5064/api/trending?since=weekly)
 
 ### Developers
-- [Example 6a](http://localhost:5064/api/trending/developers)
-- [Example 6b](http://localhost:5064/api/trending/developers?since=monthly)
+- [Example 6a](http://localhost:5064/api/trending?developers=true)
+- [Example 6b](http://localhost:5064/api/trending?developers=true&since=monthly)
 
 
 Tech 

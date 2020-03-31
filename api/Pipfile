@@ -4,11 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-Flask="*"
-mamba="*"
-requests="*"
-beautifulsoup4="*"
-Flask-Cors="*"
+Flask="~=1.1"
+mamba="~=0.10"
+requests="~=2.23"
+beautifulsoup4="~=4.8"
+Flask-Cors="~=3.0"
 
 [requires]
 python_version = "3.7"

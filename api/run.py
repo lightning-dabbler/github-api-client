@@ -162,7 +162,7 @@ if __name__ == '__main__':
     # http://localhost:5064/api/emojis?emoji=octocat
 
     #http://localhost:5064/api/trending?since=weekly
-    #http://localhost:5064/api/trending/developers
+    #http://localhost:5064/api/trending?developers=true&since=monthly
     
     app.run(host='0.0.0.0',port=2064,debug=True)
 
