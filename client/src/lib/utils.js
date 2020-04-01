@@ -13,7 +13,7 @@ async function setKeyExpiration(key, seconds) {
   client.expireAsync(key, seconds).then(res => {
     console.log(`Success - function: setKeyExpiration --> EXPIRATION FOR KEY "${key}" SET at ${seconds} secs; RESPONSE = ${res}`)
   }).catch(err => {
-    console.error(`Failure - function: setKeyExpiration --> NO EXPIRATION SET FOR KEY "${key}" \n${err}`)
+    console.error('Failure - function: setKeyExpiration --> NO EXPIRATION SET FOR KEY "${key}"',err)
   })
 }
 
@@ -30,7 +30,7 @@ async function setKey(key, data, seconds) {
     console.log(`Success - function: setKey --> Data set at Key; Response = ${res}`)
     await setKeyExpiration(key, seconds)
   }).catch(err => {
-    console.error(`Failure - function: setKey --> DATA NOT SET !\n${err}`)
+    console.error('Failure - function: setKey --> DATA NOT SET !\n',err)
   })
 }
 
@@ -47,8 +47,8 @@ async function getKey(key, uri) {
     console.log('Success - function: getKey --> KEY INDEXED')
     return JSON.parse(data)
   }).catch(async err => {
-    console.error(`Failure - function: getKey --> NO KEY TO INDEX !\n${err}`)
-    const data = await retrieveInternalData(uri)
+    console.error('Failure - function: getKey --> NO KEY TO INDEX !\n',err)
+    const data = await retrieveInternalAPIData(uri)
     return data
   })
 }
@@ -64,13 +64,13 @@ async function keyExists(key) {
     console.log(`Success - function: keyExists --> RESPONSE = ${res}`)
     return res
   }).catch(err => {
-    console.error(`Failure - function: keyExists --> ERROR\n${err}`)
+    console.error('Failure - function: keyExists --> ERROR\n',err)
     return 0
   })
 }
 
 /********* INTERNAL API **********/
-async function retrieveInternalData(key, uri,seconds) {
+async function retrieveInternalAPIData(key, uri,seconds) {
   /** 
    * Retrieves data from Internal API at uri 
    * @params {string} key
@@ -81,13 +81,13 @@ async function retrieveInternalData(key, uri,seconds) {
   return axios.get(uri)
     .then( async (res) => {
       const data = res.data
-      console.log(`REQUEST COMPLETE ! STATUS CODE: ${data.status_code}`)
+      console.log(`Success - function: retrieveInternalAPIData --> REQUEST TO INTERNAL API COMPLETE ! STATUS CODE: ${data.status_code}`)
       await setKey(key, data,seconds)
       return data
 
     })
     .catch((error) => {
-      console.log(error);
+      console.error('Failure - function: retrieveInternalAPIData',error.response?error.response:'NO RESPONSE');
       return {}
     })
 }
@@ -95,6 +95,6 @@ async function retrieveInternalData(key, uri,seconds) {
 module.exports = {
   keyExists,
   getKey,
-  retrieveInternalData
+  retrieveInternalAPIData
 }
 
