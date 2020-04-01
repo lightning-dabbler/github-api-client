@@ -33,7 +33,7 @@ async function pingAPI(retry, milliseconds, api_url) {
     }
 }
 
-pingAPI(3, 5000, process.env.GITHUB_API_NET)
+pingAPI(5, 5000, process.env.GITHUB_API_NET)
 .catch(err=>{
     console.error(err)
     process.exit(1)
