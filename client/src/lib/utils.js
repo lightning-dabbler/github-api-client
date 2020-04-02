@@ -70,10 +70,19 @@ async function keyExists(key) {
 }
 
 async function flushdb() {
-  flushdbAsync().then(res => {
+  client.flushdbAsync().then(res => {
     console.log(`Success - function: flushdb --> RESPONSE = ${res}`)
   }).catch(err => {
     console.error('Failure - function: flushdb --> ERROR\n', err)
+  })
+}
+
+async function quitConn() {
+  client.quitAsync().then(res => {
+    console.log(`Success - function: quitConn --> RESPONSE = ${res}\nCONNECTION OFF`)
+  }).catch(err => {
+    console.error('Success - function: quitConn --> ERROR\n',err)
+    client.end(false)
   })
 }
 
@@ -104,6 +113,7 @@ module.exports = {
   keyExists,
   getKey,
   retrieveInternalAPIData,
-  flushdb
+  flushdb,
+  quitConn
 }
 

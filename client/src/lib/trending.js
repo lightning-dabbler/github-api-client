@@ -36,12 +36,10 @@ async function trending(endpoint, key, seconds,developers, since, refresh) {
     keyInRedisClient = await keyExists(key)
     if (keyInRedisClient && !refresh) {
         const data = await getKey(key, uri)
-        console.log(data)
         return data
     }
     else {
         const data = await retrieveInternalAPIData(key, uri, `${seconds}`)
-        console.log(data)
         return data
     }
 }
