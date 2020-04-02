@@ -1,13 +1,7 @@
-const { keyExists,flushdb,quitConn } = require('../src/lib/utils')
+const { keyExists,flushdb,quitConn,delay } = require('../src/lib/utils')
 const { trending } = require('../src/lib/trending')
 
-async function delay(milliseconds) {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve()
-        }, milliseconds)
-    })
-}
+
 
 async function testTrending() {
     var x

@@ -1,6 +1,16 @@
 const client = require('../../lib/redis-client')
 const axios = require('axios')
 
+/******** Sleep Function *******/
+
+async function delay(milliseconds) {
+  return new Promise(resolve => {
+      setTimeout(() => {
+          resolve()
+      }, milliseconds)
+  })
+}
+
 /********** REDIS *********/
 async function setKeyExpiration(key, seconds) {
   /** 
@@ -114,6 +124,7 @@ module.exports = {
   getKey,
   retrieveInternalAPIData,
   flushdb,
-  quitConn
+  quitConn,
+  delay
 }
 

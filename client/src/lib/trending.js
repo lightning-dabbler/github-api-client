@@ -1,11 +1,11 @@
 const config = require('../../lib/config')
-const { keyExists, getKey, retrieveInternalAPIData} = require('./utils')
+const { keyExists, getKey, retrieveInternalAPIData } = require('./utils')
 
 const api = config.api_url
 
-async function trending(endpoint, key, seconds,developers, since, refresh) {
+async function trending(endpoint, key, seconds, developers, since, refresh) {
     /** 
-   * Fetches Trending repositories/developers data from internal api or redis client
+   * Fetches Trending repositories/developers data from internal API or Redis client
    * @params {string} endpoint
    * @params {string} key
    * @params {number} seconds
@@ -14,12 +14,16 @@ async function trending(endpoint, key, seconds,developers, since, refresh) {
    * @params {boolean|undefined} refresh
    * @return {object}
    */
+
+    console.log('Function: trending')
+
     developers = developers === true ? developers : false
     since = ['daily', 'weekly', 'monthly'].includes(since) ? since : undefined
     refresh = refresh === true ? refresh : false
 
-    params = {endpoint, key, seconds,developers, since, refresh}
+    const params = { endpoint, key, seconds, developers, since, refresh }
     console.log(`Parameters = ${JSON.stringify(params)}`)
+
     var uri = `${api}${endpoint}`
 
     if (developers && since) {
@@ -33,7 +37,7 @@ async function trending(endpoint, key, seconds,developers, since, refresh) {
     }
     console.log(`uri = ${uri}`)
 
-    keyInRedisClient = await keyExists(key)
+    const keyInRedisClient = await keyExists(key)
     if (keyInRedisClient && !refresh) {
         const data = await getKey(key, uri)
         return data
