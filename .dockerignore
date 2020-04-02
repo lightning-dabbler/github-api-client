@@ -7,5 +7,5 @@ lab
 modules
 tests 
 run_tests.sh
-text*.js
+test*.js
 yarn-error.log

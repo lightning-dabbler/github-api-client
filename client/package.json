@@ -39,7 +39,7 @@
     "ping": "node ping-internal-api.js",
     "devserver": "NODE_ENV=prod webpack-dev-server --env.development=true --config webpack.config.js",
     "build": "NODE_ENV=prod webpack --env.production=true --progress --config webpack.config.js",
-    "test": "node tests/test_network.js"
+    "test": "node tests/test-trending.js"
   },
   "repository": {
     "type": "git",
