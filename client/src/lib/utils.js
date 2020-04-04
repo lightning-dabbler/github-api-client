@@ -115,6 +115,8 @@ async function retrieveInternalAPIData(key, uri, seconds) {
 module.exports = {
   keyExists,
   getKey,
+  setKey,
+  setKeyExpiration,
   retrieveInternalAPIData,
   quitConn,
   flushdb
