@@ -2,10 +2,26 @@
 
 > :octocat: [GitHub REST API v3]
 
-Run Flask server:
+# Table of Contents
+- [Run Containers:](#run-containers)
+- [APIs](#apis)
+- [API Usage Examples](#api-usage)
+    - [Search](#search)
+        - [Repositories](#search-repositories)
+        - [Users](#search-users)
+        - [Commits](#search-commits)
+    - [GitHub Emojis](#github-emojis)
+    - [Trending](#trending)
+        - [Repositories](#trending-repositories)
+        - [Developers](#trending-developers)
+- [Tech](#tech)
+- [Author](#author)
+
+## Run Containers:
 ```bash
 docker-compose up
-# localhost:5064
+# Python Flask - localhost:5064
+# Redis - localhost:6379
 ```
 
 APIs
