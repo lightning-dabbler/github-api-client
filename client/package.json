@@ -36,7 +36,7 @@
     "webpack-dev-server": "^3.7.2"
   },
   "scripts": {
-    "ping": "node ping-internal-api.js",
+    "ping": "node ping-internal-api.js && node ping-redis-api.js",
     "devserver": "NODE_ENV=prod webpack-dev-server --env.development=true --config webpack.config.js",
     "build": "NODE_ENV=prod webpack --env.production=true --progress --config webpack.config.js",
     "test": "node tests/test-trending.js"

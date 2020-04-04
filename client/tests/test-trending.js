@@ -1,4 +1,5 @@
-const { keyExists,flushdb,quitConn,delay } = require('../src/lib/utils')
+const { keyExists, flushdb, quitConn } = require('../src/lib/utils')
+const { delay } = require('../lib/utils')
 const { trending } = require('../src/lib/trending')
 
 
@@ -8,7 +9,7 @@ async function testTrending() {
     await flushdb()
     x = await trending('/api/trending', 'trending_repo_daily', 30)
     console.log(typeof x)
-    x = await trending('/api/trending', 'trending_dev_monthly', 30,developers=true,since='monthly')
+    x = await trending('/api/trending', 'trending_dev_monthly', 30, developers = true, since = 'monthly')
     console.log(typeof x)
     await delay(25000)
     x = await trending('/api/trending', 'trending_repo_daily', 20)

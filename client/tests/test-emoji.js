@@ -1,4 +1,5 @@
-const { keyExists,flushdb,quitConn,delay } = require('../src/lib/utils')
+const { keyExists,flushdb,quitConn } = require('../src/lib/utils')
+const {delay} = require('../lib/utils')
 const { emoji } = require('../src/lib/emoji')
 
 

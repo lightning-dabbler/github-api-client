@@ -1,16 +1,6 @@
 const client = require('../../lib/redis-client')
 const axios = require('axios')
 
-/******** Sleep Function *******/
-
-async function delay(milliseconds) {
-  return new Promise(resolve => {
-      setTimeout(() => {
-          resolve()
-      }, milliseconds)
-  })
-}
-
 /********** REDIS *********/
 async function setKeyExpiration(key, seconds) {
   /** 
@@ -79,22 +69,25 @@ async function keyExists(key) {
   })
 }
 
-async function flushdb() {
-  client.flushdbAsync().then(res => {
-    console.log(`Success - function: flushdb --> RESPONSE = ${res}`)
+async function quitConn() {
+  client.quitAsync().then(res => {
+      console.log(`Success - function: quitConn --> RESPONSE = ${res}\nCONNECTION OFF`)
   }).catch(err => {
-    console.error('Failure - function: flushdb --> ERROR\n', err)
+      console.error('Success - function: quitConn --> ERROR\n', err)
+      client.end(false)
   })
 }
 
-async function quitConn() {
-  client.quitAsync().then(res => {
-    console.log(`Success - function: quitConn --> RESPONSE = ${res}\nCONNECTION OFF`)
+async function flushdb() {
+  client.flushdbAsync().then(res => {
+      console.log(`Success - function: flushdb --> RESPONSE = ${res}`)
   }).catch(err => {
-    console.error('Success - function: quitConn --> ERROR\n',err)
-    client.end(false)
+      console.error('Failure - function: flushdb --> ERROR\n', err)
   })
 }
+
+
+
 
 /********* INTERNAL API **********/
 async function retrieveInternalAPIData(key, uri, seconds) {
@@ -123,8 +116,7 @@ module.exports = {
   keyExists,
   getKey,
   retrieveInternalAPIData,
-  flushdb,
   quitConn,
-  delay
+  flushdb
 }
 

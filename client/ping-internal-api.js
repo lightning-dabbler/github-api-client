@@ -25,10 +25,10 @@ async function pingAPI(retry, milliseconds, api_url) {
         attempts += 1
     }
     if (status === 200) {
-        console.info(`Successful - Ping to API: ${api_url}`)
+        console.info(`Successful - Ping to Internal API: ${api_url}`)
     }
     else {
-        throw new Error(`Failure - Ping to API: ${api_url}`)
+        throw new Error(`Failure - Ping to Internal API: ${api_url}`)
         
     }
 }
