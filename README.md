@@ -5,7 +5,7 @@
 # Table of Contents
 - [Run Containers:](#run-containers)
 - [APIs](#apis)
-- [API Usage Examples](#api-usage)
+- [API Usage Examples](#api-usage-examples)
     - [Search](#search)
         - [Repositories](#search-repositories)
         - [Users](#search-users)
@@ -32,16 +32,18 @@ APIs
 
 API Usage Examples
 ----
-## Search 
-### Repositories
+
+## Search
+
+### Repositories <a id="search-repositories"></a>
 - [Example 1a](http://localhost:5064/api/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc)
 - [Example 1b](http://localhost:5064/api/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc&refresh=true)
 
-### Users    
+### Users <a id="search-users"></a>
 - [Example 2a](http://localhost:5064/api/search/users/lightn?)
 - [Example 2b](http://localhost:5064/api/search/users/lightn?refresh=true)
 
-### Commits
+### Commits <a id="search-commits"></a>
 - [Example 3a](http://localhost:5064/api/search/commits/test+repo:vuejs/vue)
 - [Example 3b](http://localhost:5064/api/search/commits/test+repo:vuejs/vue?refresh=true)
 
@@ -50,14 +52,14 @@ API Usage Examples
 - [Example 4b](http://localhost:5064/api/emojis?emoji=octocat)
 
 ## Trending
-### Repositories
+
+### Repositories <a id="trending-repositories"></a>
 - [Example 5a](http://localhost:5064/api/trending)
 - [Example 5b](http://localhost:5064/api/trending?since=weekly)
 
-### Developers
+### Developers <a id="trending-developers"></a>
 - [Example 6a](http://localhost:5064/api/trending?developers=true)
 - [Example 6b](http://localhost:5064/api/trending?developers=true&since=monthly)
-
 
 Tech 
 ------
