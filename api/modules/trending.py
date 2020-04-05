@@ -5,15 +5,28 @@ import locale
 locale.setlocale( locale.LC_ALL, 'en_US.UTF-8' ) 
 from constants import GITHUB_TRENDING_URL
 
+import logging
+logger = logging.getLogger(__name__)
+
 def trending(**kwargs):
+    """
+    Scrapes trending endpoint on GitHub depending `kwargs` compiles meta data from html 
+    `developers:bool`
+    
+    `since:str`
+
+    `returns tuple(status_code:int,results:list[n],headers:dict)`
+    """
+    logger.info('Scraper for trending endpoint on GitHub')
     developers = False
-    since = None
     path = f'{GITHUB_TRENDING_URL}'
     freq = ('daily','weekly','monthly')
     if 'developers' in kwargs:
         developers = True
         path = f'{path}/developers'
-
+        logger.debug('Constructing Trending Developer Data')
+    else:
+        logger.debug('Constructing Trending Repository Data')
     if 'since' in kwargs and kwargs['since'].lower() in freq:
         path = f'{path}?since={kwargs["since"].lower()}'
     
@@ -26,6 +39,7 @@ def trending(**kwargs):
     return status_code,results,headers
     
 def __parse_html_response(html,developer_flag):
+    logger.debug('Parsing Trending HTML from GitHub')
     html_class = BeautifulSoup(html,"html.parser")
     results = []
     articles = html_class.select('article.Box-row')

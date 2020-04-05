@@ -1,15 +1,10 @@
 from flask import Flask,jsonify,request
 from flask_cors import CORS
-import search,emojis,trending
+import search,emojis,trending,utils
 import re
 import sys
 import logging
 import os
-
-logging.basicConfig(level=logging.DEBUG,
-                   format=f'[%(asctime)s] - {os.getpid()} - %(levelname)s | %(pathname)s | %(funcName)s: %(message)s',
-                   datefmt='%Y-%m-%d %H:%M:%S',
-                   handlers=[logging.StreamHandler(),logging.FileHandler('debug.log')])
 
 logger = logging.getLogger(__name__)
 
@@ -39,6 +34,7 @@ def __search_helper(search_generators,search_results,**kwargs):
         search_results[endpoint]['items']=items
         search_results[endpoint]['headers'] = headers
         search_results[endpoint]['status_code'] = status_code
+        logger.debug(f'status_code = {status_code} num_items = {len(items)}')
     else:
         search_generators[endpoint] = search.search_lazy(endpoint,query,sort=sort,
         order=order,page=page,per_page=per_page)
@@ -49,6 +45,7 @@ def __search_helper(search_generators,search_results,**kwargs):
         search_results[endpoint]['items']=items
         search_results[endpoint]['headers'] = headers
         search_results[endpoint]['status_code'] = status_code
+        logger.debug(f'status_code = {status_code} num_items = {len(items)}')
 
 def __url_arg_fix(arg):
     return re.sub(r'\s+|\++','+',arg,flags=re.IGNORECASE)
@@ -56,8 +53,8 @@ def __url_arg_fix(arg):
 # API ROUTES
 @app.route('/',methods=['GET'])
 def home():
-    logger.debug(f'Route = {request.url}')
-    logger.debug('Root Route Successfully Pinged!')
+    logger.info(f'Route = {request.url}')
+    logger.info('Root Route Successfully Pinged!')
     response = {
         'status_code':200,
         'headers':{'Route':'Home'},
@@ -67,7 +64,7 @@ def home():
 
 @app.route('/api/search/<string:endpoint>/<path:query>',methods=['GET'])
 def query_search(endpoint,query):
-    logger.debug(f'Route = {request.url}')
+    logger.info(f'Route = {request.url}')
     global generators,search_query_params,search_results
     sort = request.args.get('sort',None)
     order = request.args.get('order',None)
@@ -105,10 +102,14 @@ def query_search(endpoint,query):
                 search_results[endpoint]['items'].extend(items)
                 search_results[endpoint]['headers'] = headers
                 search_results[endpoint]['status_code'] = status_code
+                logger.debug(f"status_code = {status_code} num_items = {len(search_results[endpoint]['items'])}")
             except StopIteration:
                 search_generators[endpoint] = None
+                logger.debug(f"status_code = {status_code} num_items = {len(search_results[endpoint]['items'])}")
                 pass
+            
         elif cached_params == current_search_params:
+            logger.debug(f'DATA QUERY PARAMS AND VALUES ALREAY CACHED AND WILL BE RETURNED!')
             pass
         else:
             search_query_params[endpoint] = current_search_params
@@ -122,7 +123,7 @@ def query_search(endpoint,query):
 
 @app.route('/api/emojis',methods=['GET'])
 def query_emojis():
-    logger.debug(f'Route = {request.url}')
+    logger.info(f'Route = {request.url}')
     status_code,response,headers = emojis.emojis()
     emoji = request.args.get('emoji',None)
     if emoji: emoji = __url_arg_fix(emoji)
@@ -138,11 +139,13 @@ def query_emojis():
             'status_code':status_code,
             emoji:response[emoji]
         }
+    
+    logger.debug(f'status_code = {status_code} {f"{emoji} = {response[emoji]}" if emoji in response else f"num_items = {len(response)}"}')    
     return jsonify(results)
 
 @app.route('/api/trending',methods=['GET'])
 def query_trending():
-    logger.debug(f'Route = {request.url}')
+    logger.info(f'Route = {request.url}')
     request_body = {}
     developers = bool(request.args.get('developers',False))
     since = request.args.get('since',None)
@@ -161,6 +164,7 @@ def query_trending():
         'status_code':status_code,
         'items':items
     }
+    logger.debug(f'status_code = {status_code} num_items = {len(items)}')
     return jsonify(results)
     
 

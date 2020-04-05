@@ -1,6 +1,9 @@
 import requests
 from constants import GITHUB_API
 
+import logging
+logger = logging.getLogger(__name__)
+
 def search_lazy(endpoint,query,sort=None,order=None,page=1,per_page=100):
     """
     `endpoint:str = 'users','repositories','commits'`
@@ -24,6 +27,7 @@ def search_lazy(endpoint,query,sort=None,order=None,page=1,per_page=100):
 
     `returns generator`
     """
+    logger.info('Lazy Search Wrapper for /search endpoint')
     header = {'Content-Type': 'application/json'}
     if endpoint == 'repositories': header['Accept'] = 'application/vnd.github.mercy-preview+json'
     if endpoint == 'commits': header['Accept'] = 'application/vnd.github.cloak-preview'
@@ -74,8 +78,11 @@ def search(endpoint,query,sort=None,order=None,page=1,per_page=100,strict=False)
     -----
     https://developer.github.com/v3/search/#search-commits
     https://help.github.com/en/github/searching-for-information-on-github/searching-commits
+
+    `returns tuple(status_code:int,items:list[n], headers:dict)`
     """
 
+    logger.info('Search Wrapper for /search endpoint')
     results =[]
 
     if not strict:

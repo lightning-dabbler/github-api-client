@@ -1,10 +1,16 @@
 import requests
 from constants import GITHUB_API
 
+import logging
+logger = logging.getLogger(__name__)
+
 def emojis():
     """
     `Retrieves all available emojis on GitHub`
+
+    `returns tuple(status_code:int,response:dict,headers:dict)`
     """
+    logger.info('emojis wrapper endpoint')
     header = {'Content-Type': 'application/json'}
     request_url = f'{GITHUB_API}/emojis'
     response = requests.request(
