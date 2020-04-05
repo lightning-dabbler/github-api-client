@@ -3,6 +3,15 @@ from flask_cors import CORS
 import search,emojis,trending
 import re
 import sys
+import logging
+import os
+
+logging.basicConfig(level=logging.DEBUG,
+                   format=f'[%(asctime)s] - {os.getpid()} - %(levelname)s | %(pathname)s | %(funcName)s: %(message)s',
+                   datefmt='%Y-%m-%d %H:%M:%S',
+                   handlers=[logging.StreamHandler(),logging.FileHandler('debug.log')])
+
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 CORS(app)
@@ -47,6 +56,8 @@ def __url_arg_fix(arg):
 # API ROUTES
 @app.route('/',methods=['GET'])
 def home():
+    logger.debug(f'Route = {request.url}')
+    logger.debug('Root Route Successfully Pinged!')
     response = {
         'status_code':200,
         'headers':{'Route':'Home'},
@@ -56,8 +67,8 @@ def home():
 
 @app.route('/api/search/<string:endpoint>/<path:query>',methods=['GET'])
 def query_search(endpoint,query):
+    logger.debug(f'Route = {request.url}')
     global generators,search_query_params,search_results
-
     sort = request.args.get('sort',None)
     order = request.args.get('order',None)
 
@@ -78,7 +89,7 @@ def query_search(endpoint,query):
         'strict':strict
     }
 
-    print(f'refresh = {refresh}, current_search_params = {current_search_params}',file= sys.stderr)
+    logger.debug(f'refresh = {refresh}, current_search_params = {current_search_params}')
 
     if refresh == True:
         search_query_params[endpoint] = current_search_params
@@ -111,10 +122,11 @@ def query_search(endpoint,query):
 
 @app.route('/api/emojis',methods=['GET'])
 def query_emojis():
+    logger.debug(f'Route = {request.url}')
     status_code,response,headers = emojis.emojis()
     emoji = request.args.get('emoji',None)
     if emoji: emoji = __url_arg_fix(emoji)
-
+    logger.debug(f'{f"emoji = {emoji}" if emoji else "No Emoji Specified"}')
     results = {
         'headers':headers,
         'status_code':status_code,
@@ -130,9 +142,12 @@ def query_emojis():
 
 @app.route('/api/trending',methods=['GET'])
 def query_trending():
+    logger.debug(f'Route = {request.url}')
     request_body = {}
     developers = bool(request.args.get('developers',False))
     since = request.args.get('since',None)
+    params = {"developers":developers,"since":since}
+    logger.debug(f'Params = {params}')
     if developers:
         request_body['developers'] = developers
     if since:
