@@ -227,6 +227,7 @@ Tech
 * [Docker]
 * [Docker-Compose]
 * [Redis]
+* [Node-Redis]
 
 Author
 --------
@@ -243,3 +244,4 @@ Author
 [trending.py]:./api/modules/trending.py
 [api/modules/]:./api/modules/
 [Redis]: https://redis.io/
+[Node-Redis]:https://github.com/NodeRedis/node-redis
