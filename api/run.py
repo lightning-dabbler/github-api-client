@@ -55,12 +55,37 @@ def __url_arg_fix(arg):
 def home():
     logger.info(f'Route = {request.url}')
     logger.info('Root Route Successfully Pinged!')
+    resources = {
+        'search':"http://localhost:5064/api/search",
+        'emojis':"http://localhost:5064/api/emojis",
+        'trending':"http://localhost:5064/api/trending"
+    }
     response = {
         'status_code':200,
-        'headers':{'Route':'Home'},
-        'items':[]
+        'resources':resources
     }
     return jsonify(response)
+
+@app.route('/api/search',methods=['GET'])
+def search_resource():
+    logger.info(f'Route = {request.url}')
+    response = {
+    "uri":"http://localhost:5064/api/search/<string:endpoint>/<path:query>",
+    "endpoint":{
+        "values":[
+        "repositories",
+        "users",
+        "commits"
+    ],
+        "optional":False
+    },
+    "query": {
+        "documentation_url": "https://developer.github.com/v3/search",
+        "optional":False
+    }
+    }
+    return jsonify(response)
+
 
 @app.route('/api/search/<string:endpoint>/<path:query>',methods=['GET'])
 def query_search(endpoint,query):
