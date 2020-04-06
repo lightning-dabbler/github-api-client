@@ -221,9 +221,9 @@ Response
 
 Tech 
 ------
-* [flask]
+* [Flask]
 * [Mamba]
-* [beautifulsoup4]
+* [Beautifulsoup4]
 * [Docker]
 * [Docker-Compose]
 * [Redis]
@@ -232,12 +232,12 @@ Author
 --------
 * Osarodion Irabor
 
-[flask]: http://flask.pocoo.org/
+[Flask]: http://flask.pocoo.org/
 [GitHub REST API v3]: https://developer.github.com/v3/
 [Mamba]: https://pypi.org/project/mamba/
 [Docker]: https://docs.docker.com/engine/reference/builder/#usage
 [Docker-Compose]: https://docs.docker.com/compose/compose-file/
-[beautifulsoup4]: https://pypi.org/project/beautifulsoup4/
+[Beautifulsoup4]: https://pypi.org/project/beautifulsoup4/
 [emojis.py]:./api/modules/emojis.py
 [search.py]:./api/modules/search.py
 [trending.py]:./api/modules/trending.py
