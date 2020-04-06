@@ -124,7 +124,7 @@ def query_search(endpoint,query):
                 status_code,items,headers = next(search_generators[endpoint])
                 if status_code !=200 or not items:
                     search_generators[endpoint] = None
-                search_results[endpoint]['items'].extend(items)
+                search_results[endpoint]['items'] =items
                 search_results[endpoint]['headers'] = headers
                 search_results[endpoint]['status_code'] = status_code
                 logger.debug(f"status_code = {status_code} num_items = {len(search_results[endpoint]['items'])}")
