@@ -6,11 +6,6 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-# Search Globals
-search_generators = {}
-search_query_params = {}
-search_results = {}
-
 def create_app():
     app = Flask(__name__)
 
@@ -82,6 +77,7 @@ def create_app():
         },
         "query": {
             "documentation_url": "https://developer.github.com/v3/search",
+            "example":"http://localhost:5064/api/search/commits/test+repo:vuejs/vue",
             "optional":False
         }
         }
@@ -91,7 +87,7 @@ def create_app():
     @app.route('/api/search/<string:endpoint>/<path:query>',methods=['GET'])
     def query_search(endpoint,query):
         logger.info(f'Route = {request.url}')
-        # global generators,search_query_params,search_results
+
         sort = request.args.get('sort',None)
         order = request.args.get('order',None)
 
@@ -101,51 +97,26 @@ def create_app():
         
         per_page = int(request.args.get('per_page',100))
         page = int(request.args.get('page',1))
-        strict = bool(request.args.get('strict',False))
-        refresh = bool(request.args.get('refresh',False))
+
         current_search_params = {
             'query':query,
             'sort':sort,
             'order':order,
             'per_page':per_page,
-            'page':page,
-            'strict':strict
+            'page':page
         }
 
-        logger.debug(f'refresh = {refresh}, current_search_params = {current_search_params}')
-
-        if refresh == True:
-            search_query_params[endpoint] = current_search_params
-            __search_helper(search_generators,search_results,endpoint=endpoint,**current_search_params)
-
-        elif endpoint in search_query_params:
-            cached_params = search_query_params[endpoint]
-            if cached_params == current_search_params and search_generators[endpoint]!=None:
-                try:
-                    status_code,items,headers = next(search_generators[endpoint])
-                    if status_code !=200 or not items:
-                        search_generators[endpoint] = None
-                    search_results[endpoint]['items'] =items
-                    search_results[endpoint]['headers'] = headers
-                    search_results[endpoint]['status_code'] = status_code
-                    logger.debug(f"status_code = {status_code} num_items = {len(search_results[endpoint]['items'])}")
-                except StopIteration:
-                    search_generators[endpoint] = None
-                    logger.debug(f"status_code = {status_code} num_items = {len(search_results[endpoint]['items'])}")
-                    pass
-                
-            elif cached_params == current_search_params:
-                logger.debug(f'DATA QUERY PARAMS AND VALUES ALREAY CACHED AND WILL BE RETURNED!')
-                pass
-            else:
-                search_query_params[endpoint] = current_search_params
-                __search_helper(search_generators,search_results,endpoint=endpoint,**current_search_params)
-
-        else:
-            search_query_params[endpoint] = current_search_params
-            __search_helper(search_generators,search_results,endpoint=endpoint,**current_search_params)        
-
-        return jsonify(search_results[endpoint])
+        logger.debug(f'current_search_params = {current_search_params}')
+        status_code,items,headers = search.search(endpoint,query,sort=sort,
+            order=order,page=page,per_page=per_page,strict=True)
+        
+        results = {
+            'headers':headers,
+            'status_code':status_code,
+            'items':items
+        }
+        logger.debug(f'status_code = {status_code} num_items = {len(items)}')
+        return jsonify(results)
 
     @app.route('/api/emojis',methods=['GET'])
     def query_emojis():
@@ -198,13 +169,10 @@ def create_app():
 
 if __name__ == '__main__':
     # http://localhost:5064/api/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc
-    # http://localhost:5064/api/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc&refresh=true
     
     # http://localhost:5064/api/search/users/lightn?
-    # http://localhost:5064/api/search/users/lightn?refresh=true
 
     # http://localhost:5064/api/search/commits/test+repo:vuejs/vue
-    # http://localhost:5064/api/search/commits/test+repo:vuejs/vue?refresh=true
 
     # http://localhost:5064/api/emojis?emoji=octocat
 

@@ -36,8 +36,7 @@ API Usage Examples
 ## Search
 
 ### Repositories <a id="search-repositories"></a>
-- [Example 1a](http://localhost:5064/api/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc)
-- [Example 1b](http://localhost:5064/api/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc&refresh=true)
+- [Example 1](http://localhost:5064/api/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc)
 
 Response
 ```json
@@ -64,8 +63,7 @@ Response
 ```
 
 ### Users <a id="search-users"></a>
-- [Example 2a](http://localhost:5064/api/search/users/lightn?)
-- [Example 2b](http://localhost:5064/api/search/users/lightn?refresh=true)
+- [Example 2](http://localhost:5064/api/search/users/lightn?)
 
 Response
 ```json
@@ -88,8 +86,7 @@ Response
 }
 ```
 ### Commits <a id="search-commits"></a>
-- [Example 3a](http://localhost:5064/api/search/commits/test+repo:vuejs/vue)
-- [Example 3b](http://localhost:5064/api/search/commits/test+repo:vuejs/vue?refresh=true)
+- [Example 3](http://localhost:5064/api/search/commits/test+repo:vuejs/vue)
 
 Response
 ```json
