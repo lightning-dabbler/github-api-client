@@ -4,7 +4,7 @@ if [ -d "/build" ]
 then
     cp /build/Pipfile.lock /build/Pipfile /api \
     && rm -rf /build \
-    && python run.py
+    && gunicorn -c gunicorn.conf.py wsgi:app
 else
-    python run.py
+    gunicorn -c gunicorn.conf.py wsgi:app
 fi

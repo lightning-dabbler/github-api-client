@@ -22,4 +22,10 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 
 ENV LANG en_US.UTF-8 
 
+ENV PYTHONPATH /api/modules
+
 WORKDIR /api
+
+COPY . /api
+
+CMD gunicorn -c gunicorn.conf.py wsgi:app

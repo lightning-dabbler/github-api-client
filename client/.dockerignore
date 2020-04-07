@@ -4,9 +4,6 @@ dist
 **/.DS_Store
 data
 lab
-modules
 tests 
-run_tests.sh
 test*.js
 yarn-error.log
-debug.log

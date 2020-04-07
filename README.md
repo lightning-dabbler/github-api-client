@@ -20,7 +20,7 @@
 ## Run Containers:
 ```bash
 docker-compose up
-# Python Flask - localhost:5064
+# Python Flask-Gunicorn WSGI Server - localhost:5064
 # Redis - localhost:6379
 ```
 
@@ -228,6 +228,7 @@ Tech
 * [Docker-Compose]
 * [Redis]
 * [Node-Redis]
+* [Gunicorn]
 
 Author
 --------
@@ -245,3 +246,4 @@ Author
 [api/modules/]:./api/modules/
 [Redis]: https://redis.io/
 [Node-Redis]:https://github.com/NodeRedis/node-redis
+[Gunicorn]:https://gunicorn.org/

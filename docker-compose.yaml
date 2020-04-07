@@ -8,6 +8,7 @@ services:
             context: ./api
             dockerfile: Dockerfile
         environment:
+            APP_ENV: ${APP_ENV}
             PYTHONPATH: /api/modules
             GITHUB_API: https://api.github.com
             GITHUB_TRENDING_URL: https://github.com/trending

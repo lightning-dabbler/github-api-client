@@ -9,7 +9,7 @@ def setup_logging():
     logging.basicConfig(level=logging.DEBUG,
                     format=FORMAT,
                     filename='debug.log',
-                    filemode='w')
+                    filemode='a')
 
     formatter = logging.Formatter('[%(asctime)s] - %(levelname)s | %(message)s')
 
