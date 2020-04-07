@@ -19,7 +19,9 @@
 
 ## Run Containers:
 ```bash
-docker-compose up
+docker-compose up # FLASK_ENV=development
+sh start.sh # or bash start.sh FLASK_ENV=production
+
 # Python Flask-Gunicorn WSGI Server - localhost:5064
 # Redis - localhost:6379
 ```
