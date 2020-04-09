@@ -8,7 +8,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 r = redis.from_url(os.environ.get('REDIS_URL_NET'))
-ttl = 60*60*5
 
 cache_bp = Blueprint('cache_bp',__name__)
 
@@ -34,11 +33,11 @@ def __cached_trending(**kwargs):
 @cache_bp.route('/api/cached/trending',methods=['GET'])
 def cached_trending():
     logger.info(f'Route = {request.url}')
-    request_body = {}
+
     developers = bool(request.args.get('developers',False))
     since = request.args.get('since',None)
     refresh = bool(request.args.get('refresh',False))
-
+    ttl = 60*60*5
     freqs = ['daily','weekly','monthly']
 
     if since not in freqs:
