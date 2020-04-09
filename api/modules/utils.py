@@ -2,6 +2,7 @@ import logging
 import os
 import sys
 
+initialized = False
 
 def setup_logging():
     FORMAT = f'[%(asctime)s] - {os.getpid()} - %(levelname)s | %(name)s | %(funcName)s | %(message)s'
@@ -25,4 +26,6 @@ def setup_logging():
 
     logger.debug('LOGGING INITIALIZED')
 
-setup_logging()
+if not initialized:
+    setup_logging()
+    initialized = True

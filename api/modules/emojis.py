@@ -1,4 +1,5 @@
 import requests
+import utils
 from constants import GITHUB_API
 
 import logging

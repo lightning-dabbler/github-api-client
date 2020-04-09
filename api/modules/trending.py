@@ -1,4 +1,5 @@
 import requests
+import utils
 from bs4 import BeautifulSoup
 from urllib.parse import splitquery
 import locale
