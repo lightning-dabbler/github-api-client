@@ -1,22 +1,19 @@
 from flask import Flask
 import utils
 from flask_cors import CORS
-from flask_session import Session
-
-sess = Session()
 
 def create_app():
     app = Flask(__name__)
 
     app.config.from_object('config')
     CORS(app)
-    sess.init_app(app)
+    
 
     with app.app_context():
         from . import routes
-        from . import sessioned_routes
+        from . import cached_routes
 
-        app.register_blueprint(sessioned_routes.session_bp)
+        app.register_blueprint(cached_routes.cache_bp)
     
     return app
     

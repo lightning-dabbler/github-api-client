@@ -7,19 +7,15 @@ logger = logging.getLogger(__name__)
 def str_url_params_fix(arg):
     return re.sub(r'\s+|\++','+',arg,flags=re.IGNORECASE)
 
-def h_trending(request_body, developers, since):
+def h_trending(**request_body):
     """
     - Executes trending.trending and returns a dictionary
     of results 
     
     `return {headers,status_code,items}`
     """
-    params = {"developers":developers,"since":since}
-    logger.debug(f'Params = {params}')
-    if developers:
-        request_body['developers'] = developers
-    if since:
-        request_body['since'] = since
+    logger.debug(f'request_body = {request_body}')
+    
     if request_body:
         status_code,items,headers = trending.trending(**request_body)
     else:

@@ -75,10 +75,11 @@ def query_emojis():
 @app.route('/api/trending',methods=['GET'])
 def query_trending():
     logger.info(f'Route = {request.url}')
-    request_body = {}
     developers = bool(request.args.get('developers',False))
     since = request.args.get('since',None)
-
-    results = helpers.h_trending(request_body, developers, since)
+    if since:
+        results = helpers.h_trending(developers=developers, since=since)
+    else:
+        results = helpers.h_trending(developers=developers)
     return jsonify(results)
 

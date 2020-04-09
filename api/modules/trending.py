@@ -21,7 +21,7 @@ def trending(**kwargs):
     developers = False
     path = f'{GITHUB_TRENDING_URL}'
     freq = ('daily','weekly','monthly')
-    if 'developers' in kwargs:
+    if 'developers' in kwargs and kwargs['developers']==True:
         developers = True
         path = f'{path}/developers'
         logger.debug('Constructing Trending Developer Data')
