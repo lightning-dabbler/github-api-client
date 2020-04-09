@@ -228,6 +228,8 @@ Tech
 * [Redis]
 * [Node-Redis]
 * [Gunicorn]
+* [Flask-Session]
+* [Redis-Python-API]
 
 Author
 --------
@@ -246,3 +248,5 @@ Author
 [Redis]: https://redis.io/
 [Node-Redis]:https://github.com/NodeRedis/node-redis
 [Gunicorn]:https://gunicorn.org/
+[Flask-Session]:https://pythonhosted.org/Flask-Session/#flask.ext.session.Session
+[Redis-Python-API]:https://github.com/andymccurdy/redis-py
