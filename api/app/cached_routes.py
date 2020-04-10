@@ -63,3 +63,26 @@ def cached_trending():
             logger.debug(f'Value set @ key {key_construct}_{freq} TTL = {ttl} !')
     results = __cached_trending(**params)    
     return jsonify(results)
+
+@cache_bp.route('/api/cached/emojis/<path:emoji>',methods=['GET'])
+def cached_emojis(emoji):
+    logger.info(f'Route = {request.url}')
+    results = r.get(emoji)
+    ttl = 60*60*20
+    if results == None:
+        logger.info(f'No Cached Data @ key {emoji} !')
+        results = helpers.h_emojis(emoji)
+        if emoji in results:
+            results = {
+                'exists':True,
+                'img':results[emoji]
+            }
+        else:
+            results = {'exists':False}
+        r.set(emoji,json.dumps(results),ex=ttl)
+        logger.debug(f'Value set @ key {emoji} TTL = {ttl} !')
+    else:
+        logger.info(f'Cached Data @ key {emoji} Retrieved !')
+        results = json.loads(results)
+
+    return jsonify(results)
