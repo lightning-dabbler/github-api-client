@@ -1,44 +1,22 @@
 const config = require('../../lib/config')
-const { keyExists, getKey, retrieveInternalAPIData } = require('./utils')
-
+const { retrieveInternalAPIData } = require('./utils')
 const api = config.api_url
 
-async function emoji(endpoint, emoji, seconds) {
+async function emoji(emoji) {
     /**
-     * Fetches image url associated with emoji from internal
-     * API or Redis client
-     * @params {string} endpoint
+     * Fetches image url data associated with emoji from internal API
      * @params {string} emoji
-     * @seconds {number} seconds
      * @return {object}
      */
     console.log('Function: emoji')
 
-    const uri = `${api}${endpoint}?emoji=${emoji}`
+    const uri = `${api}/api/cached/emojis/${emoji}`
     console.log(uri)
 
-    const params = { endpoint, emoji, seconds }
-    console.log(`Parameters = ${JSON.stringify(params)}`)
-
-    keyInRedisClient = await keyExists(emoji)
-    if (keyInRedisClient) {
-        const data = await getKey(emoji, uri)
-        if (data.hasOwnProperty(`${emoji}`)) {
-            return { exists: true, img: data[`${emoji}`] }
-        }
-        else {
-            return { exists: false }
-        }
-    }
-    else {
-        const data = await retrieveInternalAPIData(emoji, uri, `${seconds}`)
-        if (data.hasOwnProperty(`${emoji}`)) {
-            return { exists: true, img: data[`${emoji}`] }
-        }
-        else {
-            return { exists: false }
-        }
-    }
+    console.log(`Fetching emoji data for ${emoji}; ${uri}`)
+    const data = await retrieveInternalAPIData(uri)
+    console.log(`emoji data = ${JSON.stringify(data)}`)
+    return data
 }
 
 module.exports = {

@@ -1,14 +1,11 @@
 const config = require('../../lib/config')
-const { keyExists, getKey, retrieveInternalAPIData } = require('./utils')
+const { retrieveInternalAPIData } = require('./utils')
 
 const api = config.api_url
 
-async function trending(endpoint, key, seconds, developers, since, refresh) {
+async function trending({developers,since,refresh}) {
     /** 
-   * Fetches Trending repositories/developers data from internal API or Redis client
-   * @params {string} endpoint
-   * @params {string} key
-   * @params {number} seconds
+   * Fetches Trending repositories/developers data from internal API 
    * @params {boolean|undefined} developers
    * @params {string|undefined} since
    * @params {boolean|undefined} refresh
@@ -21,31 +18,31 @@ async function trending(endpoint, key, seconds, developers, since, refresh) {
     since = ['daily', 'weekly', 'monthly'].includes(since) ? since : undefined
     refresh = refresh === true ? refresh : false
 
-    const params = { endpoint, key, seconds, developers, since, refresh }
+    const params = { developers, since, refresh }
     console.log(`Parameters = ${JSON.stringify(params)}`)
 
-    var uri = `${api}${endpoint}`
+    var uri = `${api}/api/cached/trending`
+    
 
     if (developers && since) {
         uri = `${uri}?developers=${developers}&since=${since}`
+        if(refresh) uri = `${uri}&refresh=${true}`
     }
     else if (developers) {
         uri = `${uri}?developers=${developers}`
+        if(refresh) uri = `${uri}&refresh=${true}`
     }
     else if (since) {
         uri = `${uri}?&since=${since}`
+        if(refresh) uri = `${uri}&refresh=${true}`
     }
-    console.log(`uri = ${uri}`)
+    else{
+        if(refresh) uri = `${uri}?&refresh=${true}`
+    }
 
-    const keyInRedisClient = await keyExists(key)
-    if (keyInRedisClient && !refresh) {
-        const data = await getKey(key, uri)
-        return data
-    }
-    else {
-        const data = await retrieveInternalAPIData(key, uri, `${seconds}`)
-        return data
-    }
+    const data = await retrieveInternalAPIData(uri)
+    console.log(`Trending:: ${data.items ? `${data.items.length} items returned` : `ERR NO DATA Trending @ uri ${uri}`}`)
+    return data
 }
 
 module.exports = {
