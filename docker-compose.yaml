@@ -55,9 +55,14 @@ services:
     redis:
         image: redis:6.0-rc2
         container_name: redis-cache
+        command: ["redis-server", "--appendonly", "yes"]
         expose:
             - 6379
         networks: 
             - web
+        volumes:
+            - redis-data:/data
 networks: 
     web:
+volumes:
+    redis-data:
