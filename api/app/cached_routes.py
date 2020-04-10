@@ -67,6 +67,7 @@ def cached_trending():
 @cache_bp.route('/api/cached/emojis/<path:emoji>',methods=['GET'])
 def cached_emojis(emoji):
     logger.info(f'Route = {request.url}')
+    emoji = emoji.strip().lower()
     results = r.get(emoji)
     ttl = 60*60*20
     if results == None:
@@ -74,11 +75,12 @@ def cached_emojis(emoji):
         results = helpers.h_emojis(emoji)
         if emoji in results:
             results = {
+                'name':emoji,
                 'exists':True,
                 'img':results[emoji]
             }
         else:
-            results = {'exists':False}
+            results = {'name':emoji,'exists':False}
         r.set(emoji,json.dumps(results),ex=ttl)
         logger.debug(f'Value set @ key {emoji} TTL = {ttl} !')
     else:
