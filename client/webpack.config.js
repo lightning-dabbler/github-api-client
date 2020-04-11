@@ -4,6 +4,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 rimraf.sync('./dist') // Remove dist directory
 
@@ -12,6 +13,9 @@ module.exports = env => (
         mode: env.production ? 'production' : 'development',
         devtool: env.production ? 'source-map' : 'inline-cheap-module-source-map',
         entry: './src/main.js',
+        node: {
+            fs: 'empty'
+        },
         output: {
             path: path.resolve(__dirname, './dist'),
             publicPath: '/',
@@ -73,7 +77,8 @@ module.exports = env => (
             new CopyWebpackPlugin([
                 { from: 'src/static/', to: 'static/' },
                 { from: 'src/ie.html' }
-            ])
+            ]),
+            new Dotenv({path:'/client/.env'})
         ],
         optimization:
         {

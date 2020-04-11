@@ -4,7 +4,10 @@
   "description": "GitHub API Client",
   "private": true,
   "dependencies": {
+    "@babel/runtime": "^7.9.2",
     "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "dotenv-webpack": "^1.7.0",
     "mkdirp": "^1.0.3",
     "redis": "^3.0.2",
     "vue-lazyload": "^1.3.2"
@@ -12,6 +15,7 @@
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/preset-env": "^7.5.5",
     "babel-loader": "^8.0.6",
     "bootstrap": "^4.3.1",
@@ -26,7 +30,7 @@
     "sass-loader": "^7.2.0",
     "style-loader": "^1.0.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "vue": "^2.6.10",
+    "vue": "^2.6.11",
     "vue-loader": "^15.7.1",
     "vue-router": "^3.1.2",
     "vue-style-loader": "^4.1.2",
@@ -36,10 +40,11 @@
     "webpack-dev-server": "^3.7.2"
   },
   "scripts": {
+    "set:env": "node setenv.js > /client/.env",
     "ping": "node ping-internal-api.js && node ping-redis-api.js",
-    "devserver": "NODE_ENV=prod webpack-dev-server --env.development=true --config webpack.config.js",
-    "build": "NODE_ENV=prod webpack --env.production=true --progress --config webpack.config.js",
-    "test": "node tests/test-trending.js"
+    "devserver": "NODE_ENV=prod yarn set:env && webpack-dev-server --env.development=true --config webpack.config.js",
+    "build": "NODE_ENV=prod yarn set:env && webpack --env.production=true --progress --config webpack.config.js",
+    "test": "NODE_ENV=dev yarn set:env && node tests/test-trending.js && node tests/test-search.js && node tests/test-emoji.js"
   },
   "repository": {
     "type": "git",

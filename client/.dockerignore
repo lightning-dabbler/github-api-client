@@ -7,3 +7,4 @@ lab
 tests 
 test*.js
 yarn-error.log
+.env

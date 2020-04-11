@@ -1,7 +1,6 @@
-const config = require('../../lib/config')
 const { retrieveInternalAPIData } = require('./utils')
-
-const api = config.api_url
+require('../../lib/config')
+const api = process.env.API_URL
 
 async function trending({developers,since,refresh}) {
     /** 

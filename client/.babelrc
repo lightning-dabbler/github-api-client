@@ -1,15 +1,23 @@
 {
-    "presets": [
-        [
-        "@babel/preset-env",
-          {
-          "useBuiltIns": "entry",
-          "corejs": "3.0.0",
-          "forceAllTransforms": true,
-          "ignoreBrowserslistConfig": false,
-          "modules": false,
-          "debug": true
-        }
-      ]
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry",
+        "corejs": "3.0.0",
+        "forceAllTransforms": true,
+        "ignoreBrowserslistConfig": false,
+        "modules": "cjs",
+        "debug": true
+      }
     ]
-  }
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
+  ]
+}
