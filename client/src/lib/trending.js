@@ -5,9 +5,9 @@ const api = process.env.API_URL
 async function trending({developers,since,refresh}) {
     /** 
    * Fetches Trending repositories/developers data from internal API 
-   * @params {boolean|undefined} developers
-   * @params {string|undefined} since
-   * @params {boolean|undefined} refresh
+   * @param {boolean|undefined} developers
+   * @param {string|undefined} since
+   * @param {boolean|undefined} refresh
    * @return {object}
    */
 

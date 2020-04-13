@@ -19,20 +19,6 @@ async function emoji(emoji) {
     return data
 }
 
-
-const getEmoji = async (key) => {
-    /**
-     * Used In Components fetches image associated with key
-     * @params {string} key
-     * @return {object}
-     */
-    const result = {};
-    var data = await emoji(key);
-    result[key] = data.exists ? data.img : undefined;
-    console.log(`emojis = ${JSON.stringify(result)}`);
-    return result;
-  }
-
 module.exports = {
-    emoji, getEmoji
+    emoji
 }

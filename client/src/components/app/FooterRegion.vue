@@ -21,7 +21,6 @@
   </footer>
 </template>
 <script>
-const { getEmoji } = require("../../lib/emoji");
 
 const year = new Date().toLocaleString("en-US", {
   timeZone: "America/New_York",
@@ -37,7 +36,8 @@ export default {
     };
   },
   created: async function created() {
-    this.emoji_obj = await getEmoji(this.emoji);
+    await this.$store.dispatch("callGetEmoji",this.emoji);
+    this.emoji_obj = this.$store.getters.getEmoji(this.emoji)
   }
 };
 </script>

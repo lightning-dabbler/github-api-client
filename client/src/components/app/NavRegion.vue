@@ -14,17 +14,17 @@
   </nav>
 </template>
 <script>
-const { getEmoji } = require("../../lib/emoji");
 export default {
   name: "nav-region",
   props: { emoji: String },
   data: function() {
     return {
-      emoji_obj: false
+      emoji_obj:false
     };
   },
   created: async function created() {
-    this.emoji_obj = await getEmoji(this.emoji);
+    await this.$store.dispatch("callGetEmoji",this.emoji);
+    this.emoji_obj = this.$store.getters.getEmoji(this.emoji)
   }
 };
 </script>

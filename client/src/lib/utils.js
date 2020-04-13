@@ -4,7 +4,7 @@ const axios = require('axios')
 async function retrieveInternalAPIData(uri) {
   /** 
    * Retrieves data from Internal API at uri 
-   * @params {string} uri
+   * @param {string} uri
    * @return {object}
    */
   console.log('Function: retrieveInternalAPIData')

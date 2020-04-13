@@ -5,12 +5,12 @@ const api = process.env.API_URL
 async function search(endpoint, query, {per_page, page, sort, order}) {
     /** 
     * Fetches search data from internal API
-    * @params {string} endpoint
-    * @params {string} query 
-    * @params {number|undefined} per_page
-    * @params {number|undefined} page 
-    * @params {string|undefined} sort  
-    * @params {string|undefined} order
+    * @param {string} endpoint
+    * @param {string} query 
+    * @param {number|undefined} per_page
+    * @param {number|undefined} page 
+    * @param {string|undefined} sort  
+    * @param {string|undefined} order
     * @return {object}
     */
 
