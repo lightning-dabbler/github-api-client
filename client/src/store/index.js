@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 const { trending } = require('@/lib/trending')
 const { emoji } = require('@/lib/emoji')
-
+console.log("vuex store")
 Vue.use(Vuex);
 
 
