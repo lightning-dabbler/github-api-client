@@ -229,6 +229,9 @@ Tech
 * [Node-Redis]
 * [Gunicorn]
 * [Redis-Python-API]
+* [Vue.js]
+* [Vue Router]
+* [Vuex]
 
 Author
 --------
@@ -248,3 +251,6 @@ Author
 [Node-Redis]:https://github.com/NodeRedis/node-redis
 [Gunicorn]:https://gunicorn.org/
 [Redis-Python-API]:https://github.com/andymccurdy/redis-py
+[Vue.js]:https://vuejs.org/
+[Vue Router]:https://router.vuejs.org/
+[Vuex]:https://vuex.vuejs.org/
