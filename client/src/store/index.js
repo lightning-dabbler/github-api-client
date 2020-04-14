@@ -9,7 +9,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         trending: {
-            developers: false,
+            active:{
+                developers:false,
+                repositories:true
+            },
             since: 'daily',
             results: {}
         },
@@ -36,9 +39,13 @@ export default new Vuex.Store({
              * @param {Object} payload 
              */
             console.log("Mutation: updateTrendingFlags Started")
-            state.trending.developers = payload.developers !== state.trending.developers ? payload.developers : state.trending.developers
-            state.trending.since = payload.since ? payload.since : state.trending.since
-            state.trending.results = payload.results ? payload.results : state.trending.results
+            if (payload.active){
+                Vue.set(state.trending.active,"developers", payload.active.developers)
+                Vue.set(state.trending.active,"repositories", payload.active.repositories)
+            }
+            Vue.set(state.trending,"since", payload.since ? payload.since : state.trending.since)
+            Vue.set(state.trending,"results", payload.results ? payload.results : state.trending.results)
+            console.log(state.trending.active,`since ${state.trending.since}`)
             console.log("Mutation: updateTrendingFlags Complete")
         },
         updateEmojis(state, payload) {
@@ -46,7 +53,7 @@ export default new Vuex.Store({
              * @param {Object} payload 
              */
             console.log("Mutation: updateEmojis Started")
-            state.emojis[payload.name] = payload.exists ? payload.img : false
+            Vue.set(state.emojis,payload.name, payload.exists ? payload.img : false)
             console.log("Mutation: updateEmojis Complete")
         }
     },
@@ -57,6 +64,7 @@ export default new Vuex.Store({
              */
             console.log("Action: callTrending Started")
             const data = await trending(payload)
+            console.log(data)
             payload.results = data
             context.commit("updateTrendingFlags", payload)
             console.log("Action: callTrending Complete")
@@ -67,6 +75,7 @@ export default new Vuex.Store({
              */
             console.log("Action: callGetEmojis Started")
             const data = await emoji(payload)
+            console.log(data)
             context.commit("updateEmojis", data)
             console.log("Action: callGetEmoji Complete")
         }

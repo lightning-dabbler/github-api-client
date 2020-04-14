@@ -32,11 +32,11 @@ async function trending({developers,since,refresh}) {
         if(refresh) uri = `${uri}&refresh=${true}`
     }
     else if (since) {
-        uri = `${uri}?&since=${since}`
+        uri = `${uri}?since=${since}`
         if(refresh) uri = `${uri}&refresh=${true}`
     }
     else{
-        if(refresh) uri = `${uri}?&refresh=${true}`
+        if(refresh) uri = `${uri}?refresh=${true}`
     }
 
     const data = await retrieveInternalAPIData(uri)

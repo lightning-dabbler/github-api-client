@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav-region emoji="octocat"></nav-region>
-    <div class="container">
+    <div class="container-fluid">
       <router-view></router-view>
     </div>
     <footer-region emoji="zap"></footer-region>

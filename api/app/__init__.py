@@ -6,7 +6,7 @@ def create_app():
     app = Flask(__name__)
 
     app.config.from_object('config')
-    CORS(app)
+    CORS(app, resources={r"/*": {"origins": "*"}})
     
 
     with app.app_context():

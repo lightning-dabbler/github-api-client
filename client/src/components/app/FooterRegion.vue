@@ -42,8 +42,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "@/static/css/custom.scss";
 footer#footer {
-  font-size: 1rem;
+  font-size: $font-size-sm;
 }
 span#emoji-footer {
   width: 18px;

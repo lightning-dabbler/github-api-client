@@ -11,23 +11,7 @@ r = redis.from_url(os.environ.get('REDIS_URL_NET'))
 
 cache_bp = Blueprint('cache_bp',__name__)
 
-def __cached_trending(**kwargs):
-    logger.debug(f'params = {kwargs}')
-    developers = kwargs['developers']
-    since = kwargs['since']
-    key = kwargs['key']
-    ttl = kwargs['ttl']
 
-    results = r.get(key)
-    if results == None:
-        logger.info(f'No Cached Data @ key {key} !')
-        results = helpers.h_trending(developers=developers,since=since)
-        r.set(key,json.dumps(results),ex=ttl)
-        logger.info(f'Value set @ key {key} TTL = {ttl} !')
-    else:
-        logger.info(f'Cached Data @ key {key} Retrieved !')
-        results = json.loads(results)
-    return results
 
 
 @cache_bp.route('/api/cached/trending',methods=['GET'])
@@ -51,7 +35,8 @@ def cached_trending():
         'key':f'{key_construct}_{since}',
         'developers':developers,
         'since':since,
-        'ttl':ttl
+        'ttl':ttl,
+        'r':r
     }
 
     if refresh:
@@ -61,7 +46,7 @@ def cached_trending():
             results = helpers.h_trending(developers=developers,since=freq)
             r.set(f'{key_construct}_{freq}',json.dumps(results),ex=ttl)
             logger.debug(f'Value set @ key {key_construct}_{freq} TTL = {ttl} !')
-    results = __cached_trending(**params)    
+    results = helpers.cached_trending_util(**params)    
     return jsonify(results)
 
 @cache_bp.route('/api/cached/emojis/<path:emoji>',methods=['GET'])

@@ -1,6 +1,7 @@
 import search,emojis,trending
 import re
 import logging
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -78,4 +79,23 @@ def h_emojis(emoji):
         }
     
     logger.debug(f'status_code = {status_code} {f"{emoji} = {response[emoji]}" if emoji in response else f"num_items = {len(response)}"}')    
+    return results
+
+def cached_trending_util(**kwargs):
+    logger.debug(f'params = {kwargs}')
+    developers = kwargs['developers']
+    since = kwargs['since']
+    key = kwargs['key']
+    ttl = kwargs['ttl']
+    r = kwargs['r']
+
+    results = r.get(key)
+    if results == None:
+        logger.info(f'No Cached Data @ key {key} !')
+        results = h_trending(developers=developers,since=since)
+        r.set(key,json.dumps(results),ex=ttl)
+        logger.info(f'Value set @ key {key} TTL = {ttl} !')
+    else:
+        logger.info(f'Cached Data @ key {key} Retrieved !')
+        results = json.loads(results)
     return results

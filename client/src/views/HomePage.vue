@@ -1,7 +1,6 @@
 <template>
   <section id="home">
-    <h1>HOME</h1>
-  <trending-section></trending-section>  
+    <trending-section></trending-section>
   </section>
 </template>
 

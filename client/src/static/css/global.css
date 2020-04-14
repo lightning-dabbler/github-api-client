@@ -5,3 +5,16 @@ header,
 footer {
   display: block;
 }
+.container-fluid{
+  padding-left: 0!important;
+  padding-right: 0!important;
+}
+body {
+  background-color: #F2F3F4 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+hr {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
