@@ -53,7 +53,7 @@ export default new Vuex.Store({
              * @param {Object} payload 
              */
             console.log("Mutation: updateEmojis Started")
-            Vue.set(state.emojis,payload.name, payload.exists ? payload.img : false)
+            Vue.set(state.emojis,payload.name, payload.exists ? payload.img : '/static/images/error.svg')
             console.log("Mutation: updateEmojis Complete")
         }
     },

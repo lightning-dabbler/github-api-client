@@ -5,32 +5,41 @@
         to="/"
         tag="a"
         name="home"
-        class="navbar-brand"
+        class="navbar-brand d-inline-block my-1"
         id="emoji-nav"
         v-if="emoji_obj && emoji_obj[emoji]"
         :style="{backgroundImage:`url(${emoji_obj[emoji]})`}"
       />
-        <ul class="nav mx-auto">
-          <li class="nav-item">
-            <router-link to="/search" tag="a" class="nav-link direct-link direct-search" name="search"/>
-          </li>
-          <li class="nav-item">
-            <router-link to="/" tag="a" class="nav-link direct-link direct-home" name="Home"/>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link direct-gh direct-link"
-              name="Help"
-              href="https://developer.github.com/v3/search"
-              target="_blank"
-            />
-          </li>
-        </ul>
-      </section>
+      <ul class="nav mr-auto my-1">
+        <!-- <li class="nav-item">
+          
+        </li>-->
+
+        <li class="nav-item">
+          <router-link to="/search" tag="a" class="nav-link" name="search">
+            <img class="direct-link" :data-src="'/static/images/search.svg'" />Search
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/" tag="a" class="nav-link" name="Home">
+            <img class="direct-link" :data-src="'/static/images/home.svg'" />Home
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            name="Help"
+            href="https://developer.github.com/v3/search"
+            target="_blank"
+          >
+            <img class="direct-link" :data-src="'/static/images/help.svg'" />Help
+          </a>
+        </li>
+      </ul>
+    </section>
   </nav>
 </template>
 <script>
-
 export default {
   name: "nav-region",
   props: { emoji: String },
@@ -53,29 +62,38 @@ export default {
   height: 60px;
   background-color: transparent;
   background-size: cover;
+  margin: 0;
+  margin-left: auto;
 }
 
-.nav-link.direct-link {
-  width: 30px;
-  height: 30px;
-  background-size: cover;
-  display: inline-block;
-  // margin-right: -0.1rem;
-  // margin-top: -0.2rem;
+img.direct-link {
+  width: 25px;
+  height: 25px;
+  margin-top: -0.4rem;
 }
-.direct-home {
-  background-image: url("/static/images/home.svg");
-}
-.direct-gh {
-  background-image: url("/static/images/help.svg");
-}
-.direct-search{
-background-image: url("/static/images/search.svg");
-}
-
+// .nav,.nav-link {
+//   // float: right;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
 .nav-link {
-  display:inline;
+  display: inline;
+  padding: 0.2rem;
 }
 
+.nav {
+  margin-right: auto;
+}
 
+@media all and (max-width: 350px) {
+  #emoji-nav {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .nav {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 </style>

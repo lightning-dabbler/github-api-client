@@ -133,6 +133,12 @@ export default {
 <style lang="scss" scoped>
 @import "@/static/css/custom.scss";
 
+.nav-link {
+  padding: 0.5rem;
+}
+.dropdown-menu {
+  min-width: 8rem;
+}
 .nav-link,
 .dropdown-item {
   color: black;
@@ -166,4 +172,16 @@ div.dropdown-menu {
 .dropdown-item:nth-child(2) {
   padding-bottom: $font-size-xs;
 }
+#trending-tabs{
+  border-bottom: 1px solid $ternary-color;
+  background-color: $primary-color;
+}
+
+@media all and (max-width: 991px) {
+  #trending-tabs {
+    display: flex;
+    justify-content: center;
+  }
+}
+
 </style>
