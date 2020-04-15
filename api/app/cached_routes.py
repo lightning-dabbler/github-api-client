@@ -18,9 +18,14 @@ cache_bp = Blueprint('cache_bp',__name__)
 def cached_trending():
     logger.info(f'Route = {request.url}')
 
-    developers = bool(request.args.get('developers',False))
+    developers = request.args.get('developers',False)
+    developers = True if developers in ('true',True) else False
+
     since = request.args.get('since',None)
-    refresh = bool(request.args.get('refresh',False))
+
+    refresh = request.args.get('refresh',False)
+    refresh = True if refresh in ('true',True) else False
+    
     ttl = 60*60*5
     freqs = ['daily','weekly','monthly']
 

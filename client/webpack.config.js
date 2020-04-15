@@ -52,6 +52,11 @@ module.exports = env => (
                         'css-loader',
                         'sass-loader'
                     ]
+                },
+                {
+                    test: /\.(jpg|JPG|jpeg|png|gif|mp3|svg|ttf|woff2|woff|eot)$/,
+                    use: ['file-loader']
+
                 }
             ],
 

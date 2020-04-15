@@ -53,7 +53,12 @@ export default {
         ? this.$route.query.since
         : "daily";
     const developers =
-      this.$route.query && this.$route.query.developers === true ? true : false;
+      this.$route.query &&
+      (this.$route.query.developers == true ||
+        this.$route.query.developers == "true")
+        ? true
+        : false;
+
     const repositories = !developers;
     const payload = {
       active: {
