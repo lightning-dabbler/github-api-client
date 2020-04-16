@@ -41,7 +41,6 @@ services:
             - ./client/nginx-conf/nginx.conf:/etc/nginx/nginx.conf
         networks: 
             - web-prod
-            - default
     
     redis_prod:
         image: redis:6.0-rc2
