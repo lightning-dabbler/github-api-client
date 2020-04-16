@@ -22,7 +22,7 @@ async function search(endpoint, query, {per_page, page, sort, order}) {
 
     console.log(`Parameters = ${JSON.stringify(params)}`)
 
-    var uri = `${api}/api/search/${endpoint}/${query}?page=${page}&${per_page}`
+    var uri = `${api}/search/${endpoint}/${query}?page=${page}&${per_page}`
     if (sort) uri = `${uri}&sort=${sort}`
     if (order) uri = `${uri}&order=${order}`
 

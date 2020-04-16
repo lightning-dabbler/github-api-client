@@ -17,6 +17,7 @@ async function retrieveInternalAPIData(uri) {
     })
     .catch(error => {
       console.error(`Failure - function: retrieveInternalAPIData --> REQUEST TO INTERNAL API ${uri}\n`, error.response ? error.response : 'NO RESPONSE');
+      console.error(error)
       return {}
     })
 }

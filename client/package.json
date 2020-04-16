@@ -1,7 +1,7 @@
 {
   "name": "github-api-client-oi",
   "version": "1.0.0",
-  "description": "GitHub API Client",
+  "description": "GitHub API Client that wraps around GitHub's REST API v3 search resource at endpoints: commit, repositories, & users and also scrapes GitHub Trending Developers and Repositories data.",
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.9.2",
@@ -31,7 +31,7 @@
     "rimraf": "^2.6.3",
     "sass-loader": "^7.2.0",
     "style-loader": "^1.0.0",
-    "uglifyjs-webpack-plugin": "^2.2.0",
+    "terser-webpack-plugin": "^2.3.5",
     "vue": "^2.6.11",
     "vue-loader": "^15.7.1",
     "vue-router": "^3.1.2",

@@ -14,7 +14,7 @@ cache_bp = Blueprint('cache_bp',__name__)
 
 
 
-@cache_bp.route('/api/cached/trending',methods=['GET'])
+@cache_bp.route('/cached/trending',methods=['GET'])
 def cached_trending():
     logger.info(f'Route = {request.url}')
 
@@ -54,7 +54,7 @@ def cached_trending():
     results = helpers.cached_trending_util(**params)    
     return jsonify(results)
 
-@cache_bp.route('/api/cached/emojis/<path:emoji>',methods=['GET'])
+@cache_bp.route('/cached/emojis/<path:emoji>',methods=['GET'])
 def cached_emojis(emoji):
     logger.info(f'Route = {request.url}')
     emoji = emoji.strip().lower()

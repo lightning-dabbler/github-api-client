@@ -20,7 +20,7 @@ async function trending({developers,since,refresh}) {
     const params = { developers, since, refresh }
     console.log(`Parameters = ${JSON.stringify(params)}`)
 
-    var uri = `${api}/api/cached/trending`
+    var uri = `${api}/cached/trending`
     
 
     if (developers && since) {

@@ -13,9 +13,9 @@ def home():
     logger.info(f'Route = {request.url}')
     logger.info('Root Route Successfully Pinged!')
     resources = {
-        'search':"http://localhost:5064/api/search",
-        'emojis':"http://localhost:5064/api/emojis",
-        'trending':"http://localhost:5064/api/trending"
+        'search':"http://localhost:5064/search",
+        'emojis':"http://localhost:5064/emojis",
+        'trending':"http://localhost:5064/trending"
     }
     response = {
         'status_code':200,
@@ -23,11 +23,11 @@ def home():
     }
     return jsonify(response)
 
-@app.route('/api/search',methods=['GET'])
+@app.route('/search',methods=['GET'])
 def search_resource():
     logger.info(f'Route = {request.url}')
     response = {
-    "uri":"http://localhost:5064/api/search/<string:endpoint>/<path:query>",
+    "uri":"http://localhost:5064/search/<string:endpoint>/<path:query>",
     "endpoint":{
         "values":[
         "repositories",
@@ -38,14 +38,14 @@ def search_resource():
     },
     "query": {
         "documentation_url": "https://developer.github.com/v3/search",
-        "example":"http://localhost:5064/api/search/commits/test+repo:vuejs/vue",
+        "example":"http://localhost:5064/search/commits/test+repo:vuejs/vue",
         "optional":False
     }
     }
     return jsonify(response)
 
 
-@app.route('/api/search/<string:endpoint>/<path:query>',methods=['GET'])
+@app.route('/search/<string:endpoint>/<path:query>',methods=['GET'])
 def query_search(endpoint,query):
     logger.info(f'Route = {request.url}')
 
@@ -62,7 +62,7 @@ def query_search(endpoint,query):
     results = helpers.h_search(endpoint, query, sort, order, per_page, page)
     return jsonify(results)
 
-@app.route('/api/emojis',methods=['GET'])
+@app.route('/emojis',methods=['GET'])
 def query_emojis():
     logger.info(f'Route = {request.url}')
     emoji = request.args.get('emoji',None)
@@ -72,7 +72,7 @@ def query_emojis():
 
     return jsonify(results)
 
-@app.route('/api/trending',methods=['GET'])
+@app.route('/trending',methods=['GET'])
 def query_trending():
     logger.info(f'Route = {request.url}')
     

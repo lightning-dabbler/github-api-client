@@ -1,18 +1,15 @@
 version: '3.7'
 
-x-common-variables: &common-variables
-    REDIS_URL_NET: redis://redis:6379
-
 services: 
 
-    github_api:
-        container_name: gh_api
+    github_api_prod:
+        container_name: gh_api-prod
         image: gh_api
         build: 
             context: ./api
             dockerfile: Dockerfile
         environment:
-            <<: *common-variables
+            REDIS_URL_NET: redis://redis_prod:6379
             APP_ENV: ${APP_ENV}
             PYTHONPATH: /api/modules
             GITHUB_API: https://api.github.com
@@ -20,48 +17,43 @@ services:
         volumes:
             - ./api:/api
         ports:
-            - "5064:2064"
+            - "5067:2067"
         networks: 
-            - web
+            - web-prod
         depends_on:
-            - redis
+            - redis_prod
         entrypoint: 
             - sh
             - /api/entrypoint.sh
 
-    github_web:
-        container_name: gh_client_side
-        image: gh_client_side
+    github_web_nginx:
+        container_name: gh_client_side-nginx
+        image: gh_client_side-nginx
         build: 
             context: ./client
             dockerfile: Dockerfile
-        ports:
-            - "8089:8089"
-        environment:
-            <<: *common-variables
-            GITHUB_API_NET: http://github_api:2064
-            GITHUB_API_WEB: http://localhost:5064
-                
         depends_on:
-            - github_api
-        volumes: 
-            - ./client:/client
+            - github_api_prod
+        ports:
+            - "80:80"
+            # - "443:443"
+        volumes:
+            - ./client/nginx-conf/nginx.conf:/etc/nginx/nginx.conf
         networks: 
-            - web
-        stdin_open: true
-        tty: true   
+            - web-prod
+            - default
     
-    redis:
+    redis_prod:
         image: redis:6.0-rc2
-        container_name: redis-cache
+        container_name: redis-cache-prod
         command: ["redis-server", "--appendonly", "yes"]
         expose:
             - 6379
         networks: 
-            - web
+            - web-prod
         volumes:
-            - redis-data:/data
+            - redis-data-prod:/data
 networks: 
-    web:
+    web-prod:
 volumes:
-    redis-data:
+    redis-data-prod:

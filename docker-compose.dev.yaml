@@ -1,0 +1,68 @@
+version: '3.7'
+
+x-common-variables: &common-variables
+    REDIS_URL_NET: redis://redis:6379
+
+services: 
+
+    github_api:
+        container_name: gh_api-dev
+        image: gh_api
+        build: 
+            context: ./api
+            dockerfile: Dockerfile
+        environment:
+            <<: *common-variables
+            APP_ENV: ${APP_ENV}
+            PYTHONPATH: /api/modules
+            GITHUB_API: https://api.github.com
+            GITHUB_TRENDING_URL: https://github.com/trending
+        volumes:
+            - ./api:/api
+        ports:
+            - "5064:2064"
+        networks: 
+            - web-dev
+        depends_on:
+            - redis
+        entrypoint: 
+            - sh
+            - /api/entrypoint.sh
+
+    github_web:
+        container_name: gh_client_side-dev
+        image: gh_client_side
+        build: 
+            context: ./client
+            dockerfile: Dockerfile-dev
+        ports:
+            - "8089:8089"
+        environment:
+            <<: *common-variables
+            GITHUB_API_NET: http://github_api:2064
+            GITHUB_API_WEB: http://localhost:5064
+            WEB_URL: http://localhost:8089
+                
+        depends_on:
+            - github_api
+        volumes: 
+            - ./client:/client
+        networks: 
+            - web-dev
+        stdin_open: true
+        tty: true   
+    
+    redis:
+        image: redis:6.0-rc2
+        container_name: redis-cache-dev
+        command: ["redis-server", "--appendonly", "yes"]
+        expose:
+            - 6379
+        networks: 
+            - web-dev
+        volumes:
+            - redis-data-dev:/data
+networks: 
+    web-dev:
+volumes:
+    redis-data-dev:

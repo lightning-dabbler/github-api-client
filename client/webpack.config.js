@@ -1,6 +1,6 @@
 const path = require('path')
 const rimraf = require('rimraf')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -81,17 +81,19 @@ module.exports = env => (
             new VueLoaderPlugin(),
             new CopyWebpackPlugin([
                 { from: 'src/static/', to: 'static/' },
-                { from: 'src/ie.html' }
+                { from: 'src/ie.html' },
+                { from: 'src/403.html' }
             ]),
-            new Dotenv({path:'/client/.env'})
+            new Dotenv({ path: '/client/.env' })
         ],
         optimization:
         {
+            minimize: true,
             minimizer:
                 [
-                    new UglifyJSPlugin({
+                    new TerserPlugin({
                         sourceMap: true,
-                        uglifyOptions: {
+                        terserOptions: {
                             output: {
                                 comments: false
                             },
@@ -103,6 +105,15 @@ module.exports = env => (
                 ]
         },
         devServer: {
+            proxy: {
+                '/api': {
+                    target: `${process.env.GITHUB_API_NET}`,
+                    pathRewrite: {
+                        '^/api': ''
+                    },
+                    logLevel: 'debug'
+                }
+            },
             historyApiFallback: true,
             contentBase: 'dist',
             compress: true,

@@ -3,7 +3,7 @@
 > :octocat: [GitHub REST API v3]
 
 # Table of Contents
-- [Run Containers:](#run-containers)
+- [Run App:](#run-app)
 - [APIs](#apis)
 - [API Usage Examples](#api-usage-examples)
     - [Search](#search)
@@ -17,13 +17,9 @@
 - [Tech](#tech)
 - [Author](#author)
 
-## Run Containers:
+## Run App:
 ```bash
-docker-compose up # FLASK_ENV=development
-sh start.sh # or bash start.sh FLASK_ENV=production
-
-# Python Flask-Gunicorn WSGI Server - localhost:5064
-# Redis - localhost:6379
+sh prod_start.sh # http://localhost:80
 ```
 
 APIs
@@ -38,7 +34,7 @@ API Usage Examples
 ## Search
 
 ### Repositories <a id="search-repositories"></a>
-- [Example 1](http://localhost:5064/api/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc)
+- [Example 1](http://localhost:80/api/search/repositories/stars:>1+forks:>1?sort=stars+forks&order=desc)
 
 Response
 ```json
@@ -65,7 +61,7 @@ Response
 ```
 
 ### Users <a id="search-users"></a>
-- [Example 2](http://localhost:5064/api/search/users/lightn?)
+- [Example 2](http://localhost:80/api/search/users/lightn?)
 
 Response
 ```json
@@ -88,7 +84,7 @@ Response
 }
 ```
 ### Commits <a id="search-commits"></a>
-- [Example 3](http://localhost:5064/api/search/commits/test+repo:vuejs/vue)
+- [Example 3](http://localhost:80/api/search/commits/test+repo:vuejs/vue)
 
 Response
 ```json
@@ -124,7 +120,7 @@ Response
   }
 ```
 ## GitHub Emojis
-- [Example 4a](http://localhost:5064/api/emojis)
+- [Example 4a](http://localhost:80/api/emojis)
 
 Response
 ```json
@@ -143,13 +139,13 @@ Response
 }
 ```
 
-- [Example 4b](http://localhost:5064/api/emojis?emoji=octocat)
+- [Example 4b](http://localhost:80/api/emojis?emoji=octocat)
 
 ## Trending
 
 ### Repositories <a id="trending-repositories"></a>
-- [Example 5a](http://localhost:5064/api/trending)
-- [Example 5b](http://localhost:5064/api/trending?since=weekly)
+- [Example 5a](http://localhost:80/api/trending)
+- [Example 5b](http://localhost:80/api/trending?since=weekly)
 
 Response
 ```json
@@ -191,8 +187,8 @@ Response
 ```
 
 ### Developers <a id="trending-developers"></a>
-- [Example 6a](http://localhost:5064/api/trending?developers=true)
-- [Example 6b](http://localhost:5064/api/trending?developers=true&since=monthly)
+- [Example 6a](http://localhost:80/api/trending?developers=true)
+- [Example 6b](http://localhost:80/api/trending?developers=true&since=monthly)
 
 Response
 ```json
@@ -232,6 +228,7 @@ Tech
 * [Vue.js]
 * [Vue Router]
 * [Vuex]
+* [Nginx]
 
 Author
 --------
@@ -254,3 +251,4 @@ Author
 [Vue.js]:https://vuejs.org/
 [Vue Router]:https://router.vuejs.org/
 [Vuex]:https://vuex.vuejs.org/
+[Nginx]:https://www.nginx.com/

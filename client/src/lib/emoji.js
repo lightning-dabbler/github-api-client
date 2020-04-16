@@ -10,7 +10,7 @@ async function emoji(emoji) {
      */
     console.log('Function: emoji')
 
-    const uri = `${api}/api/cached/emojis/${emoji}`
+    const uri = `${api}/cached/emojis/${emoji}`
     console.log(uri)
 
     console.log(`Fetching emoji data for ${emoji}; ${uri}`)
