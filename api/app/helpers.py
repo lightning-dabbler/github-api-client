@@ -7,7 +7,8 @@ logger = logging.getLogger(__name__)
 
 def str_url_params_fix(arg):
     return re.sub(r'\s+|\++','+',arg,flags=re.IGNORECASE)
-
+def str_lower_rem_l_t_whitespace(arg):
+    return str(arg).lower().strip()
 def h_trending(**request_body):
     """
     - Executes trending.trending and returns a dictionary

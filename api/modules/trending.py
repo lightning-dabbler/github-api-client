@@ -28,8 +28,8 @@ def trending(**kwargs):
         logger.debug('Constructing Trending Developer Data')
     else:
         logger.debug('Constructing Trending Repository Data')
-    if 'since' in kwargs and kwargs['since'].lower() in freq:
-        path = f'{path}?since={kwargs["since"].lower()}'
+    if 'since' in kwargs and kwargs['since'].lower().strip() in freq:
+        path = f'{path}?since={kwargs["since"].lower().strip()}'
     
     response = requests.request('GET',path)
     status_code = response.status_code

@@ -19,16 +19,18 @@ def cached_trending():
     logger.info(f'Route = {request.url}')
 
     developers = request.args.get('developers',False)
-    developers = True if developers in ('true',True) else False
+    developers = True if helpers.str_lower_rem_l_t_whitespace(developers) == 'true' else False
 
-    since = request.args.get('since',None)
-
+    since = request.args.get('since','')
+    since = helpers.str_lower_rem_l_t_whitespace(since)
+    
     refresh = request.args.get('refresh',False)
-    refresh = True if refresh in ('true',True) else False
+    refresh = True if helpers.str_lower_rem_l_t_whitespace(refresh) == 'true' else False
     
     ttl = 60*60*5
     freqs = ['daily','weekly','monthly']
-
+    
+    
     if since not in freqs:
         since = 'daily'
     if developers:

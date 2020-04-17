@@ -77,10 +77,13 @@ def query_trending():
     logger.info(f'Route = {request.url}')
     
     developers = request.args.get('developers',False)
-    developers = True if developers in ('true',True) else False
+    developers = True if helpers.str_lower_rem_l_t_whitespace(developers) == 'true' else False
+    freq = ['daily','weekly','monthly']
 
-    since = request.args.get('since',None)
-    if since:
+    since = request.args.get('since','')
+    since = helpers.str_lower_rem_l_t_whitespace(since)
+    
+    if since in freq:
         results = helpers.h_trending(developers=developers, since=since)
     else:
         results = helpers.h_trending(developers=developers)
