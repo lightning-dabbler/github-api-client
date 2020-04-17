@@ -93,8 +93,8 @@ def __construct_repository_data(base_url,item,html_tag):
     a_tag = html_tag.select_one('h1>a')
     span_pl_tag = html_tag.select_one('div span[itemprop="programmingLanguage"]')
     span_bg_tag = html_tag.select_one('div span.repo-language-color')
-    star_svg = html_tag.select_one('div a svg.octicon.octicon-star')
-    fork_svg = html_tag.select_one('div a svg.octicon.octicon-repo-forked')
+    star_svg = html_tag.select_one('div a svg.octicon.octicon-star[aria-label="star"]')
+    fork_svg = html_tag.select_one('div a svg.octicon.octicon-repo-forked[aria-label="fork"]')
     freq_star_svg = html_tag.select_one('div span svg.octicon.octicon-star')
     repo_builders = html_tag.select('div>span:contains("Built by")>a')
 
@@ -151,7 +151,12 @@ def __construct_repository_data(base_url,item,html_tag):
         
         
 if __name__ == '__main__':
-    print(*trending(),sep=f'\n{"-"*50}\n')
-    print(*trending(since='monthly'),sep=f'\n{"-"*50}\n')
-    print(*trending(developers=True,since='weekly'),sep=f'\n{"-"*50}\n')
+    logger.info('REPOSITORIES DAILY:')
+    logger.debug(trending())
+
+    logger.info('REPOSITORIES MONTHLY:')
+    logger.debug(trending(since='monthly'))
+
+    logger.info('DEVELOPERS WEEKLY:')
+    logger.debug(trending(developers=True,since='weekly'))
     

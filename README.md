@@ -154,31 +154,30 @@ Response
         ...
     },
   "items": [
+    ...
     {
-      "author": "nytimes", 
-      "avatar": "https://github.com/nytimes.png", 
+      "author": "ahertel",
+      "avatar": "https://github.com/ahertel.png",
       "built_by": [
         {
-          "avatar": "https://avatars3.githubusercontent.com/u/382862", 
-          "profile": "https://github.com/albertsun", 
-          "username": "albertsun"
-        }, 
+        "avatar": "https://avatars0.githubusercontent.com/u/3003066",
+        "profile": "https://github.com/ahertel",
+        "username": "ahertel"
+        },
         {
-          "avatar": "https://avatars0.githubusercontent.com/u/1675354", 
-          "profile": "https://github.com/archietse", 
-          "username": "archietse"
-        }, 
-        {
-          "avatar": "https://avatars3.githubusercontent.com/u/126789", 
-          "profile": "https://github.com/wmandrews", 
-          "username": "wmandrews"
+        "avatar": "https://avatars3.githubusercontent.com/u/7012513",
+        "profile": "https://github.com/antoniablair",
+        "username": "antoniablair"
         }
-      ], 
-      "description": "An ongoing repository of data on coronavirus cases and deaths in the U.S.", 
-      "forks": 970, 
-      "name": "covid-19-data", 
-      "present_freq_stars": "2,230 stars this week", 
-      "url": "https://github.com/nytimes/covid-19-data"
+    ],
+      "description": "A Mac tool that finds available delivery slots for Amazon's Whole Foods delivery and Amazon Fresh services",
+      "forks": 145,
+      "language_color": "#101F1F",
+      "name": "Amazon-Fresh-Whole-Foods-delivery-slot-finder",
+      "present_freq_stars": "381 stars this week",
+      "programming_language": "AppleScript",
+      "stars": 874,
+      "url": "https://github.com/ahertel/Amazon-Fresh-Whole-Foods-delivery-slot-finder"
     },
     ...
   ],
