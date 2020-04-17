@@ -8,12 +8,12 @@
         class="navbar-brand d-inline-block my-1"
         id="emoji-nav"
         v-if="emoji_obj && emoji_obj[emoji]"
-        :style="{backgroundImage:`url(${emoji_obj[emoji]})`}"
+        v-lazy:background-image="emoji_obj[emoji]"
       />
-      <ul class="nav mr-auto my-1">
-        <!-- <li class="nav-item">
-          
-        </li>-->
+      <ul
+        class="nav mr-auto my-1"
+        v-lazy-container="{selector:'img',loading:'/static/images/loading.svg'}"
+      >
 
         <li class="nav-item">
           <router-link to="/search" tag="a" class="nav-link" name="search">

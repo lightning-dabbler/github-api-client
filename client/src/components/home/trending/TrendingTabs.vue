@@ -52,9 +52,9 @@ export default {
   methods: {
     updateRoute(since,developers){
       if (since == "daily") {
-        this.$router.push({ name: "landing", query: { developers } });
+        this.$router.replace({ name: "landing", query: { developers } });
       } else {
-        this.$router.push({ name: "landing", query: { developers, since } });
+        this.$router.replace({ name: "landing", query: { developers, since } });
       }
     },
     mountData: async function mountData() {
