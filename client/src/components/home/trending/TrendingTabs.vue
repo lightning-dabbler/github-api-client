@@ -47,47 +47,53 @@ export default {
   },
   created: async function created() {
     console.log("TrendingHeader.vue: created");
-    const since =
-      this.$route.query &&
-      ["daily", "weekly", "monthly"].includes(this.$route.query.since)
-        ? this.$route.query.since
-        : "daily";
-    const developers =
-      this.$route.query &&
-      (this.$route.query.developers == true ||
-        this.$route.query.developers == "true")
-        ? true
-        : false;
-
-    const repositories = !developers;
-    const payload = {
-      active: {
-        developers,
-        repositories
-      },
-      since
-    };
-    this.curr_since = since.charAt(0).toUpperCase() + since.slice(1);
-    this.since_arr = ["Daily", "Weekly", "Monthly"];
-    this.active = payload.active;
-    this.$store.commit("updateTrendingFlags", payload);
-    await this.$store.dispatch("callTrending", {
-      developers: payload.active.developers,
-      since: payload.since
-    });
+    await this.mountData();
   },
   methods: {
+    updateRoute(since,developers){
+      if (since == "daily") {
+        this.$router.push({ name: "landing", query: { developers } });
+      } else {
+        this.$router.push({ name: "landing", query: { developers, since } });
+      }
+    },
+    mountData: async function mountData() {
+      const since =
+        this.$route.query &&
+        ["daily", "weekly", "monthly"].includes(this.$route.query.since)
+          ? this.$route.query.since
+          : "daily";
+      const developers =
+        this.$route.query &&
+        (this.$route.query.developers == true ||
+          this.$route.query.developers == "true")
+          ? true
+          : false;
+
+      const repositories = !developers;
+      const payload = {
+        active: {
+          developers,
+          repositories
+        },
+        since
+      };
+      this.curr_since = since.charAt(0).toUpperCase() + since.slice(1);
+      this.since_arr = ["Daily", "Weekly", "Monthly"];
+      this.active = payload.active;
+      this.$store.commit("updateTrendingFlags", payload);
+      await this.$store.dispatch("callTrending", {
+        developers: payload.active.developers,
+        since: payload.since
+      });
+    },
     updateSince: async function updateSince(freq) {
       const developers = this.active.developers;
       const since = freq.toLowerCase();
       this.$store.commit("updateTrendingFlags", { since });
       await this.$store.dispatch("callTrending", { developers, since });
       this.curr_since = freq;
-      if (since == "daily") {
-        this.$router.push({ name: "landing", query: { developers } });
-      } else {
-        this.$router.push({ name: "landing", query: { developers, since } });
-      }
+      this.updateRoute(since,developers)
     },
     updateTrendType: async function updateTrendType(name) {
       let developers = this.active.developers;
@@ -121,11 +127,7 @@ export default {
       }
       this.active.developers = developers;
       this.active.repositories = !developers;
-      if (since == "daily") {
-        this.$router.push({ name: "landing", query: { developers } });
-      } else {
-        this.$router.push({ name: "landing", query: { developers, since } });
-      }
+      this.updateRoute(since,developers)
     }
   }
 };
@@ -172,7 +174,7 @@ div.dropdown-menu {
 .dropdown-item:nth-child(2) {
   padding-bottom: $font-size-xs;
 }
-#trending-tabs{
+#trending-tabs {
   border-bottom: 1px solid $ternary-color;
   background-color: $primary-color;
 }
@@ -183,5 +185,4 @@ div.dropdown-menu {
     justify-content: center;
   }
 }
-
 </style>

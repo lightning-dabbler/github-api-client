@@ -15,13 +15,14 @@ export default {
   computed: mapGetters(["getTrendingFlags"]),
   methods: {
     refreshTrending: async function refreshTrending() {
+      console.log('REFRESH')
       const since =
-        this.$route.query &&
-        ["daily", "weekly", "monthly"].includes(this.$route.query.since)
-          ? this.$route.query.since
+        this.getTrendingFlags.since &&
+        ["daily", "weekly", "monthly"].includes(this.getTrendingFlags.since)
+          ? this.getTrendingFlags.since
           : "daily";
       const developers =
-        this.$route.query && this.$route.query.developers === true
+        this.getTrendingFlags.active.developers && this.getTrendingFlags.active.developers === true
           ? true
           : false;
       await this.$store.dispatch("callTrending", {

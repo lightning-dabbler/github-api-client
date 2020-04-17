@@ -86,24 +86,24 @@ module.exports = env => (
             ]),
             new Dotenv({ path: '/client/.env' })
         ],
-        optimization:
-        {
-            minimize: true,
-            minimizer:
-                [
-                    new TerserPlugin({
-                        sourceMap: true,
-                        terserOptions: {
-                            output: {
-                                comments: false
-                            },
-                            compress: {
-                                drop_console: true
+        optimization: env.production ?
+            {
+                minimize: true,
+                minimizer:
+                    [
+                        new TerserPlugin({
+                            sourceMap: true,
+                            terserOptions: {
+                                output: {
+                                    comments: false
+                                },
+                                compress: {
+                                    drop_console: true
+                                }
                             }
-                        }
-                    })
-                ]
-        },
+                        })
+                    ]
+            } : {},
         devServer: {
             proxy: {
                 '/api': {
