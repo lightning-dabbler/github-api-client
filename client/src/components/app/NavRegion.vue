@@ -12,7 +12,6 @@
       />
       <ul
         class="nav mr-auto my-1"
-        v-lazy-container="{selector:'img',loading:'/static/images/loading.svg'}"
       >
 
         <li class="nav-item">

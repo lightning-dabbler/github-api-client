@@ -1,10 +1,10 @@
 <template>
   <section id="trending-refresh">
-    <h1>Trending Refresh</h1>
+    <button @click="refreshTrending">Refresh</button>
     <article
       v-if="getTrendingFlags.results && getTrendingFlags.results.headers"
-    >{{getTrendingFlags.results.headers.date}}</article>
-    <button @click="refreshTrending">Refresh</button>
+    >Last Pulled: {{getTrendingFlags.results.headers.date}}</article>
+    
   </section>
 </template>
 <script>
@@ -35,4 +35,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "@/static/css/custom.scss";
+
+#trending-refresh{
+  border-bottom: 1px solid $ternary-color;
+}
 </style>
