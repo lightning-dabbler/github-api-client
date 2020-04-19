@@ -58,6 +58,7 @@ export default {
       }
     },
     mountData: async function mountData() {
+      this.$store.commit("updateTrendingLoader",true)
       const since =
         this.$route.query &&
         ["daily", "weekly", "monthly"].includes(this.$route.query.since)
@@ -86,16 +87,22 @@ export default {
         developers: payload.active.developers,
         since: payload.since
       });
+      this.$store.commit("updateTrendingLoader",false)
     },
     updateSince: async function updateSince(freq) {
+      console.log("TrendingHeader.vue: updateSince")
+      this.$store.commit("updateTrendingLoader",true)
       const developers = this.active.developers;
       const since = freq.toLowerCase();
       this.$store.commit("updateTrendingFlags", { since });
       await this.$store.dispatch("callTrending", { developers, since });
       this.curr_since = freq;
       this.updateRoute(since,developers)
+      this.$store.commit("updateTrendingLoader",false)
     },
     updateTrendType: async function updateTrendType(name) {
+      console.log("TrendingHeader.vue: updateTrendType")
+      this.$store.commit("updateTrendingLoader",true)
       let developers = this.active.developers;
       const since = this.curr_since.toLowerCase();
       if (developers && name === "developers") {
@@ -128,6 +135,7 @@ export default {
       this.active.developers = developers;
       this.active.repositories = !developers;
       this.updateRoute(since,developers)
+      this.$store.commit("updateTrendingLoader",false)
     }
   }
 };

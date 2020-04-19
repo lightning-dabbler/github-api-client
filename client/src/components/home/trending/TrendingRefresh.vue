@@ -4,7 +4,6 @@
     <article
       v-if="getTrendingFlags.results && getTrendingFlags.results.headers"
     >Last Pulled: {{getTrendingFlags.results.headers.date}}</article>
-    
   </section>
 </template>
 <script>
@@ -15,14 +14,16 @@ export default {
   computed: mapGetters(["getTrendingFlags"]),
   methods: {
     refreshTrending: async function refreshTrending() {
-      console.log('REFRESH')
+      console.log("REFRESH");
+      this.$store.commit("updateTrendingLoader", true);
       const since =
         this.getTrendingFlags.since &&
         ["daily", "weekly", "monthly"].includes(this.getTrendingFlags.since)
           ? this.getTrendingFlags.since
           : "daily";
       const developers =
-        this.getTrendingFlags.active.developers && this.getTrendingFlags.active.developers === true
+        this.getTrendingFlags.active.developers &&
+        this.getTrendingFlags.active.developers === true
           ? true
           : false;
       await this.$store.dispatch("callTrending", {
@@ -30,6 +31,7 @@ export default {
         since,
         refresh: true
       });
+      this.$store.commit("updateTrendingLoader", false);
     }
   }
 };
@@ -37,7 +39,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/static/css/custom.scss";
 
-#trending-refresh{
+#trending-refresh {
   border-bottom: 1px solid $ternary-color;
 }
 </style>
