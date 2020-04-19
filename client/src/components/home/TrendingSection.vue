@@ -30,7 +30,6 @@ import TrendingTabs from "./trending/TrendingTabs.vue";
 import TrendingHeader from "./trending/TrendingHeader.vue";
 import TrendingRefresh from "./trending/TrendingRefresh.vue";
 import VueLoading from "vue-loading-overlay";
-import "vue-loading-overlay/dist/vue-loading.css";
 const { mapGetters } = require("vuex");
 
 export default {
@@ -48,9 +47,32 @@ export default {
   }
 };
 </script>
-
+<style>
+/**
+* VUE-LOADING-OVERLAY CUSTOM STYLES
+*/
+.vld-overlay {
+  align-items: unset;
+}
+.vld-overlay.is-active:focus {
+  outline: none;
+}
+.vld-icon {
+  margin-top: 4rem;
+}
+</style>
 <style lang="scss" scoped>
 @import "@/static/css/custom.scss";
+
+#trending-section {
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+}
 
 .trending-rect {
   background-color: transparent;

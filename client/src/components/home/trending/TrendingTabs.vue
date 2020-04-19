@@ -4,13 +4,13 @@
       <li class="nav-item">
         <button
           :class="`nav-link ${active.repositories?'active':''}`"
-          @click="updateTrendType('repositories')"
+          @click.prevent="updateTrendType('repositories')"
         >Repositories</button>
       </li>
       <li class="nav-item">
         <button
           :class="`nav-link ${active.developers?'active':''}`"
-          @click="updateTrendType('developers')"
+          @click.prevent="updateTrendType('developers')"
         >Developers</button>
       </li>
       <li v-if="curr_since" class="nav-item dropdown">
@@ -26,7 +26,7 @@
             v-for="item in since_arr"
             v-if="item !== curr_since"
             class="dropdown-item"
-            @click="updateSince(item)"
+            @click.prevent="updateSince(item)"
           >{{item}}</button>
         </div>
       </li>
@@ -102,12 +102,12 @@ export default {
     },
     updateTrendType: async function updateTrendType(name) {
       console.log("TrendingHeader.vue: updateTrendType")
-      this.$store.commit("updateTrendingLoader",true)
       let developers = this.active.developers;
       const since = this.curr_since.toLowerCase();
       if (developers && name === "developers") {
         return;
       } else if (developers && name == "repositories") {
+        this.$store.commit("updateTrendingLoader",true)
         developers = false;
         const repositories = true;
         const payload = {
@@ -121,6 +121,7 @@ export default {
       } else if (!developers && name === "repositories") {
         return;
       } else {
+        this.$store.commit("updateTrendingLoader",true)
         developers = true;
         const repositories = false;
         const payload = {
@@ -191,6 +192,15 @@ div.dropdown-menu {
   #trending-tabs {
     display: flex;
     justify-content: center;
+  }
+}
+@media all and (max-width: 245px){
+  #trending-tabs {
+    display:block
+  }
+  .nav-item {
+    display:inline-block;
+    margin:0 auto;
   }
 }
 </style>

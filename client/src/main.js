@@ -1,4 +1,5 @@
 import 'bootstrap'
+import "vue-loading-overlay/dist/vue-loading.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'static/css/global.css'
 import VueRouter from 'vue-router'
