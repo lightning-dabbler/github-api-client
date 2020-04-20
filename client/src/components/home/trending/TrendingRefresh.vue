@@ -9,8 +9,8 @@
       <div class="col-md-6 text-center mb-1">
         <p
           class="last-pulled mb-0"
-          v-if="getTrendingFlags.results && getTrendingFlags.results.headers"
-        ><span class="font-weight-bold">Last Pulled:</span> {{getTrendingFlags.results.headers.date}}</p>
+          v-if="getTrendingFlags.headers"
+        ><span class="font-weight-bold">Last Pulled:</span> {{getTrendingFlags.headers.date}}</p>
       </div>
     </div>
   </section>

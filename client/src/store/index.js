@@ -14,7 +14,9 @@ export default new Vuex.Store({
                 repositories: true
             },
             since: 'daily',
-            results: {},
+            headers:{},
+            items: [],
+            status_code: false,
             loading: {
                 active: false,
                 canCancel: false,
@@ -61,8 +63,14 @@ export default new Vuex.Store({
                 Vue.set(state.trending.active, "developers", payload.active.developers)
                 Vue.set(state.trending.active, "repositories", payload.active.repositories)
             }
-            Vue.set(state.trending, "since", payload.since ? payload.since : state.trending.since)
-            Vue.set(state.trending, "results", payload.results ? payload.results : state.trending.results)
+            if (payload.since) {
+                Vue.set(state.trending, "since", payload.since)
+            }
+            if (payload.results) {
+                Vue.set(state.trending, "items", payload.results.items)
+                Vue.set(state.trending, "headers", payload.results.headers)
+                Vue.set(state.trending, "status_code", payload.results.status_code)
+            }
             console.log(state.trending.active, `since ${state.trending.since}`)
             console.log("Mutation: updateTrendingFlags Complete")
         },
@@ -74,12 +82,12 @@ export default new Vuex.Store({
             Vue.set(state.emojis, payload.name, payload.exists ? payload.img : '/static/images/error.svg')
             console.log("Mutation: updateEmojis Complete")
         },
-        updateTrendingLoader(state,payload){
+        updateTrendingLoader(state, payload) {
             /**
              * @param {boolean} payload
              */
             console.log("Mutation: updateTrendingLoader Started")
-            Vue.set(state.trending.loading,'active',payload)
+            Vue.set(state.trending.loading, 'active', payload)
             console.log("Mutation: updateTrendingLoader Complete")
         }
     },
