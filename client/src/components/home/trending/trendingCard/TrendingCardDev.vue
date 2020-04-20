@@ -1,7 +1,7 @@
 <template>
   <section id="trending-card-dev" class="card bg-light text-center">
     <div class="card-header text-left">
-      <img :src="`/static/images/trending_up.svg`" alt="Trending Up" class="img-fluid" />
+      <img :src="`/static/images/trending_up.svg`" alt="Trending Up" class="img-fluid trending-up" />
       {{index+1}}
     </div>
     <div class="card-body">
@@ -81,6 +81,20 @@ export default {
 .avatar-img {
   width: 100px;
   height: 100px;
+}
+.trending-up {
+  width: 24px;
+  height: 24px;
+}
+.repo-name::before {
+content:"";
+background-image: url("/static/images/repo.svg");
+background-size:contain;
+width: $font-size-sm;
+height: $font-size-sm;
+display: inline-block;
+background-repeat:no-repeat;
+margin-bottom: -0.18rem;
 }
 
 @media all and (max-width: 370px) {
