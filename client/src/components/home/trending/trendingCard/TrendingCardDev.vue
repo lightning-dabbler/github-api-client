@@ -24,7 +24,7 @@
       <a :href="profile" target="_blank">
         <img :src="avatar" :alt="username" class="card-img-top avatar-img img-fluid" />
       </a>
-      <div class="card-title text-muted mt-2 mb-0 font-weight-normal">Popular Repo:</div>
+      <div class="card-title text-muted mt-2 mb-0 font-weight-normal popular-repo-title">Popular Repo:</div>
       <a
         class="card-subtitle card-link font-weight-bold repo-name"
         :href="popular_repository.url"
@@ -86,15 +86,23 @@ export default {
   width: 24px;
   height: 24px;
 }
+
 .repo-name::before {
-content:"";
 background-image: url("/static/images/repo.svg");
+margin-bottom: -0.18rem;
+}
+.popular-repo-title:before {
+background-image: url("/static/images/fire.svg");
+margin-bottom: -0.1rem;
+}
+
+.repo-name::before,.popular-repo-title:before {
+  content:"";
 background-size:contain;
 width: $font-size-sm;
 height: $font-size-sm;
 display: inline-block;
 background-repeat:no-repeat;
-margin-bottom: -0.18rem;
 }
 
 @media all and (max-width: 370px) {
