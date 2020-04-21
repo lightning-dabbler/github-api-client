@@ -14,6 +14,7 @@
     - [Trending](#trending)
         - [Repositories](#trending-repositories)
         - [Developers](#trending-developers)
+- [Visuals](#visuals)
 - [Tech](#tech)
 - [Author](#author)
 
@@ -212,6 +213,10 @@ Response
     "status_code": 200
 }
 ```
+## Visuals
+<img src="./screenshots/trending-home-page.gif" alt="GitHub API Client Home page">
+<img src="./screenshots/commit-search-results.gif" alt="Sample commit search; uri = http://localhost:80/api/search/commits/test+repo:vuejs/vue">
+<img src="./screenshots/trending-repos.gif" alt="Trending Repositories today; uri = http://localhost:8089/api/cached/trending">
 
 Tech 
 ------
