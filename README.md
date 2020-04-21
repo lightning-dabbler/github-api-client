@@ -217,13 +217,15 @@ Response
 ```
 ## Visuals
 ### Home Page
+
 <p align="center">
-<img src="./screenshots/trending-home-page.gif" alt="GitHub API Client Home page" height="auto" width="500" vspace="20"/>
-</div>
-<div style="display:inline-block">
-<img src="./screenshots/trending-dev-home-page-full-page.png" alt="Full Page GitHub API Client Home page Devs" width="350" align="left"/>
-<img src="./screenshots/trending-repo-home-page-full-page.png" alt="Full Page GitHub API Client Home page repos" width="350" align="left" hspace="20"/>
-</div>
+    <img src="./screenshots/trending-home-page.gif" alt="GitHub API Client Home page"/>
+    </p>
+<table align="center">
+    <tr rowspan="2"><td></td></tr>
+    <tr><th>Developers</th><th>Repositories</th></tr>
+    <tr><td><p><img src="./screenshots/trending-dev-home-page-full-page.png" alt="Full Page GitHub API Client Home page Devs"/></p></td><td><p><img src="./screenshots/trending-repo-home-page-full-page.png" alt="Full Page GitHub API Client Home page repos"/></p></td></tr>
+    </table>
 
 
 ### API
