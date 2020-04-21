@@ -221,10 +221,9 @@ Response
 <p align="center">
     <img src="./screenshots/trending-home-page.gif" alt="GitHub API Client Home page"/>
     </p>
-<table align="center">
-    <tr rowspan="2"><td></td></tr>
+<table>
     <tr><th>Developers</th><th>Repositories</th></tr>
-    <tr><td><p><img src="./screenshots/trending-dev-home-page-full-page.png" alt="Full Page GitHub API Client Home page Devs"/></p></td><td><p><img src="./screenshots/trending-repo-home-page-full-page.png" alt="Full Page GitHub API Client Home page repos"/></p></td></tr>
+    <tr><td valign="top"><img src="./screenshots/trending-dev-home-page-full-page.png" alt="Full Page GitHub API Client Home page Devs" /></td><td valign="top"><img src="./screenshots/trending-repo-home-page-full-page.png" alt="Full Page GitHub API Client Home page repos"/></td></tr>
     </table>
 
 
