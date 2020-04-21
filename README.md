@@ -214,9 +214,9 @@ Response
 }
 ```
 ## Visuals
-<img src="./screenshots/trending-home-page.gif" alt="GitHub API Client Home page">
-<img src="./screenshots/commit-search-results.png" alt="Sample commit search; uri = http://localhost:80/api/search/commits/test+repo:vuejs/vue">
-<img src="./screenshots/trending-repos.png" alt="Trending Repositories today; uri = http://localhost:80/api/cached/trending">
+<img src="./screenshots/trending-home-page.gif" alt="GitHub API Client Home page" height="auto" width="500">
+<img src="./screenshots/commit-search-results.png" alt="Sample commit search; uri = http://localhost:80/api/search/commits/test+repo:vuejs/vue" height="auto" width="500">
+<img src="./screenshots/trending-repos.png" alt="Trending Repositories today; uri = http://localhost:80/api/cached/trending" height="auto" width="500">
 
 Tech 
 ------
