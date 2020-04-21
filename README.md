@@ -15,6 +15,8 @@
         - [Repositories](#trending-repositories)
         - [Developers](#trending-developers)
 - [Visuals](#visuals)
+  - [Home Page](#home-page)
+  - [API](#api)
 - [Tech](#tech)
 - [Author](#author)
 
@@ -214,17 +216,23 @@ Response
 }
 ```
 ## Visuals
+### Home Page
 <p align="center">
-<img src="./screenshots/trending-home-page-full-page.png" alt="Full Page GitHub API Client Home page" height="auto" width="500">
+<img src="./screenshots/trending-home-page.gif" alt="GitHub API Client Home page" height="auto" width="500" vspace="20"/>
+</div>
+<div style="display:inline-block">
+<img src="./screenshots/trending-dev-home-page-full-page.png" alt="Full Page GitHub API Client Home page Devs" width="350" align="left"/>
+<img src="./screenshots/trending-repo-home-page-full-page.png" alt="Full Page GitHub API Client Home page repos" width="350" align="left" hspace="20"/>
+</div>
+
+
+### API
+
+<p align="center">
+<img src="./screenshots/commit-search-results.png" alt="Sample commit search; uri = http://localhost:80/api/search/commits/test+repo:vuejs/vue" height="auto" width="500"/>
 </p>
 <p align="center">
-<img src="./screenshots/trending-home-page.gif" alt="GitHub API Client Home page" height="auto" width="500">
-</p>
-<p align="center">
-<img src="./screenshots/commit-search-results.png" alt="Sample commit search; uri = http://localhost:80/api/search/commits/test+repo:vuejs/vue" height="auto" width="500">
-</p>
-<p align="center">
-<img src="./screenshots/trending-repos.png" alt="Trending Repositories today; uri = http://localhost:80/api/cached/trending" height="auto" width="500">
+<img src="./screenshots/trending-repos.png" alt="Trending Repositories today; uri = http://localhost:80/api/cached/trending" height="auto" width="500"/>
 </p>
 
 Tech 
