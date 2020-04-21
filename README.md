@@ -215,6 +215,9 @@ Response
 ```
 ## Visuals
 <p align="center">
+<img src="./screenshots/trending-home-page-full-page.png" alt="Full Page GitHub API Client Home page" height="auto" width="500">
+</p>
+<p align="center">
 <img src="./screenshots/trending-home-page.gif" alt="GitHub API Client Home page" height="auto" width="500">
 </p>
 <p align="center">
