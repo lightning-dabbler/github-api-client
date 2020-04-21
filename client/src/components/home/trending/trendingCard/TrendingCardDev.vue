@@ -1,5 +1,5 @@
 <template>
-  <section id="trending-card-dev" class="card bg-light text-center">
+  <article id="trending-card-dev" class="card bg-light text-center">
     <div class="card-header text-left">
       <img :src="`/static/images/trending_up.svg`" alt="Trending Up" class="img-fluid trending-up" />
       {{index+1}}
@@ -34,7 +34,7 @@
         class="card-text text-muted mb-1 font-weight-light"
       >{{popular_repository.description && popular_repository.description.length > 125?popular_repository.description.slice(0,120)+'...' :popular_repository.description}}</p>
     </div>
-  </section>
+  </article>
 </template>
 
 <script>

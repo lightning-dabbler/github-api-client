@@ -32,8 +32,6 @@ export default {
   mounted() {
     this.$nextTick(() => {
       this.arrow = this.$refs["arrow-to-top"];
-      console.log(this.arrow);
-
       window.addEventListener("scroll", this.scrollFunction);
     });
   }
