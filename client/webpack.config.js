@@ -118,6 +118,9 @@ module.exports = env => (
             contentBase: 'dist',
             compress: true,
             host: '0.0.0.0',
+            allowedHosts: [
+                '.local',
+              ],
             port: 8089
         }
     }
