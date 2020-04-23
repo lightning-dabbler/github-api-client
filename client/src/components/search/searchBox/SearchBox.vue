@@ -13,11 +13,11 @@
           <input type="text" class="form-control" id="sort-arg" />
         </div>
       </div>
-      <div class="form-row align-items-center">
-        <div class="col-auto my-1" v-if="getSearchBox.type">
-          <label class="mr-sm-2" for="query-type-param">Type</label>
+      <div class="form-row align-items-center block-content">
+        <div class="col-auto my-1 block-content" v-if="getSearchBox.type">
+          <label class="mr-sm-2 block-content" for="query-type-param">Type</label>
           <select
-            class="custom-select mr-sm-2"
+            class="custom-select mr-sm-2 block-content"
             id="query-type-param"
             @change="modifyOptions(type_payload)"
             v-model="type_payload"
@@ -33,10 +33,10 @@
             >{{item.html}}</option>
           </select>
         </div>
-        <div class="col-auto my-1" v-if="getSearchBox.order">
-          <label class="mr-sm-2" for="order-arg">Order</label>
+        <div class="col-auto my-1 block-content" v-if="getSearchBox.order">
+          <label class="mr-sm-2 block-content" for="order-arg">Order</label>
           <select
-            class="custom-select mr-sm-2"
+            class="custom-select mr-sm-2 block-content"
             id="order-arg"
             @change="modifyOptions(order_payload)"
             v-model="order_payload"
@@ -124,5 +124,16 @@ input {
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+@media all and (max-width: 408px){
+.block-content{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+select {
+  max-width: 145px;
+}
 }
 </style>
