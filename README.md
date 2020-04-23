@@ -22,7 +22,7 @@
 
 ## Run App:
 ```bash
-sh prod_start.sh # http://localhost:80
+sh prod_run.sh # http://localhost:80
 ```
 
 APIs
