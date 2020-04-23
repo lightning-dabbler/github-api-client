@@ -24,13 +24,18 @@
       <a :href="profile" target="_blank">
         <img :src="avatar" :alt="username" class="card-img-top avatar-img img-fluid" />
       </a>
-      <div class="card-title text-muted mt-2 mb-0 font-weight-normal popular-repo-title">Popular Repo:</div>
+      <div
+        v-if="popular_repository"
+        class="card-title text-muted mt-2 mb-0 font-weight-normal popular-repo-title"
+      >Popular Repo:</div>
       <a
+        v-if="popular_repository"
         class="card-subtitle card-link font-weight-bold repo-name"
         :href="popular_repository.url"
         target="_blank"
       >{{popular_repository.name.length > 20?popular_repository.name.slice(0,17)+'...':popular_repository.name}}</a>
       <p
+        v-if="popular_repository"
         class="card-text text-muted mb-1 font-weight-light"
       >{{popular_repository.description && popular_repository.description.length > 125?popular_repository.description.slice(0,120)+'...' :popular_repository.description}}</p>
     </div>
@@ -63,15 +68,15 @@ export default {
 }
 
 .card:hover {
-      box-shadow: $trending-card-hover;
+  box-shadow: $trending-card-hover;
 }
 
-.card-header{
-    border-bottom: 1px solid $ternary-color;;
+.card-header {
+  border-bottom: 1px solid $ternary-color;
 }
 
 .username-profile {
-    color:$secondary-color;
+  color: $secondary-color;
 }
 
 .full-name {
@@ -88,21 +93,22 @@ export default {
 }
 
 .repo-name::before {
-background-image: url("/static/images/repo.svg");
-margin-bottom: -0.18rem;
+  background-image: url("/static/images/repo.svg");
+  margin-bottom: -0.18rem;
 }
 .popular-repo-title:before {
-background-image: url("/static/images/fire.svg");
-margin-bottom: -0.1rem;
+  background-image: url("/static/images/fire.svg");
+  margin-bottom: -0.1rem;
 }
 
-.repo-name::before,.popular-repo-title:before {
-  content:"";
-background-size:contain;
-width: $font-size-sm;
-height: $font-size-sm;
-display: inline-block;
-background-repeat:no-repeat;
+.repo-name::before,
+.popular-repo-title:before {
+  content: "";
+  background-size: contain;
+  width: $font-size-sm;
+  height: $font-size-sm;
+  display: inline-block;
+  background-repeat: no-repeat;
 }
 
 @media all and (max-width: 370px) {
