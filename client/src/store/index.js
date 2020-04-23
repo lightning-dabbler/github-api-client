@@ -14,7 +14,7 @@ export default new Vuex.Store({
                 repositories: true
             },
             since: 'daily',
-            headers:{},
+            headers: {},
             items: [],
             status_code: false,
             loading: {
@@ -32,6 +32,22 @@ export default new Vuex.Store({
         },
         emojis: {
 
+        },
+        search: {
+            searchBox: {
+                order: {
+                    selected: { html: "Descending", value: "desc" },
+                    options: [
+                        { html: "Descending", value: "desc" }, { html: "Ascending", value: "asc" }
+                    ]
+                },
+                type: {
+                    selected: { html: "Commits", value: "commits" },
+                    options: [
+                        { html: "Commits", value: "commits" }, { html: "Repositories", value: "repositories" }, { html: "Users", value: "users" }
+                    ]
+                }
+            }
         }
     },
     getters: {
@@ -51,6 +67,28 @@ export default new Vuex.Store({
             const loadingData = state.trending.loading
             console.log(`Getter: getTrendingLoader retrieving ${JSON.stringify(loadingData)}`)
             return loadingData
+        },
+        getSearchBox: state => {
+            console.log('Getter: getSearchBox Started')
+            const orderSelected = state.search.searchBox.order.selected
+            const typeSelected = state.search.searchBox.type.selected
+            const searchBox = {order:{selected:orderSelected},type:{selected:typeSelected}}
+            const typeOptionsLeftover = []
+            const orderOptionsLeftover = []
+            for (const i of state.search.searchBox.order.options){
+                if(i.value !== orderSelected.value){
+                    orderOptionsLeftover.push(i)
+                }
+            }
+            for (const j of state.search.searchBox.type.options){
+                if(j.value !== typeSelected.value){
+                    typeOptionsLeftover.push(j)
+                }
+            }
+            searchBox.order.options = orderOptionsLeftover
+            searchBox.type.options = typeOptionsLeftover
+            console.log(`Getter: getSearchBox retrieving ${JSON.stringify(searchBox)}`)
+            return searchBox
         }
     },
     mutations: {
@@ -89,6 +127,19 @@ export default new Vuex.Store({
             console.log("Mutation: updateTrendingLoader Started")
             Vue.set(state.trending.loading, 'active', payload)
             console.log("Mutation: updateTrendingLoader Complete")
+        },
+        updateSearchBox(state,payload){
+            /**
+             * @param {Object} payload
+             */
+            console.log("Mutation: updateSearchBox Started")
+            if (payload.order){
+                Vue.set(state.search.searchBox.order,'selected',payload.order.selected)
+            }
+            if (payload.type){
+                Vue.set(state.search.searchBox.type,'selected',payload.type.selected)
+            }
+            console.log("Mutation: updateSearchBox Complete")
         }
     },
     actions: {

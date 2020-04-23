@@ -1,22 +1,24 @@
 <template>
   <div id="search">
-<h1>SEARCH</h1>
-
+    <search-header></search-header>
+    <!-- <search-results></search-results> -->
   </div>
 </template>
 
 <script>
 console.info("module: search.vue");
-
+// import SearchResults from "../components/search/SearchResults.vue";
+import SearchHeader from "../components/search/SearchHeader.vue";
 export default {
   name: "search",
-  data() {
-    return {
-    };
+  components: {
+    // SearchResults,
+    SearchHeader
   },
-  methods: {
-
-  }
+  data() {
+    return {};
+  },
+  methods: {}
 };
 </script>
 
