@@ -4,7 +4,7 @@
 <script>
 console.log("module: ArrowToTop.vue");
 
-// When Arroe clicked,
+// When Arrow clicked,
 // scroll to the top of the document
 function topFunction() {
   document.body.scrollTop = 0; // Safari

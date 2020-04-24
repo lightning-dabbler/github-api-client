@@ -46,7 +46,20 @@ export default new Vuex.Store({
                     options: [
                         { html: "Commits", value: "commits" }, { html: "Repositories", value: "repositories" }, { html: "Users", value: "users" }
                     ]
+                },
+                query: {
+                    invalid: false,
+                    description: ""
+                },
+                sort: {
+                    invalid: false,
+                    description: ""
                 }
+            },
+            submit: {
+                disabled: true,
+                query: "",
+                sort: ""
             }
         }
     },
@@ -68,27 +81,39 @@ export default new Vuex.Store({
             console.log(`Getter: getTrendingLoader retrieving ${JSON.stringify(loadingData)}`)
             return loadingData
         },
-        getSearchBox: state => {
-            console.log('Getter: getSearchBox Started')
+        getSearchBoxSelect: state => {
+            console.log('Getter: getSearchBoxSelect Started')
             const orderSelected = state.search.searchBox.order.selected
             const typeSelected = state.search.searchBox.type.selected
-            const searchBox = {order:{selected:orderSelected},type:{selected:typeSelected}}
+            const searchBoxSelect = { order: { selected: orderSelected }, type: { selected: typeSelected } }
             const typeOptionsLeftover = []
             const orderOptionsLeftover = []
-            for (const i of state.search.searchBox.order.options){
-                if(i.value !== orderSelected.value){
+            for (const i of state.search.searchBox.order.options) {
+                if (i.value !== orderSelected.value) {
                     orderOptionsLeftover.push(i)
                 }
             }
-            for (const j of state.search.searchBox.type.options){
-                if(j.value !== typeSelected.value){
+            for (const j of state.search.searchBox.type.options) {
+                if (j.value !== typeSelected.value) {
                     typeOptionsLeftover.push(j)
                 }
             }
-            searchBox.order.options = orderOptionsLeftover
-            searchBox.type.options = typeOptionsLeftover
-            console.log(`Getter: getSearchBox retrieving ${JSON.stringify(searchBox)}`)
-            return searchBox
+            searchBoxSelect.order.options = orderOptionsLeftover
+            searchBoxSelect.type.options = typeOptionsLeftover
+            console.log(`Getter: getSearchBoxSelect retrieving ${JSON.stringify(searchBoxSelect)}`)
+            return searchBoxSelect
+        },
+        getSearchBoxValidations: state => {
+            console.log('Getter: getSearchBoxValidations Started')
+            const validations = { query_validation: state.search.searchBox.query, sort_validation: state.search.searchBox.sort }
+            console.log(`Getter: getSearchBoxValidations retrieving ${JSON.stringify(validations)}`)
+            return validations
+        },
+        getSearchSubmitValues: state => {
+            console.log('Getter: getSearchSubmitValues Started')
+            const submit = state.search.submit
+            console.log(`Getter: getSearchSubmitValues retrieving ${JSON.stringify(submit)}`)
+            return submit
         }
     },
     mutations: {
@@ -128,18 +153,49 @@ export default new Vuex.Store({
             Vue.set(state.trending.loading, 'active', payload)
             console.log("Mutation: updateTrendingLoader Complete")
         },
-        updateSearchBox(state,payload){
+        updateSearchBox(state, payload) {
             /**
              * @param {Object} payload
              */
             console.log("Mutation: updateSearchBox Started")
-            if (payload.order){
-                Vue.set(state.search.searchBox.order,'selected',payload.order.selected)
+            if (payload.order) {
+                Vue.set(state.search.searchBox.order, 'selected', payload.order.selected)
             }
-            if (payload.type){
-                Vue.set(state.search.searchBox.type,'selected',payload.type.selected)
+            if (payload.type) {
+                Vue.set(state.search.searchBox.type, 'selected', payload.type.selected)
             }
             console.log("Mutation: updateSearchBox Complete")
+        },
+        updateSearchBoxValidations(state, payload) {
+            /**
+             * @param {Object} payload
+             */
+            console.log("Mutation: updateSearchBoxValidations Started")
+            if (payload.query) {
+                Vue.set(state.search.searchBox.query, 'invalid', payload.query.invalid)
+                Vue.set(state.search.searchBox.query, 'description', payload.query.description)
+            }
+            if (payload.sort) {
+                Vue.set(state.search.searchBox.sort, 'invalid', payload.sort.invalid)
+                Vue.set(state.search.searchBox.sort, 'description', payload.sort.description)
+            }
+            console.log("Mutation: updateSearchBoxValidations Complete")
+        },
+        updateSearchSubmitValues(state, payload) {
+            /**
+             * @param {Object} payload
+             */
+            console.log("Mutation: updateSearchSubmitValues Started")
+            if (payload.disabled === true || payload.disabled === false) {
+                Vue.set(state.search.submit, 'disabled', payload.disabled)
+            }
+            if (payload.query || payload.query === '') {
+                Vue.set(state.search.submit, 'query', payload.query)
+            }
+            if (payload.sort || payload.sort === '') {
+                Vue.set(state.search.submit, 'sort', payload.sort)
+            }
+            console.log("Mutation: updateSearchSubmitValues Complete")
         }
     },
     actions: {
