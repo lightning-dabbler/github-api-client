@@ -1,11 +1,11 @@
 <template>
-  <section v-if="invalid" class="invalid-input bg-danger text-white mt-1">{{description}}</section>
+  <section v-if="invalid" class="invalid-input bg-danger text-white mt-1">{{message}}</section>
 </template>
 <script>
 export default {
   props: {
     invalid: Boolean,
-    description: String
+    message: String
   }
 };
 </script>

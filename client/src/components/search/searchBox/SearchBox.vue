@@ -14,7 +14,7 @@
             @input="validateInput('query')"
             required
           />
-          <invalid-input :invalid="query.invalid" :description="query.description"></invalid-input>
+          <invalid-input :invalid="query.invalid" :message="query.message"></invalid-input>
         </div>
       </div>
       <div class="form-group row">
@@ -29,7 +29,7 @@
             :value="submit.sort"
             @input="validateInput('sort')"
           />
-          <invalid-input :invalid="sort.invalid" :description="sort.description"></invalid-input>
+          <invalid-input :invalid="sort.invalid" :message="sort.message"></invalid-input>
         </div>
       </div>
       <div class="form-row align-items-center block-content">
@@ -118,7 +118,23 @@ export default {
   },
   methods: {
     submitRequest() {
-      console.log("Submit");
+      if (
+        this.submit.disabled ||
+        this.sort.invalid ||
+        this.query.invalid ||
+        !this.submit.query ||
+        !this.type_payload.type.selected ||
+        !["commits", "repositories", "users"].includes(
+          this.type_payload.type.selected.value
+        ) ||
+        !this.order_payload.order.selected ||
+        !["desc", "asc"].includes(this.order_payload.order.selected.value)
+      ) {
+        console.log("No Submissions Allowed: Valid Criteria not met!");
+        return;
+      }
+      console.log("Submission Accepted");
+      console.log('Doing stuff ...')
     },
     validateInput(name) {
       console.log("function: validateInput");
@@ -134,7 +150,7 @@ export default {
         this.$store.commit("updateSearchBoxValidations", {
           [name]: {
             invalid: true,
-            description: "Maximum is 100 Characters!"
+            message: "Maximum is 100 Characters!"
           }
         });
         submitPayload["disabled"] = true;
@@ -143,7 +159,7 @@ export default {
         this.$store.commit("updateSearchBoxValidations", {
           [name]: {
             invalid: true,
-            description: "Please remove whitespace."
+            message: "Please remove whitespace."
           }
         });
         submitPayload["disabled"] = true;
@@ -152,7 +168,7 @@ export default {
         this.$store.commit("updateSearchBoxValidations", {
           [name]: {
             invalid: true,
-            description: "Please remove &"
+            message: "Please remove &"
           }
         });
         submitPayload["disabled"] = true;
@@ -161,7 +177,7 @@ export default {
         this.$store.commit("updateSearchBoxValidations", {
           [name]: {
             invalid: false,
-            description: ""
+            message: ""
           }
         });
 

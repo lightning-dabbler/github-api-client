@@ -49,11 +49,11 @@ export default new Vuex.Store({
                 },
                 query: {
                     invalid: false,
-                    description: ""
+                    message: ""
                 },
                 sort: {
                     invalid: false,
-                    description: ""
+                    message: ""
                 }
             },
             submit: {
@@ -173,11 +173,11 @@ export default new Vuex.Store({
             console.log("Mutation: updateSearchBoxValidations Started")
             if (payload.query) {
                 Vue.set(state.search.searchBox.query, 'invalid', payload.query.invalid)
-                Vue.set(state.search.searchBox.query, 'description', payload.query.description)
+                Vue.set(state.search.searchBox.query, 'message', payload.query.message)
             }
             if (payload.sort) {
                 Vue.set(state.search.searchBox.sort, 'invalid', payload.sort.invalid)
-                Vue.set(state.search.searchBox.sort, 'description', payload.sort.description)
+                Vue.set(state.search.searchBox.sort, 'message', payload.sort.message)
             }
             console.log("Mutation: updateSearchBoxValidations Complete")
         },
