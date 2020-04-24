@@ -6,7 +6,7 @@
         <div class="col-sm-9">
           <input
             type="text"
-            class="form-control"
+            :class="`form-control ${query.invalid? 'border-danger':''}`"
             id="query-param"
             maxlength="100"
             size="100"
@@ -22,7 +22,7 @@
         <div class="col-sm-9">
           <input
             type="text"
-            class="form-control"
+            :class="`form-control ${sort.invalid? 'border-danger':''}`"
             id="sort-arg"
             maxlength="100"
             size="100"
@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="form-row align-items-center block-content">
-        <div class="col-auto my-1 block-content" v-if="getSearchBoxSelect.type">
+        <div class="col-auto my-1 block-content" v-if="type_payload.type">
           <label class="mr-sm-2 block-content label-required" for="query-type-param">Type</label>
           <select
             class="custom-select mr-sm-2 block-content"
@@ -42,9 +42,9 @@
             v-model="type_payload"
           >
             <option
-              :value="{type:{selected:getSearchBoxSelect.type.selected}}"
+              :value="{type:{selected:type_payload.type.selected}}"
               selected
-            >{{getSearchBoxSelect.type.selected.html}}</option>
+            >{{type_payload.type.selected.html}}</option>
             <option
               v-for="(item,index) in getSearchBoxSelect.type.options"
               :value="{type:{selected:item}}"
@@ -52,7 +52,7 @@
             >{{item.html}}</option>
           </select>
         </div>
-        <div class="col-auto my-1 block-content" v-if="getSearchBoxSelect.order">
+        <div class="col-auto my-1 block-content" v-if="order_payload.order">
           <label class="mr-sm-2 block-content" for="order-arg">Order</label>
           <select
             class="custom-select mr-sm-2 block-content"
@@ -61,9 +61,9 @@
             v-model="order_payload"
           >
             <option
-              :value="{order:{selected:getSearchBoxSelect.order.selected}}"
+              :value="{order:{selected:order_payload.order.selected}}"
               selected
-            >{{getSearchBoxSelect.order.selected.html}}</option>
+            >{{order_payload.order.selected.html}}</option>
             <option
               v-for="(item,index) in getSearchBoxSelect.order.options"
               :value="{order:{selected:item}}"
@@ -134,7 +134,7 @@ export default {
         return;
       }
       console.log("Submission Accepted");
-      console.log('Doing stuff ...')
+      console.log("Doing stuff ...");
     },
     validateInput(name) {
       console.log("function: validateInput");
@@ -238,6 +238,15 @@ input {
   font-size: $font-size-m;
   max-width: 250px;
 }
+
+input:focus,
+select:focus {
+  border-color: unset;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
 .label-required::after {
   content: "*";
   font-size: $font-size-m;
