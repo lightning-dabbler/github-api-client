@@ -124,12 +124,22 @@ export default {
       console.log("function: validateInput");
       name = name === "query" ? name : "sort";
       let submitPayload;
-      let value = event.target.value;
+      let value = event.target.value.slice(0, 101);
+      console.log(value);
       submitPayload = {};
       submitPayload[name] = value;
       value = value.trim();
-      console.log(value)
-      if (value.includes(" ")) {
+      console.log(value);
+      if (submitPayload[name].length > 100) {
+        this.$store.commit("updateSearchBoxValidations", {
+          [name]: {
+            invalid: true,
+            description: "Maximum is 100 Characters!"
+          }
+        });
+        submitPayload["disabled"] = true;
+        this.$store.commit("updateSearchSubmitValues", submitPayload);
+      } else if (value.includes(" ")) {
         this.$store.commit("updateSearchBoxValidations", {
           [name]: {
             invalid: true,
@@ -154,18 +164,21 @@ export default {
             description: ""
           }
         });
-        
+
         if (name === "query" && value && !this.sort.invalid) {
           submitPayload["disabled"] = false;
         } else if (name === "query" && !value) {
           submitPayload["disabled"] = true;
-        }
-        else if (name==='sort' && this.submit.query && !this.query.invalid){
+        } else if (
+          name === "sort" &&
+          this.submit.query &&
+          !this.query.invalid
+        ) {
           submitPayload["disabled"] = false;
         }
         this.$store.commit("updateSearchSubmitValues", submitPayload);
       }
-    console.log(this.getSearchSubmitValues)
+      console.log(this.getSearchSubmitValues);
     },
     modifyOptions(payload) {
       if (
