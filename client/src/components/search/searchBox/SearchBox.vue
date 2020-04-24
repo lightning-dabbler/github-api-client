@@ -8,8 +8,8 @@
             type="text"
             :class="`form-control ${query.invalid? 'border-danger':''}`"
             id="query-param"
-            maxlength="100"
-            size="100"
+            maxlength="261"
+            size="261"
             :value="submit.query"
             @input="validateInput('query')"
             required
@@ -24,8 +24,8 @@
             type="text"
             :class="`form-control ${sort.invalid? 'border-danger':''}`"
             id="sort-arg"
-            maxlength="100"
-            size="100"
+            maxlength="261"
+            size="261"
             :value="submit.sort"
             @input="validateInput('sort')"
           />
@@ -140,17 +140,17 @@ export default {
       console.log("function: validateInput");
       name = name === "query" ? name : "sort";
       let submitPayload;
-      let value = event.target.value.slice(0, 101);
+      let value = event.target.value.slice(0, 262);
       console.log(value);
       submitPayload = {};
       submitPayload[name] = value;
       value = value.trim();
       console.log(value);
-      if (submitPayload[name].length > 100) {
+      if (submitPayload[name].length > 261) {
         this.$store.commit("updateSearchBoxValidations", {
           [name]: {
             invalid: true,
-            message: "Maximum is 100 Characters!"
+            message: "Maximum is 261 Characters!"
           }
         });
         submitPayload["disabled"] = true;
