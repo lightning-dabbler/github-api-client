@@ -88,13 +88,15 @@ article {
   display: inline-grid;
   margin: 1rem;
   border: 1px solid $ternary-color;
+  border-radius: .25rem;
 }
 
 .card {
   font-size: $font-size-sm;
+  border:none;
 }
 
-.card:hover {
+article:hover {
   box-shadow: $trending-card-hover;
 }
 
