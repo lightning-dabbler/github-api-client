@@ -15,6 +15,7 @@
           :description="item.description"
           :name="item.name"
           :owner="item.owner"
+          :index="index +1"
           :key="index"
         ></search-results-repos>
       </section>

@@ -36,6 +36,7 @@
         </div>
       </div>
     </div>
+    <div class="card-footer text-left text-muted">{{index}}</div>
   </article>
 </template>
 <script>
@@ -54,7 +55,8 @@ export default {
     language: String,
     description: String,
     name: String,
-    owner: Object
+    owner: Object,
+    index: Number
   }
 };
 </script>
