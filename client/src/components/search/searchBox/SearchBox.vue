@@ -297,7 +297,7 @@ select:focus {
   }
 }
 
-@media all and (max-width: 408px) {
+@media all and (max-width: 420px) {
   .block-content {
     display: block;
     margin-left: auto;
