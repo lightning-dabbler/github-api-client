@@ -13,9 +13,9 @@
           target="_blank"
         >{{name.length > 20? name.slice(0,17)+'...':name}}</a>
       </div>
-      <div class="card-subtitle">
+      <div class="card-subtitle mb-3">
         <a
-          class="card-link d-block ml-0 mb-3 username-profile font-weight-normal"
+          class="card-link username-profile font-weight-normal"
           :href="profile"
           :name="username"
           target="_blank"

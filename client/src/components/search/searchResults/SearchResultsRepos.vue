@@ -13,15 +13,20 @@
         class="card-text text-muted mb-2 font-weight-light"
       >{{description && description.length > 125?description.slice(0,120)+'...' :description}}</p>
       <a :href="owner.html_url" target="_blank">
-          <img :src="owner.avatar_url" :alt="owner.login" class="card-img-top avatar-img img-fluid" />
+        <img :src="owner.avatar_url" :alt="owner.login" class="card-img-top avatar-img img-fluid" />
       </a>
-      <p class="card-subtitle mt-2">{{owner.login}}</p>
+      <div class="card-subtitle mt-3">
+        <a
+          class="card-link username-profile font-weight-bold"
+          :href="owner.html_url"
+          :name="owner.login"
+          target="_blank"
+        >{{owner.login}}</a>
+      </div>
       <p v-if="language">Language: {{language}}</p>
       <div class="row my-2 text-muted">
         <div class="col-sm-4">
-          <p class="repo-watchers mb-0">
-            {{watchers_count}}
-          </p>
+          <p class="repo-watchers mb-0">{{watchers_count}}</p>
         </div>
         <div class="col-sm-4">
           <p class="repo-stars mb-0">{{stargazers_count}}</p>
@@ -68,6 +73,10 @@ export default {
   box-shadow: $trending-card-hover;
 }
 
+.username-profile {
+  color: $secondary-color;
+}
+
 .repo-result {
   font-size: $font-size-m;
 }
@@ -99,8 +108,9 @@ export default {
 }
 
 .repo-watchers::before {
-background-image: url("/static/images/eye.svg");
-margin-bottom: -0.1rem;
+  background-image: url("/static/images/eye.svg");
+  margin-bottom: -0.1rem;
+  margin-right: 0.2rem;
 }
 
 .repo-stars::before,
@@ -122,5 +132,4 @@ margin-bottom: -0.1rem;
     margin-right: auto;
   }
 }
-
 </style>
