@@ -1,5 +1,17 @@
 <template>
-  <section id="search-box" class="py-3 px-2">
+  <section id="search-box" class="py-3 px-2 vld-parent">
+    <vue-loading
+          :active.sync="getSearchBoxLoader.active"
+          :can-cancel="getSearchBoxLoader.canCancel"
+          :is-full-page="getSearchBoxLoader.isFullPage"
+          :color="getSearchBoxLoader.color"
+          :loader="getSearchBoxLoader.loader"
+          :width="getSearchBoxLoader.width"
+          :height="getSearchBoxLoader.height"
+          :background-color="getSearchBoxLoader.backgroundColor"
+          :opacity="getSearchBoxLoader.opacity"
+          :z-index="getSearchBoxLoader.zIndex"
+        ></vue-loading>
     <article>
       <div class="form-group row">
         <label for="query-param" class="col-sm-3 col-form-label label-required">Query</label>
@@ -86,6 +98,7 @@
 <script>
 console.log("module: SearchBox.vue");
 const { mapGetters } = require("vuex");
+import VueLoading from "vue-loading-overlay";
 import InvalidInput from "./invalid/InvalidInput.vue";
 
 export default {
@@ -93,9 +106,10 @@ export default {
   computed: mapGetters([
     "getSearchBoxSelect",
     "getSearchBoxValidations",
-    "getSearchSubmitValues"
+    "getSearchSubmitValues",
+    "getSearchBoxLoader"
   ]),
-  components: { InvalidInput },
+  components: { InvalidInput,VueLoading },
   created() {
     this.order_payload = {
       order: { selected: this.getSearchBoxSelect.order.selected }
@@ -117,7 +131,7 @@ export default {
     };
   },
   methods: {
-    submitRequest() {
+    submitRequest: async function submitRequest() {
       if (
         this.submit.disabled ||
         this.sort.invalid ||
@@ -133,8 +147,22 @@ export default {
         console.log("No Submissions Allowed: Valid Criteria not met!");
         return;
       }
+      this.$store.commit("updateSearchBoxLoader",true)
+      const payload = {
+        endpoint: this.type_payload.type.selected.value,
+        query: this.submit.query,
+        args: {
+          per_page: 100,
+          page: 1,
+          sort: this.submit.sort,
+          order: this.order_payload.order.selected.value
+        }
+      };
       console.log("Submission Accepted");
-      console.log("Doing stuff ...");
+      console.log(payload);
+      this.$store.commit("removeSearchPayload", true);
+      await this.$store.dispatch("callSearch", payload);
+      this.$store.commit("updateSearchBoxLoader",false)
     },
     validateInput(name) {
       console.log("function: validateInput");
@@ -180,7 +208,7 @@ export default {
             message: ""
           }
         });
-
+        submitPayload[name] = value;
         if (name === "query" && value && !this.sort.invalid) {
           submitPayload["disabled"] = false;
         } else if (name === "query" && !value) {
@@ -220,6 +248,14 @@ export default {
   }
 };
 </script>
+<style>
+/**
+* VUE-LOADING-OVERLAY CUSTOM STYLES
+*/
+.vld-overlay.is-active:focus {
+  outline: none;
+}
+</style>
 <style lang="scss" scoped>
 @import "@/static/css/custom.scss";
 

@@ -1,18 +1,20 @@
 <template>
   <div id="search">
     <search-header></search-header>
-    <!-- <search-results></search-results> -->
+    <section class="container py-5">
+      <search-results></search-results>
+    </section>
   </div>
 </template>
 
 <script>
 console.info("module: search.vue");
-// import SearchResults from "../components/search/SearchResults.vue";
+import SearchResults from "../components/search/SearchResults.vue";
 import SearchHeader from "../components/search/SearchHeader.vue";
 export default {
   name: "search",
   components: {
-    // SearchResults,
+    SearchResults,
     SearchHeader
   },
   data() {

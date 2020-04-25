@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 const { trending } = require('@/lib/trending')
 const { emoji } = require('@/lib/emoji')
+const { search } = require('@/lib/search')
 console.log("vuex store")
 Vue.use(Vuex);
 
@@ -54,6 +55,18 @@ export default new Vuex.Store({
                 sort: {
                     invalid: false,
                     message: ""
+                },
+                loading: {
+                    active: false,
+                    canCancel: false,
+                    isFullPage: false,
+                    color: '#000000',
+                    loader: 'spinner',
+                    width: 70,
+                    height: 70,
+                    backgroundColor: '#ffffff',
+                    opacity: 0.5,
+                    zIndex: 999,
                 }
             },
             submit: {
@@ -113,6 +126,18 @@ export default new Vuex.Store({
             console.log('Getter: getSearchSubmitValues Started')
             const submit = state.search.submit
             console.log(`Getter: getSearchSubmitValues retrieving ${JSON.stringify(submit)}`)
+            return submit
+        },
+        getSearchBoxLoader: state =>{
+            console.log('Getter: getSearchLoader Started')
+            const loadingData = state.search.searchBox.loading
+            console.log(`Getter: getSearchLoader retrieving ${JSON.stringify(loadingData)}`)
+            return loadingData
+        },
+        getSearchPayload: state => {
+            console.log('Getter: getSearchPayload Started')
+            const submit = state.search.payload
+            console.log(`Getter: getSearchPayload retrieving ${JSON.stringify(submit)}`)
             return submit
         }
     },
@@ -196,6 +221,33 @@ export default new Vuex.Store({
                 Vue.set(state.search.submit, 'sort', payload.sort)
             }
             console.log("Mutation: updateSearchSubmitValues Complete")
+        },
+        updateSearchBoxLoader(state, payload) {
+            /**
+             * @param {boolean} payload
+             */
+            console.log("Mutation: updateSearchBoxLoader Started")
+            Vue.set(state.search.searchBox.loading, 'active', payload)
+            console.log("Mutation: updateSearchBoxLoader Complete")
+        },
+        setSearchPayload(state, payload) {
+            /**
+             * @param {Object} payload
+             */
+            console.log("Mutation: setSearchPayload Started")
+            Vue.set(state.search, 'payload', payload)
+            console.log("Mutation: setSearchPayload Complete")
+        },
+        removeSearchPayload(state, payload) {
+            /**
+             * @param {boolean} payload
+             */
+            console.log("Mutation: removeSearchPayload Started")
+            if (payload && state.search.payload) {
+                Vue.delete(state.search, 'payload')
+                console.log('state.search.payload object removed')
+            }
+            console.log("Mutation: removeSearchPayload Complete")
         }
     },
     actions: {
@@ -219,6 +271,25 @@ export default new Vuex.Store({
             console.log(data)
             context.commit("updateEmojis", data)
             console.log("Action: callGetEmoji Complete")
+        },
+        callSearch: async function callSearch(context, payload) {
+            /**
+             * @param {object} payload 
+             */
+            console.log("Action: callSearch Started")
+            if (context.state.search.payload) {
+                console.log("Lazy load the rest...")
+            }
+            else {
+                console.log("'payload' not in state.search")
+                const data = await search(payload.endpoint, payload.query, payload.args)
+                Vue.set(payload, "items", data.items)
+                Vue.set(payload, "headers", data.headers)
+                Vue.set(payload, "status_code", data.status_code)
+                Vue.set(payload, "length", data.items.length)
+                context.commit("setSearchPayload", payload)
+            }
+            console.log("Action: callSearch Complete")
         }
     }
 });
