@@ -1,5 +1,5 @@
 <template>
-  <footer id="footer" class="footer">
+  <footer id="footer" class="footer d-flex align-items-center">
     <section class="container">
       <p class="text-center mb-0" v-if="year > 2020">
         &#169; 2020-{{year}} Osarodion Irabor
@@ -50,7 +50,6 @@ footer#footer {
   bottom: 0;
   width: 100%;
   height: 60px;
-  line-height: 60px;
   background-color: $primary-color;
 }
 span#emoji-footer {
@@ -61,5 +60,13 @@ span#emoji-footer {
   display: inline-block;
   margin-bottom: -0.2rem;
   margin-left: -0.2rem;
+}
+
+@media all and (max-width: 225px) {
+  .footer {
+    height: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
 }
 </style>

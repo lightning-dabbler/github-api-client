@@ -1,44 +1,48 @@
 <template>
-  <article id="trending-card-dev" class="card bg-light text-center">
-    <div class="card-header text-left">
-      <img :src="`/static/images/trending_up.svg`" alt="Trending Up" class="img-fluid trending-up" />
-      {{index+1}}
-    </div>
-    <div class="card-body">
-      <div class="card-title mb-2">
-        <a
-          class="card-link font-weight-bold full-name"
-          :href="profile"
-          :name="name"
-          target="_blank"
-        >{{name.length > 20? name.slice(0,17)+'...':name}}</a>
+  <article>
+    <section id="trending-card-dev" class="card bg-light text-center">
+      <div class="card-header text-left">
+        <img
+          :src="`/static/images/trending_up.svg`"
+          alt="Trending Up"
+          class="img-fluid trending-up"
+        />
+        {{index+1}}
       </div>
-      <div class="card-subtitle mb-3">
+      <div class="card-body">
+        <div class="card-title mb-2">
+          <a
+            class="card-link font-weight-bold full-name"
+            :href="profile"
+            target="_blank"
+          >{{name.length > 20? name.slice(0,17)+'...':name}}</a>
+        </div>
+        <div class="card-subtitle mb-3">
+          <a
+            class="card-link username-profile font-weight-normal"
+            :href="profile"
+            target="_blank"
+          >{{username}}</a>
+        </div>
+        <a :href="profile" target="_blank">
+          <img :src="avatar" :alt="username" class="card-img-top avatar-img img-fluid" />
+        </a>
+        <div
+          v-if="popular_repository"
+          class="card-title text-muted mt-2 mb-0 font-weight-normal popular-repo-title"
+        >Popular Repo:</div>
         <a
-          class="card-link username-profile font-weight-normal"
-          :href="profile"
-          :name="username"
+          v-if="popular_repository"
+          class="card-subtitle card-link font-weight-bold repo-name"
+          :href="popular_repository.url"
           target="_blank"
-        >{{username}}</a>
+        >{{popular_repository.name.length > 20?popular_repository.name.slice(0,17)+'...':popular_repository.name}}</a>
+        <p
+          v-if="popular_repository && popular_repository.description"
+          class="card-text text-muted mb-1 font-weight-light"
+        >{{popular_repository.description.length > 125?popular_repository.description.slice(0,120)+'...' :popular_repository.description}}</p>
       </div>
-      <a :href="profile" target="_blank">
-        <img :src="avatar" :alt="username" class="card-img-top avatar-img img-fluid" />
-      </a>
-      <div
-        v-if="popular_repository"
-        class="card-title text-muted mt-2 mb-0 font-weight-normal popular-repo-title"
-      >Popular Repo:</div>
-      <a
-        v-if="popular_repository"
-        class="card-subtitle card-link font-weight-bold repo-name"
-        :href="popular_repository.url"
-        target="_blank"
-      >{{popular_repository.name.length > 20?popular_repository.name.slice(0,17)+'...':popular_repository.name}}</a>
-      <p
-        v-if="popular_repository"
-        class="card-text text-muted mb-1 font-weight-light"
-      >{{popular_repository.description && popular_repository.description.length > 125?popular_repository.description.slice(0,120)+'...' :popular_repository.description}}</p>
-    </div>
+    </section>
   </article>
 </template>
 
@@ -59,12 +63,15 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/static/css/custom.scss";
-.card {
+
+article {
   width: 300px;
   display: inline-grid;
   margin: 1rem;
-  font-size: $font-size-sm;
   border: 1px solid $ternary-color;
+}
+.card {
+  font-size: $font-size-sm;
 }
 
 .card:hover {
@@ -112,7 +119,7 @@ export default {
 }
 
 @media all and (max-width: 370px) {
-  .card {
+  article {
     width: 90%;
     display: block;
     margin-left: auto;

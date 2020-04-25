@@ -1,42 +1,42 @@
 <template>
-  <article id="search-results-repos" class="card bg-light text-center">
-    <div class="card-body">
-      <div class="card-title">
-        <a
-          class="card-link repo-result font-weight-bold"
-          :alt="name"
-          :href="html_url"
-          target="_blank"
-        >{{name.length > 25? name.slice(0,22)+'...':name}}</a>
-      </div>
-      <p
-        class="card-text text-muted mb-2 font-weight-light"
-      >{{description && description.length > 125?description.slice(0,120)+'...' :description}}</p>
-      <a :href="owner.html_url" target="_blank">
-        <img :src="owner.avatar_url" :alt="owner.login" class="card-img-top avatar-img img-fluid" />
-      </a>
-      <div class="card-subtitle mt-3">
-        <a
-          class="card-link username-profile font-weight-bold"
-          :href="owner.html_url"
-          :name="owner.login"
-          target="_blank"
-        >{{owner.login}}</a>
-      </div>
-      <p v-if="language">Language: {{language}}</p>
-      <div class="row my-2 text-muted">
-        <div class="col-sm-4">
-          <p class="repo-watchers mb-0">{{watchers_count}}</p>
+  <article>
+    <section id="search-results-repos" class="card bg-light text-center">
+      <div class="card-body">
+        <div class="card-title">
+          <a
+            class="card-link repo-result font-weight-bold"
+            :href="html_url"
+            target="_blank"
+          >{{name.length > 25? name.slice(0,22)+'...':name}}</a>
         </div>
-        <div class="col-sm-4">
-          <p class="repo-stars mb-0">{{stargazers_count}}</p>
+        <p
+          class="card-text text-muted mb-2 font-weight-light" v-if="description"
+        >{{description.length > 125?description.slice(0,120)+'...' :description}}</p>
+        <a :href="owner.html_url" target="_blank">
+          <img :src="owner.avatar_url" :alt="owner.login" class="card-img-top avatar-img img-fluid" />
+        </a>
+        <div class="card-subtitle mt-3">
+          <a
+            class="card-link username-profile font-weight-bold"
+            :href="owner.html_url"
+            target="_blank"
+          >{{owner.login}}</a>
         </div>
-        <div class="col-sm-4">
-          <p class="repo-forks mb-0">{{forks_count}}</p>
+        <p v-if="language">Language: {{language}}</p>
+        <div class="row my-2 text-muted">
+          <div class="col-sm-4">
+            <p class="repo-watchers mb-0">{{watchers_count}}</p>
+          </div>
+          <div class="col-sm-4">
+            <p class="repo-stars mb-0">{{stargazers_count}}</p>
+          </div>
+          <div class="col-sm-4">
+            <p class="repo-forks mb-0">{{forks_count}}</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="card-footer text-left text-muted">{{index}}</div>
+      <div class="card-footer text-left text-muted">{{index}}</div>
+    </section>
   </article>
 </template>
 <script>
@@ -63,12 +63,15 @@ export default {
 <style lang="scss" scoped>
 @import "@/static/css/custom.scss";
 
-.card {
-  width: 400px;
+article {
   display: inline-grid;
+  width: 400px;
   margin: 1rem;
-  font-size: $font-size-sm;
   border: 1px solid $ternary-color;
+}
+
+.card {
+  font-size: $font-size-sm;
 }
 
 .card:hover {
@@ -127,11 +130,11 @@ export default {
 }
 
 @media all and (max-width: 470px) {
-  .card {
-    width: 90%;
+  article {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    width: 90%;
   }
 }
 </style>

@@ -27,6 +27,14 @@
       <section v-else-if="payload.endpoint==='commits' && payload.items">
         <section class="py-3 results-length">
           <p class="mb-0 results-text mx-auto">{{payload.length}} Commit Result(s)!</p>
+          <search-results-commits
+          v-for="(item,index) in payload.items"
+          :commit="item.commit"
+          :html_url="item.html_url"
+          :repository="item.repository"
+          :index="index +1"
+          :key="index"
+          ></search-results-commits>
         </section>
       </section>
     </section>

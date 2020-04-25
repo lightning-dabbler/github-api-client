@@ -1,62 +1,66 @@
 <template>
-  <article id="trending-card-repo" class="card bg-light text-center">
-    <div class="card-body">
-      <div class="card-title">
+  <article>
+    <section id="trending-card-repo" class="card bg-light text-center">
+      <div class="card-body">
+        <div class="card-title">
+          <a class="card-link popular-repo" :href="repo_url" target="_blank">
+            {{`${author} / `}}
+            <span
+              class="font-weight-bold"
+            >{{name.length > 25? name.slice(0,22)+'...':name}}</span>
+          </a>
+        </div>
+        <p
+          class="card-text text-muted mb-2 font-weight-light"
+          v-if="description"
+        >{{description.length > 125?description.slice(0,120)+'...' :description}}</p>
+        <a :href="`https://github.com/${author}`" target="_blank">
+          <img :src="avatar" :alt="author" class="card-img-top avatar-img img-fluid" />
+        </a>
+        <div class="row my-2 text-muted" v-if="programming_language">
+          <div class="col-sm-4">
+            <p class="mb-0">
+              <span
+                class="prog-lang-circle text-center"
+                :style="{backgroundColor:`${language_color}`}"
+              ></span>
+              {{programming_language}}
+            </p>
+          </div>
+          <div class="col-sm-4">
+            <p class="repo-stars mb-0">{{stars}}</p>
+          </div>
+          <div class="col-sm-4">
+            <p class="repo-forks mb-0">{{forks}}</p>
+          </div>
+        </div>
+        <div class="text-muted my-2" v-else>
+          <div class="d-inline-block">
+            <p class="repo-stars mb-0 mr-2">{{stars}}</p>
+          </div>
+          <div class="d-inline-block">
+            <p class="repo-forks mb-0 ml-2">{{forks}}</p>
+          </div>
+        </div>
+        <p class="repo-stars text-muted">{{present_freq_stars}}</p>
+      </div>
+      <div class="card-footer">
+        <div class="card-title text-muted font-weight-normal">Built By:</div>
         <a
-          class="card-link popular-repo"
-          :alt="`${author} / ${name}`"
-          :href="repo_url"
+          v-for="(worker,index) in built_by"
+          class="d-inline-block my-2 mx-2"
+          :key="index"
+          :href="worker.profile"
           target="_blank"
         >
-          {{`${author} / `}}
-          <span
-            class="font-weight-bold"
-          >{{name.length > 25? name.slice(0,22)+'...':name}}</span>
+          <img
+            :alt="worker.username"
+            :src="worker.avatar"
+            class="card-img-top built-by-img img-fluid"
+          />
         </a>
       </div>
-      <p
-        class="card-text text-muted mb-2 font-weight-light"
-      >{{description && description.length > 125?description.slice(0,120)+'...' :description}}</p>
-      <a :href="`https://github.com/${author}`" target="_blank">
-        <img :src="avatar" :alt="author" class="card-img-top avatar-img img-fluid" />
-      </a>
-      <div class="row my-2 text-muted" v-if="programming_language">
-        <div class="col-sm-4">
-          <p class="mb-0">
-            <span
-              class="prog-lang-circle text-center"
-              :style="{backgroundColor:`${language_color}`}"
-            ></span>
-            {{programming_language}}
-          </p>
-        </div>
-        <div class="col-sm-4">
-          <p class="repo-stars mb-0">{{stars}}</p>
-        </div>
-        <div class="col-sm-4">
-          <p class="repo-forks mb-0">{{forks}}</p>
-        </div>
-      </div>
-      <div class="text-muted my-2" v-else>
-        <div class="d-inline-block">
-          <p class="repo-stars mb-0 mr-2">{{stars}}</p>
-        </div>
-        <div class="d-inline-block">
-          <p class="repo-forks mb-0 ml-2">{{forks}}</p>
-        </div>
-      </div>
-      <p class="repo-stars text-muted">{{present_freq_stars}}</p>
-    </div>
-    <div class="card-footer">
-      <div class="card-title text-muted font-weight-normal">Built By:</div>
-      <a v-for="(worker,index) in built_by" class="d-inline-block my-2 mx-2" :key="index" :href="worker.profile" target="_blank">
-        <img
-          :alt="worker.username"
-          :src="worker.avatar"
-          class="card-img-top built-by-img img-fluid"
-        />
-      </a>
-    </div>
+    </section>
   </article>
 </template>
 <script>
@@ -79,12 +83,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/static/css/custom.scss";
-.card {
+article {
   width: 400px;
   display: inline-grid;
   margin: 1rem;
-  font-size: $font-size-sm;
   border: 1px solid $ternary-color;
+}
+
+.card {
+  font-size: $font-size-sm;
 }
 
 .card:hover {
@@ -142,7 +149,7 @@ export default {
 }
 
 @media all and (max-width: 470px) {
-  .card {
+  article {
     width: 90%;
     display: block;
     margin-left: auto;
