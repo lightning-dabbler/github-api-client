@@ -84,7 +84,7 @@
           </select>
         </div>
       </div>
-      <div class="mt-3">
+      <div class="mt-3 d-flex justify-content-center align-items-center">
         <button
           type="button"
           class="btn btn-primary"
@@ -256,6 +256,14 @@ export default {
   background-color: transparent;
   border: 1px solid $ternary-color;
   border-radius: 3px;
+
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
 }
 
 label {

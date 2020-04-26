@@ -27,7 +27,6 @@
         <li class="nav-item">
           <a
             class="nav-link"
-            name="Help"
             href="https://developer.github.com/v3/search"
             target="_blank"
           >

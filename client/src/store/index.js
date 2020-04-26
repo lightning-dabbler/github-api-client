@@ -127,7 +127,7 @@ export default new Vuex.Store({
             console.log(`Getter: getSearchSubmitValues retrieving ${JSON.stringify(submit)}`)
             return submit
         },
-        getSearchBoxLoader: state =>{
+        getSearchBoxLoader: state => {
             console.log('Getter: getSearchLoader Started')
             const loadingData = state.search.searchBox.loading
             console.log(`Getter: getSearchLoader retrieving ${JSON.stringify(loadingData)}`)
@@ -235,6 +235,12 @@ export default new Vuex.Store({
              */
             console.log("Mutation: setSearchPayload Started")
             Vue.set(state.search, 'payload', payload)
+            if (payload.length < 100) {
+                Vue.set(state.search.payload, 'load_more', false)
+            }
+            else {
+                Vue.set(state.search.payload, 'load_more', true)
+            }
             console.log("Mutation: setSearchPayload Complete")
         },
         removeSearchPayload(state, payload) {
@@ -247,6 +253,29 @@ export default new Vuex.Store({
                 console.log('state.search.payload object removed')
             }
             console.log("Mutation: removeSearchPayload Complete")
+        },
+        incrementPage: state => {
+            console.log("Mutation: incrementPage Started")
+            state.search.payload.args.page++
+            console.log("New params:", state.search.payload.endpoint, state.search.payload.query, state.search.payload.args)
+            console.log("Mutation: incrementPage Complete")
+        },
+        extendSearchPayload(state, payload) {
+            /**
+             * @param {Object} payload
+             */
+            console.log("Mutation: extendSearchPayload Started")
+            if (payload.items.length < 100) {
+                Vue.set(state.search.payload, 'load_more', false)
+            }
+            else {
+                Vue.set(state.search.payload, 'load_more', true)
+            }
+            state.search.payload.items.push(...payload.items)
+            Vue.set(state.search.payload, "headers", payload.headers)
+            Vue.set(state.search.payload, "status_code", payload.status_code)
+            Vue.set(state.search.payload, "length", state.search.payload.items.length)
+            console.log("Mutation: extendSearchPayload Complete")
         }
     },
     actions: {
@@ -277,7 +306,13 @@ export default new Vuex.Store({
              */
             console.log("Action: callSearch Started")
             if (context.state.search.payload) {
-                console.log("Lazy load the rest...")
+                console.log("Loading More data")
+                context.commit("incrementPage")
+                const data = await search(context.state.search.payload.endpoint,
+                    context.state.search.payload.query,
+                    context.state.search.payload.args)
+                console.log(data)
+                context.commit("extendSearchPayload", data)
             }
             else {
                 console.log("'payload' not in state.search")

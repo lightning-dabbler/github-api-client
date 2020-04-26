@@ -1,6 +1,18 @@
 <template>
   <section id="search-results" class="search-rect text-center">
     <section v-if="payload">
+      <section class="py-3 results-length" v-if="payload.status_code === 422 && !payload.length">
+        <p class="mb-0 bg-warning warning-text mx-auto">
+          Unprocessible Entry(ies) Please Review
+          <a
+            href="https://developer.github.com/v3/search"
+            target="_blank"
+          >GitHub API</a>
+        </p>
+      </section>
+      <section class="py-3 results-length" v-else-if="payload.status_code === 403 && !payload.length">
+        <p class="mb-0 bg-warning warning-text mx-auto">Please wait ~60 seconds to reuse!</p>
+      </section>
       <section v-if="payload.endpoint==='repositories' && payload.items">
         <section class="py-3 results-length">
           <p class="mb-0 results-text mx-auto">{{payload.length}} Repository Result(s)!</p>
@@ -45,6 +57,21 @@
           ></search-results-commits>
         </section>
       </section>
+      <section class="py-2 vld-parent d-flex justify-content-center align-items-center" v-if="payload.load_more">
+        <button type="button" class="btn btn-success" @click.prevent="loadMore">Load Next Page</button>
+        <vue-loading
+          :active.sync="getSearchBoxLoader.active"
+          :can-cancel="getSearchBoxLoader.canCancel"
+          :is-full-page="getSearchBoxLoader.isFullPage"
+          :color="getSearchBoxLoader.color"
+          loader="bars"
+          :width="30"
+          :height="30"
+          :background-color="getSearchBoxLoader.backgroundColor"
+          :opacity="0.8"
+          :z-index="getSearchBoxLoader.zIndex"
+        ></vue-loading>
+      </section>
     </section>
   </section>
 </template>
@@ -52,18 +79,20 @@
 import SearchResultsCommits from "./searchResults/SearchResultsCommits.vue";
 import SearchResultsRepos from "./searchResults/SearchResultsRepos.vue";
 import SearchResultsUsers from "./searchResults/SearchResultsUsers.vue";
+import VueLoading from "vue-loading-overlay";
 import { mapGetters } from "vuex";
 export default {
   name: "search-results",
   components: {
     SearchResultsCommits,
     SearchResultsRepos,
-    SearchResultsUsers
+    SearchResultsUsers,
+    VueLoading
   },
   data() {
     return { payload: false };
   },
-  computed: mapGetters(["getSearchPayload"]),
+  computed: mapGetters(["getSearchPayload", "getSearchBoxLoader"]),
   watch: {
     getSearchPayload: {
       immediate: true,
@@ -71,6 +100,14 @@ export default {
       handler() {
         this.payload = this.getSearchPayload;
       }
+    }
+  },
+  methods: {
+    loadMore: async function loadMore() {
+      console.log("Loading More Data");
+      this.$store.commit("updateSearchBoxLoader", true);
+      await this.$store.dispatch("callSearch", {});
+      this.$store.commit("updateSearchBoxLoader", false);
     }
   }
 };
@@ -102,6 +139,11 @@ $results-bg-color: #def7d1;
 .results-text {
   max-width: 300px;
   background-color: $results-bg-color;
+  font-weight: bold;
+}
+
+.warning-text {
+  max-width: 300px;
   font-weight: bold;
 }
 </style>
