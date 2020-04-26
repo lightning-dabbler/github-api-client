@@ -51,18 +51,20 @@ export default {
 /**
 * VUE-LOADING-OVERLAY CUSTOM STYLES
 */
-.vld-overlay {
-  align-items: unset;
-}
-.vld-overlay.is-active:focus {
-  outline: none;
-}
-.vld-icon {
+#trending-section .vld-icon {
   margin-top: 4rem;
 }
 </style>
 <style lang="scss" scoped>
 @import "@/static/css/custom.scss";
+
+/**
+* VUE-LOADING-OVERLAY CUSTOM STYLES
+*/
+
+.vld-overlay {
+  align-items: unset;
+}
 
 #trending-section {
   -webkit-user-select: none; /* Chrome/Safari */

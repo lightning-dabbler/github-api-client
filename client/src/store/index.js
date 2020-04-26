@@ -61,7 +61,6 @@ export default new Vuex.Store({
                     canCancel: false,
                     isFullPage: false,
                     color: '#000000',
-                    loader: 'spinner',
                     width: 70,
                     height: 70,
                     backgroundColor: '#ffffff',

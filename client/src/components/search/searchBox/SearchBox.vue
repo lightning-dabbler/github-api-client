@@ -5,7 +5,7 @@
           :can-cancel="getSearchBoxLoader.canCancel"
           :is-full-page="getSearchBoxLoader.isFullPage"
           :color="getSearchBoxLoader.color"
-          :loader="getSearchBoxLoader.loader"
+          loader="spinner"
           :width="getSearchBoxLoader.width"
           :height="getSearchBoxLoader.height"
           :background-color="getSearchBoxLoader.backgroundColor"
@@ -248,14 +248,6 @@ export default {
   }
 };
 </script>
-<style>
-/**
-* VUE-LOADING-OVERLAY CUSTOM STYLES
-*/
-.vld-overlay.is-active:focus {
-  outline: none;
-}
-</style>
 <style lang="scss" scoped>
 @import "@/static/css/custom.scss";
 

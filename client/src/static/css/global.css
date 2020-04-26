@@ -22,3 +22,7 @@ hr {
   position: relative;
   min-height: 100vh;
 }
+
+.vld-overlay.is-active:focus {
+  outline: none;
+}
