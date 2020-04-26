@@ -16,6 +16,7 @@
         - [Developers](#trending-developers)
 - [Visuals](#visuals)
   - [Home Page](#home-page)
+  - [Search Page](#search-page)
   - [API](#api)
 - [Tech](#tech)
 - [Author](#author)
@@ -226,6 +227,16 @@ Response
     <tr><td valign="top"><img src="./screenshots/trending-dev-home-page-full-page.png" alt="Full Page GitHub API Client Home page Devs" /></td><td valign="top"><img src="./screenshots/trending-repo-home-page-full-page.png" alt="Full Page GitHub API Client Home page repos"/></td></tr>
     </table>
 
+### Search Page
+
+<p align="center">
+    <img src="./screenshots/search-page-commits.gif" alt="GitHub API Client search page commits"/>
+    </p>
+<table>
+    <tr><th>Users</th><th>Repositories</th><th>Commits</th></tr>
+    <tr><td valign="top"><img src="./screenshots/search-page-users.png" alt="Full Page GitHub API Client Search page users"/></td><td valign="top"><img src="./screenshots/search-page-repos.png" alt="Full Page GitHub API Client Search page repos"/></td>
+    <td valign="top"><img src="./screenshots/search-page-commits.png" alt="Full Page GitHub API Client Search page commits"/></td></tr>
+    </table>
 
 ### API
 
