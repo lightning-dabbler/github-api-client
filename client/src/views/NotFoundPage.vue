@@ -1,14 +1,17 @@
 <template>
-  <div id="notFound">
-      <h1> 404 - NOT FOUND </h1>
+  <div id="not-found" class="container mb-5">
+    <not-found-component></not-found-component>
   </div>
 </template>
 
 <script>
 console.info("module: notFound.vue");
-
+import NotFoundComponent from "../components/NotFound/NotFoundComponent.vue";
 export default {
-  name: "notFound",
+  name: "not-found",
+  components: {
+    NotFoundComponent
+  },
   data() {
     return {};
   },

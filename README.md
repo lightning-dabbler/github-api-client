@@ -17,6 +17,7 @@
 - [Visuals](#visuals)
   - [Home Page](#home-page)
   - [Search Page](#search-page)
+  - [404](#404)
   - [API](#api)
 - [Tech](#tech)
 - [Author](#author)
@@ -237,6 +238,12 @@ Response
     <tr><td valign="top"><img src="./screenshots/search-page-users.png" alt="Full Page GitHub API Client Search page users"/></td><td valign="top"><img src="./screenshots/search-page-repos.png" alt="Full Page GitHub API Client Search page repos"/></td>
     <td valign="top"><img src="./screenshots/search-page-commits.png" alt="Full Page GitHub API Client Search page commits"/></td></tr>
     </table>
+
+### 404
+
+<p align="center">
+    <img src="./screenshots/404-error.png" alt="GitHub API Client Invalid Web Page" width="500" height="auto"/>
+    </p>
 
 ### API
 
