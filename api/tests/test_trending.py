@@ -21,7 +21,7 @@ with description('Module: Trending') as self:
             assert type(built_by[0]['avatar'])==str, "built_by.avatar type String"
             assert type(built_by[0]['profile']) == str, "built_by.profile type String" 
             assert type(built_by[0]['username']) == str, "built_by.username type String"
-            assert type(y['description']) == str, "description type String"
+            if 'description' in y: assert type(y['description']) == str, "description type String"
             assert type(y['forks']) == int, "forks type Integer"
             assert type(y['stars']) == int, "stars type Integer"
             if 'language_color' in y: assert type(y['language_color']==str),"language_color type String (optional result)"
@@ -29,6 +29,9 @@ with description('Module: Trending') as self:
             assert type(y['present_freq_stars']) == str, "present_freq_stars type String"
             if 'programming_language' in y: assert type(y['programming_language']), "programming_language type String (optional result)"
             assert type(y['url']) == str, "url type String"
+
+            header_date = x[2]['date'] == str, "header.date type String"
+            
             logger.info(f'\tstatus code = {x[0]};\titem list size = {len(x[1])}; num of headers = {len(x[2])}')
         
         with it('Returns Trending Developers this Week: tuple(status_code:int,items:list(dict[n]),headers:dict)'):
@@ -41,12 +44,15 @@ with description('Module: Trending') as self:
 
             assert type(y['avatar']) == str, "avatar type String"
             assert type(y['name']) == str, "name type String"
-            popular_repository = y['popular_repository']
-            assert type(popular_repository) == dict, "popular_repository type Dict"
-            assert type(popular_repository['description']) == str, "popular_repository.description type String"
-            assert type(popular_repository['name']) == str, "popular_repository.name type String"
-            assert type(popular_repository['url']) == str, "popular_repository.url type String"
+            if 'popular_repository' in y:
+                popular_repository = y['popular_repository']
+                assert type(popular_repository) == dict, "popular_repository type Dict"
+                if 'description' in popular_repository: assert type(popular_repository['description']) == str, "popular_repository.description type String"
+                assert type(popular_repository['name']) == str, "popular_repository.name type String"
+                assert type(popular_repository['url']) == str, "popular_repository.url type String"
             assert type(y['profile']) == str, "profile type String"
             assert type(y['username']) == str, "username type String"
             
+            header_date = x[2]['date'] == str, "header.date type String"
+
             logger.info(f'\tstatus code = {x[0]};\titem list size = {len(x[1])}; num of headers = {len(x[2])}')
