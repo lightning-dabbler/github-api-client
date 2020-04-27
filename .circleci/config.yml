@@ -12,6 +12,8 @@ jobs:
           LANG: en_US.UTF-8
     steps:
       - checkout
+      - run: pwd
+      - run: env
       - run:
           working_directory: ./api
           command: |
@@ -31,7 +33,6 @@ jobs:
       - run:
           working_directory: ./api
           command: |
-            ls -al tests/
             sh run_tests.sh
 
 
