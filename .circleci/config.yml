@@ -2,7 +2,7 @@ version: 2.1
 
 jobs:
   build:
-    working_directory: ~/github-api-client
+    working_directory: ~/github-api-client/api
     docker:
       - image: circleci/python:3.7-buster
         environment:
@@ -30,6 +30,6 @@ jobs:
       - run: ls -al
       - run:
           command: |
-            sh ./api/run_tests.sh
+            sh run_tests.sh
 
 
