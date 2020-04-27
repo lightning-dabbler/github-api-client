@@ -2,13 +2,8 @@ version: 2.1
 
 jobs:
 
-  parameters:
-    workdir:
-      type: string
-      default: ~/github-api-client
-
   build:
-    working_directory: << parameters.workdir >>
+    working_directory: ~/github-api-client
     docker:
       - image: circleci/python:3.7-buster
         environment:
