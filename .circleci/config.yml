@@ -1,12 +1,18 @@
 version: 2.1
 
 jobs:
+
+  parameters:
+    workdir:
+      type: string
+      default: ~/github-api-client
+
   build:
-    working_directory: ~/github-api-client
+    working_directory: <<parameters.workdir>>
     docker:
       - image: circleci/python:3.7-buster
         environment:
-          PYTHONPATH: $CIRCLE_WORKING_DIRECTORY/api/modules
+          PYTHONPATH: <<parameters.workdir>>/api/modules
           GITHUB_API: https://api.github.com
           GITHUB_TRENDING_URL: https://github.com/trending
           LANG: en_US.UTF-8
@@ -28,7 +34,7 @@ jobs:
       - run:
           command: |
             sudo sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
-            sudo dpkg-reconfigure --frontend=noninteractive locales
+            # sudo dpkg-reconfigure --frontend=noninteractive locales
             sudo update-locale LANG=en_US.UTF-8
       - run:
           working_directory: ./api
