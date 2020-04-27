@@ -2,7 +2,7 @@ version: 2.1
 
 jobs:
   build:
-    working_directory: ~/api
+    working_directory: /api
     docker:
       - image: circleci/python:3.7-buster
         environment:
@@ -11,7 +11,7 @@ jobs:
           GITHUB_TRENDING_URL: https://github.com/trending
           LANG: en_US.UTF-8
     steps:
-      - checkout '/api'
+      - checkout
       - run:
           command: |
             pip install --upgrade pip
