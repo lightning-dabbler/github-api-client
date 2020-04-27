@@ -1,4 +1,7 @@
 <h1 align="center">GitHub API Client</h1>
+<p align="center"><a href="https://circleci.com/gh/lightning-dabbler/github-api-client" target="_blank"><img src="https://circleci.com/gh/lightning-dabbler/github-api-client.svg?style=svg" alt="CircleCI Build Status"/>
+</a></p>
+
 
 > :octocat: [GitHub REST API v3]
 
