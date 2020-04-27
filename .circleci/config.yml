@@ -32,6 +32,6 @@ jobs:
           working_directory: ./api
           command: |
             ls -al tests/
-            sh ./api/run_tests.sh
+            sh run_tests.sh
 
 
