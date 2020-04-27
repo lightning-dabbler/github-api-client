@@ -8,11 +8,11 @@ jobs:
       default: ~/github-api-client
 
   build:
-    working_directory: <<parameters.workdir>>
+    working_directory: << parameters.workdir >>
     docker:
       - image: circleci/python:3.7-buster
         environment:
-          PYTHONPATH: <<parameters.workdir>>/api/modules
+          PYTHONPATH: ~/github-api-client/api/modules
           GITHUB_API: https://api.github.com
           GITHUB_TRENDING_URL: https://github.com/trending
           LANG: en_US.UTF-8
