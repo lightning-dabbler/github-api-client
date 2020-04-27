@@ -1,0 +1,31 @@
+version: 2.1
+
+jobs:
+  build:
+    working_directory: ~/api
+    docker:
+      - image: circleci/python:3.7-jessie
+        environment:
+          PYTHONPATH: /api/modules
+          GITHUB_API: https://api.github.com
+          GITHUB_TRENDING_URL: https://github.com/trending
+          LANG: en_US.UTF-8
+    steps:
+      - checkout
+      - run:
+          command: |
+            pip install --upgrade pip
+            pip install pipenv
+            pipenv lock --clear
+            pipenv install --system --deploy --ignore-pipfile --skip-lock --verbose
+      - run: apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y locales
+      - run:
+          command: |
+            sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+            dpkg-reconfigure --frontend=noninteractive locales
+            update-locale LANG=en_US.UTF-8
+      - run:
+          command: |
+            sh run_tests.sh
+
+
