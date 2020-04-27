@@ -6,7 +6,7 @@ jobs:
     docker:
       - image: circleci/python:3.7-buster
         environment:
-          PYTHONPATH: ${CIRCLE_WORKING_DIRECTORY}/api/modules
+          PYTHONPATH: $CIRCLE_WORKING_DIRECTORY/api/modules
           GITHUB_API: https://api.github.com
           GITHUB_TRENDING_URL: https://github.com/trending
           LANG: en_US.UTF-8
