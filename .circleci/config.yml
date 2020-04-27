@@ -28,9 +28,10 @@ jobs:
             sudo sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
             sudo dpkg-reconfigure --frontend=noninteractive locales
             sudo update-locale LANG=en_US.UTF-8
-      - run: ls -al
       - run:
+          working_directory: ./api
           command: |
+            ls -al tests/
             sh ./api/run_tests.sh
 
 
