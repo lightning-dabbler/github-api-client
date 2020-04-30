@@ -10,8 +10,7 @@ with description('Module: Search') as self:
             assert type(x[0]) == int, "First Item in Tuple is of type integer"
             assert type(x[1]) == list,  "Second Item in Tuple is of type List"
             assert type(x[2]) == dict,  "Third Item in Tuple is of type Dictionary"
-            if x[1]: 
-                y = x[1][0]
+            for y in x[1]: 
                 assert type(y) == dict, "Values in Second Item of Tuple are of type Dictionary" 
                 assert type(y['avatar_url'])==str, "avatar_url type String"
                 assert type(y['html_url'])==str, "html_url type String"
@@ -26,8 +25,7 @@ with description('Module: Search') as self:
             assert type(x1[0]) == int, "First Item in Tuple is of type integer"
             assert type(x1[1]) == list,  "Second Item in Tuple is of type List"
             assert type(x1[2]) == dict,  "Third Item in Tuple is of type Dictionary"
-            if x1[1]: 
-                y = x1[1][0]
+            for y in x1[1]: 
                 assert type(y) == dict, "Values in Second Item of Tuple are of type Dictionary" 
                 assert type(y['avatar_url'])==str, "avatar_url type String"
                 assert type(y['html_url'])==str, "html_url type String"
@@ -39,8 +37,7 @@ with description('Module: Search') as self:
             assert type(x2[0]) == int, "First Item in Tuple is of type integer"
             assert type(x2[1]) == list,  "Second Item in Tuple is of type List"
             assert type(x2[2]) == dict,  "Third Item in Tuple is of type Dictionary"
-            if x2[1]: 
-                y = x2[1][0]
+            for y in x2[1]: 
                 assert type(y) == dict, "Values in Second Item of Tuple are of type Dictionary" 
                 assert type(y['avatar_url'])==str, "avatar_url type String"
                 assert type(y['html_url'])==str, "html_url type String"
@@ -54,15 +51,14 @@ with description('Module: Search') as self:
             assert type(x[0]) == int , "First Item in Tuple is of type integer"
             assert type(x[1]) == list ,  "Second Item in Tuple is of type List"
             assert type(x[2]) == dict ,  "Third Item in Tuple is of type Dictionary"
-            if x[1]: 
-                y = x[1][0]
+            for y in x[1]: 
                 assert type(y) == dict,"Values in Second Item of Tuple are of type Dictionary"
                 assert type(y['forks_count']) == int, "forks_count type Integer"
                 assert type(y['stargazers_count']) == int, "stargazers_count type Integer"
                 assert type(y['watchers_count']) == int, "watchers_count type Integer"
                 assert type(y['html_url']) == str, "html_url type String"
-                if 'description' in y: assert type(y['description']) == str, "description type String"
-                if 'language' in y: assert type(y['language']) == str, "language type String"
+                if 'description' in y: assert type(y['description']) in (str,type(None)), "description type String or NoneType"
+                if 'language' in y: assert type(y['language']) in (str,type(None)), "language type String or NoneType"
                 assert type(y['name']) == str, "name type String"
                 owner = y['owner']
                 assert type(owner) == dict, "owner type Dictionary"
@@ -78,8 +74,7 @@ with description('Module: Search') as self:
             assert type(x[0]) == int , "First Item in Tuple is of type integer"
             assert type(x[1]) == list  ,  "Second Item in Tuple is of type List"
             assert type(x[2]) == dict  ,  "Third Item in Tuple is of type Dictionary"
-            if x[1]: 
-                y = x[1][0]
+            for y in x[1]: 
                 assert type(y) == dict, "Values in Second Item of Tuple are of type Dictionary" 
                 commit = y['commit']
                 assert type(commit) == dict, "commit type Dictionary"
