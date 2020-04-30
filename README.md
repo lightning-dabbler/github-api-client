@@ -271,6 +271,7 @@ Tech
 * [Vue.js]
 * [Vue Router]
 * [Vuex]
+* [Bootstrap]
 * [Nginx]
 
 Author
@@ -295,3 +296,4 @@ Author
 [Vue Router]:https://router.vuejs.org/
 [Vuex]:https://vuex.vuejs.org/
 [Nginx]:https://www.nginx.com/
+[Bootstrap]:https://getbootstrap.com/
