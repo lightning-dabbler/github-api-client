@@ -10,26 +10,29 @@
           >GitHub API</a>
         </p>
       </section>
-      <section class="py-3 results-length" v-else-if="payload.status_code === 403 && !payload.length">
+      <section
+        class="py-3 results-length"
+        v-else-if="payload.status_code === 403 && !payload.length"
+      >
         <p class="mb-0 bg-warning warning-text mx-auto">Please wait ~60 seconds to reuse!</p>
       </section>
       <section v-if="payload.endpoint==='repositories' && payload.items">
         <section class="py-3 results-length">
           <p class="mb-0 results-text mx-auto">{{payload.length}} Repository Result(s)!</p>
+          <search-results-repos
+            v-for="(item,index) in payload.items"
+            :forks_count="item.forks_count"
+            :stargazers_count="item.stargazers_count"
+            :watchers_count="item.watchers_count"
+            :html_url="item.html_url"
+            :language="item.language"
+            :description="item.description"
+            :name="item.name"
+            :owner="item.owner"
+            :index="index +1"
+            :key="index"
+          ></search-results-repos>
         </section>
-        <search-results-repos
-          v-for="(item,index) in payload.items"
-          :forks_count="item.forks_count"
-          :stargazers_count="item.stargazers_count"
-          :watchers_count="item.watchers_count"
-          :html_url="item.html_url"
-          :language="item.language"
-          :description="item.description"
-          :name="item.name"
-          :owner="item.owner"
-          :index="index +1"
-          :key="index"
-        ></search-results-repos>
       </section>
       <section v-else-if="payload.endpoint==='users' && payload.items">
         <section class="py-3 results-length">
@@ -57,7 +60,10 @@
           ></search-results-commits>
         </section>
       </section>
-      <section class="py-2 vld-parent d-flex justify-content-center align-items-center" v-if="payload.load_more">
+      <section
+        class="py-2 vld-parent d-flex justify-content-center align-items-center"
+        v-if="payload.load_more"
+      >
         <button type="button" class="btn btn-success" @click.prevent="loadMore">Load Next Page</button>
         <vue-loading
           :active.sync="getSearchBoxLoader.active"
