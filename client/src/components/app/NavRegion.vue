@@ -1,6 +1,7 @@
 <template>
   <nav class="navbar" v-lazy-container="{selector:'img'}">
     <section class="container">
+      <section class="mx-auto wrapper-nav-items">
       <router-link
         to="/"
         tag="a"
@@ -34,6 +35,7 @@
           </a>
         </li>
       </ul>
+      </section>
     </section>
   </nav>
 </template>
@@ -54,14 +56,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/static/css/custom.scss";
-
+.wrapper-nav-items{
+  display: flex;
+    align-items: center;
+}
 #emoji-nav {
   width: 60px;
   height: 60px;
   background-color: transparent;
   background-size: cover;
   margin: 0;
-  margin-left: auto;
 }
 
 img.direct-link {
@@ -69,27 +73,23 @@ img.direct-link {
   height: 25px;
   margin-top: -0.4rem;
 }
-// .nav,.nav-link {
-//   // float: right;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
+
 .nav-link {
   display: inline;
   padding: 0.2rem;
 }
 
-.nav {
-  margin-right: auto;
-}
-
 @media all and (max-width: 350px) {
+  .wrapper-nav-items{
+    display:block;
+    text-align:center;
+  }
   #emoji-nav {
     margin-left: auto;
     margin-right: auto;
   }
   .nav {
+    justify-content: center;
     margin-left: auto;
     margin-right: auto;
   }
