@@ -31,8 +31,16 @@
 - [Docker-Compose] version 1.22.0+
 
 ## Run App:
+- **Unix**
 ```bash
 sh prod_run.sh # http://localhost:80
+# or
+sudo sh prod_run.sh
+```
+- **Windows**
+```bat
+win_prod_run.bat 
+REM http://localhost:80
 ```
 
 APIs
