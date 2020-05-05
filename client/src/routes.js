@@ -6,10 +6,13 @@ const titles = {
     notFound: '404 - NOT FOUND'
 }
 
+// resolve|require bc some components are using combinations of
+// require and export
 
-const Home = () =>  import('views/HomePage.vue')
-const Search = () =>  import('views/SearchPage.vue')
-const NotFound = () => import('views/NotFoundPage.vue')
+const Home = resolve => require(['views/HomePage.vue'], m => resolve(m.default));  
+
+const Search = resolve => require(['views/SearchPage.vue'], m => resolve(m.default));
+const NotFound = resolve => require(['views/NotFoundPage.vue'], m => resolve(m.default));
 
 export const routes = [
     {
