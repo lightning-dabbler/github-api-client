@@ -2,7 +2,7 @@
 <p align="center"><a href="https://circleci.com/gh/lightning-dabbler/github-api-client" target="_blank"><img src="https://circleci.com/gh/lightning-dabbler/github-api-client.svg?style=svg" alt="CircleCI Build Status"/>
 </a></p>
 
-**:octocat: [GitHub REST API v3]**
+<p align="center"><strong><a href="https://developer.github.com/v3/" target="_blank">:octocat: GitHub REST API v3</a></strong></p>
 
 # Table of Contents
 - [Requirements](#requirements)
