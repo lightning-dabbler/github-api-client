@@ -6,7 +6,13 @@
 
 # Table of Contents
 - [Requirements](#requirements)
-- [Run App:](#run-app)
+- [App](#run-app)
+  - [Unix](#unix)
+    - [Download](#unix-download)
+    - [Run](#unix-run)
+  - [Windows](#windows)
+    - [Download](#windows-download)
+    - [Run](#windows-run)
 - [APIs](#apis)
 - [API Usage Examples](#api-usage-examples)
     - [Search](#search)
@@ -29,14 +35,21 @@
 - [Docker] Engine version 18.06.0+
 - [Docker-Compose] version 1.22.0+
 
-## Run App:
-- **Unix**
+## App<a id="run-app"></a>
+### Unix
+<strong><a id="unix-download" href="https://api.github.com/repos/lightning-dabbler/github-api-client/zipball/master">Unix Download</a></strong>
+
+#### Run <a id="unix-run"></a>
 ```bash
 sh prod_run.sh # http://localhost:80
 # or
 sudo sh prod_run.sh
 ```
-- **Windows**
+
+### Windows
+<strong><a id="windows-download" href="https://api.github.com/repos/lightning-dabbler/github-api-client/tarball/master">Windows Download</a></strong>
+
+#### Run <a id="windows-run"></a>
 ```bat
 win_prod_run.bat 
 REM http://localhost:80
