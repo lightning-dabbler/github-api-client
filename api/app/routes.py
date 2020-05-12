@@ -13,9 +13,9 @@ def home():
     logger.info(f'Route = {request.url}')
     logger.info('Root Route Successfully Pinged!')
     resources = {
-        'search':"http://localhost:5064/search",
-        'emojis':"http://localhost:5064/emojis",
-        'trending':"http://localhost:5064/trending"
+        'search':"<Scheme>://<Host><Directory>/search",
+        'emojis':"<Scheme>://<Host><Directory>/emojis",
+        'trending':"<Scheme>://<Host><Directory>/trending"
     }
     response = {
         'status_code':200,
@@ -27,7 +27,7 @@ def home():
 def search_resource():
     logger.info(f'Route = {request.url}')
     response = {
-    "uri":"http://localhost:5064/search/<string:endpoint>/<path:query>",
+    "uri":"<Scheme>://<Host><Directory>/search/<string:endpoint>/<path:query>",
     "endpoint":{
         "values":[
         "repositories",
@@ -38,7 +38,7 @@ def search_resource():
     },
     "query": {
         "documentation_url": "https://developer.github.com/v3/search",
-        "example":"http://localhost:5064/search/commits/test+repo:vuejs/vue",
+        "example":"<Scheme>://<Host><Directory>/search/commits/test+repo:vuejs/vue",
         "optional":False
     }
     }
