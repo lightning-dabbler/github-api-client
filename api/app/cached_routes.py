@@ -1,14 +1,19 @@
 from flask import Blueprint,jsonify,request
 from . import helpers
-import redis
+# import redis
 import os
 import json
-
+from rediscluster import RedisCluster
 import logging
 logger = logging.getLogger(__name__)
 
-r = redis.from_url(os.environ.get('REDIS_URL_NET'))
-
+# r = redis.from_url(os.environ.get('REDIS_URL_NET'))
+startup_nodes = [
+    {"host":"redis-1","port":6380},
+    {"host":"redis-2","port":6381},
+    {"host":"redis-3","port":6382}
+]
+r = RedisCluster(startup_nodes=startup_nodes, decode_responses=True)
 cache_bp = Blueprint('cache_bp',__name__)
 
 

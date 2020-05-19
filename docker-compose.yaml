@@ -45,14 +45,132 @@ services:
     redis_prod:
         image: redis:6.0-rc2
         container_name: redis-cache-prod
-        command: ["redis-server", "--appendonly", "yes"]
+        entrypoint: sh /redis-cluster.sh
+        depends_on:
+            - redis-1
+            - redis-2
+            - redis-3
+            - redis-4
+            - redis-5
+            - redis-6
         expose:
             - 6379
         networks: 
-            - web-prod
+            redis-net:
+                ipv4_address: 10.0.0.2
         volumes:
             - redis-data-prod:/data
+            - ./redis/redis-cluster.sh:/redis-cluster.sh
+
+    redis-1:
+        build: 
+            context: ./redis
+        container_name: redis_1
+        image: redis-nodes
+        environment:
+            _REDIS_PORT: 6380
+        expose: 
+            - 6380
+        networks:
+            redis-net:
+                ipv4_address: 10.0.0.11
+            web-prod:
+        volumes:
+            - ./redis/entrypoint.sh:/source-dir/entrypoint.sh
+            - ./redis/redis.conf:/source-dir/template.conf
+
+    redis-2:
+        build: 
+            context: ./redis
+        container_name: redis_2
+        image: redis-nodes
+        environment:
+            _REDIS_PORT: 6381
+        expose: 
+            - 6381
+        networks:
+            redis-net:
+                ipv4_address: 10.0.0.12
+            web-prod:
+        volumes:
+            - ./redis/entrypoint.sh:/source-dir/entrypoint.sh
+            - ./redis/redis.conf:/source-dir/template.conf
+    
+    redis-3:
+        build: 
+            context: ./redis
+        container_name: redis_3
+        image: redis-nodes
+        environment:
+            _REDIS_PORT: 6382
+        expose: 
+            - 6382
+        networks:
+            redis-net:
+                ipv4_address: 10.0.0.13
+            web-prod:
+        volumes:
+            - ./redis/entrypoint.sh:/source-dir/entrypoint.sh
+            - ./redis/redis.conf:/source-dir/template.conf
+    
+    redis-4:
+        build: 
+            context: ./redis
+        container_name: redis_4
+        image: redis-nodes
+        environment:
+            _REDIS_PORT: 6383
+        expose: 
+            - 6383
+        networks:
+            redis-net:
+                ipv4_address: 10.0.0.14
+            web-prod:
+        volumes:
+            - ./redis/entrypoint.sh:/source-dir/entrypoint.sh
+            - ./redis/redis.conf:/source-dir/template.conf
+    
+    redis-5:
+        build: 
+            context: ./redis
+        container_name: redis_5
+        image: redis-nodes
+        environment:
+            _REDIS_PORT: 6384
+        expose: 
+            - 6384
+        networks:
+            redis-net:
+                ipv4_address: 10.0.0.15
+            web-prod:
+        volumes:
+            - ./redis/entrypoint.sh:/source-dir/entrypoint.sh
+            - ./redis/redis.conf:/source-dir/template.conf
+
+    redis-6:
+        build: 
+            context: ./redis
+        container_name: redis_6
+        image: redis-nodes
+        environment:
+            _REDIS_PORT: 6385
+        expose: 
+            - 6385
+        networks:
+            redis-net:
+                ipv4_address: 10.0.0.16
+            web-prod:
+        volumes:
+            - ./redis/entrypoint.sh:/source-dir/entrypoint.sh
+            - ./redis/redis.conf:/source-dir/template.conf
+    
+    
 networks: 
     web-prod:
+    redis-net:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 10.0.0.0/16
 volumes:
     redis-data-prod:
