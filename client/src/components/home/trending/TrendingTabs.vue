@@ -82,11 +82,11 @@ export default {
       this.curr_since = since.charAt(0).toUpperCase() + since.slice(1);
       this.since_arr = ["Daily", "Weekly", "Monthly"];
       this.active = payload.active;
-      this.$store.commit("updateTrendingFlags", payload);
       await this.$store.dispatch("callTrending", {
         developers: payload.active.developers,
         since: payload.since
       });
+      this.$store.commit("updateTrendingFlags", payload);
       this.$store.commit("updateTrendingLoader",false)
     },
     updateSince: async function updateSince(freq) {
@@ -94,8 +94,8 @@ export default {
       this.$store.commit("updateTrendingLoader",true)
       const developers = this.active.developers;
       const since = freq.toLowerCase();
-      this.$store.commit("updateTrendingFlags", { since });
       await this.$store.dispatch("callTrending", { developers, since });
+      this.$store.commit("updateTrendingFlags", { since });
       this.curr_since = freq;
       this.updateRoute(since,developers)
       this.$store.commit("updateTrendingLoader",false)
@@ -116,8 +116,8 @@ export default {
             repositories
           }
         };
-        this.$store.commit("updateTrendingFlags", payload);
         await this.$store.dispatch("callTrending", { developers, since });
+        this.$store.commit("updateTrendingFlags", payload);
       } else if (!developers && name === "repositories") {
         return;
       } else {
@@ -130,8 +130,8 @@ export default {
             repositories
           }
         };
-        this.$store.commit("updateTrendingFlags", payload);
         await this.$store.dispatch("callTrending", { developers, since });
+        this.$store.commit("updateTrendingFlags", payload);
       }
       this.active.developers = developers;
       this.active.repositories = !developers;
