@@ -1,19 +1,31 @@
 from flask import Blueprint,jsonify,request
 from . import helpers
-# import redis
+import redis
 import os
 import json
 from rediscluster import RedisCluster
 import logging
 logger = logging.getLogger(__name__)
 
-# r = redis.from_url(os.environ.get('REDIS_URL_NET'))
-startup_nodes = [
-    {"host":"redis-1","port":6380},
-    {"host":"redis-2","port":6381},
-    {"host":"redis-3","port":6382}
-]
-r = RedisCluster(startup_nodes=startup_nodes, decode_responses=True)
+APP_ENV = os.environ.get('APP_ENV','development')
+
+if APP_ENV == 'production':
+    logger.info('Redis Production Cluster Subnet: 10.0.0.0/16 Ports: 6380-6385')
+
+    startup_nodes = [
+        {"host":"10.0.0.11","port":6380},
+        {"host":"10.0.0.12","port":6381},
+        {"host":"10.0.0.13","port":6382},
+        {"host":"10.0.0.14","port":6383},
+        {"host":"10.0.0.15","port":6384},
+        {"host":"10.0.0.16","port":6385}
+    ]
+    r = RedisCluster(startup_nodes=startup_nodes, decode_responses=True)
+else:
+    REDIS_URL_NET = os.environ.get('REDIS_URL_NET')
+    logger.info(f'Redis Development node {REDIS_URL_NET}')
+    r = redis.from_url(REDIS_URL_NET)
+
 cache_bp = Blueprint('cache_bp',__name__)
 
 

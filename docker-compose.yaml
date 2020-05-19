@@ -9,8 +9,7 @@ services:
             context: ./api
             dockerfile: Dockerfile
         environment:
-            REDIS_URL_NET: redis://redis_prod:6379
-            APP_ENV: ${APP_ENV}
+            APP_ENV: production
             PYTHONPATH: /api/modules
             GITHUB_API: https://api.github.com
             GITHUB_TRENDING_URL: https://github.com/trending
@@ -20,6 +19,7 @@ services:
             - "5067:2067"
         networks: 
             - web-prod
+            - redis-net
         depends_on:
             - redis_prod
         entrypoint: 
@@ -59,7 +59,7 @@ services:
             redis-net:
                 ipv4_address: 10.0.0.2
         volumes:
-            - redis-data-prod:/data
+            - redis-data-prod-cluster:/data
             - ./redis/redis-cluster.sh:/redis-cluster.sh
 
     redis-1:
@@ -74,10 +74,10 @@ services:
         networks:
             redis-net:
                 ipv4_address: 10.0.0.11
-            web-prod:
         volumes:
             - ./redis/entrypoint.sh:/source-dir/entrypoint.sh
             - ./redis/redis.conf:/source-dir/template.conf
+            - redis-data-prod-1:/data
 
     redis-2:
         build: 
@@ -91,10 +91,10 @@ services:
         networks:
             redis-net:
                 ipv4_address: 10.0.0.12
-            web-prod:
         volumes:
             - ./redis/entrypoint.sh:/source-dir/entrypoint.sh
             - ./redis/redis.conf:/source-dir/template.conf
+            - redis-data-prod-2:/data
     
     redis-3:
         build: 
@@ -108,10 +108,10 @@ services:
         networks:
             redis-net:
                 ipv4_address: 10.0.0.13
-            web-prod:
         volumes:
             - ./redis/entrypoint.sh:/source-dir/entrypoint.sh
             - ./redis/redis.conf:/source-dir/template.conf
+            - redis-data-prod-3:/data
     
     redis-4:
         build: 
@@ -125,10 +125,10 @@ services:
         networks:
             redis-net:
                 ipv4_address: 10.0.0.14
-            web-prod:
         volumes:
             - ./redis/entrypoint.sh:/source-dir/entrypoint.sh
             - ./redis/redis.conf:/source-dir/template.conf
+            - redis-data-prod-4:/data
     
     redis-5:
         build: 
@@ -142,10 +142,10 @@ services:
         networks:
             redis-net:
                 ipv4_address: 10.0.0.15
-            web-prod:
         volumes:
             - ./redis/entrypoint.sh:/source-dir/entrypoint.sh
             - ./redis/redis.conf:/source-dir/template.conf
+            - redis-data-prod-5:/data
 
     redis-6:
         build: 
@@ -159,10 +159,10 @@ services:
         networks:
             redis-net:
                 ipv4_address: 10.0.0.16
-            web-prod:
         volumes:
             - ./redis/entrypoint.sh:/source-dir/entrypoint.sh
             - ./redis/redis.conf:/source-dir/template.conf
+            - redis-data-prod-6:/data
     
     
 networks: 
@@ -173,4 +173,10 @@ networks:
             config:
                 - subnet: 10.0.0.0/16
 volumes:
-    redis-data-prod:
+    redis-data-prod-1:
+    redis-data-prod-2:
+    redis-data-prod-3:
+    redis-data-prod-4:
+    redis-data-prod-5:
+    redis-data-prod-6:
+    redis-data-prod-cluster:

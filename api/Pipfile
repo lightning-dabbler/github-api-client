@@ -10,7 +10,7 @@ requests="~=2.23.0"
 beautifulsoup4="~=4.9.0"
 Flask-Cors="~=3.0.0"
 gunicorn="~=20.0.0"
-redis-py-cluster="*"
+redis-py-cluster="~=2.0.0"
 
 [requires]
 python_version = "3.7"

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-APP_ENV=production docker-compose up
+docker-compose up

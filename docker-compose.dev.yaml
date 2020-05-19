@@ -13,7 +13,7 @@ services:
             dockerfile: Dockerfile
         environment:
             <<: *common-variables
-            APP_ENV: ${APP_ENV}
+            APP_ENV: development
             PYTHONPATH: /api/modules
             GITHUB_API: https://api.github.com
             GITHUB_TRENDING_URL: https://github.com/trending
