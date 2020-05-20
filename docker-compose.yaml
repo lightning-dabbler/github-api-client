@@ -13,6 +13,7 @@ services:
             PYTHONPATH: /api/modules
             GITHUB_API: https://api.github.com
             GITHUB_TRENDING_URL: https://github.com/trending
+            X_GUNICORN_PORT: 2067
         volumes:
             - ./api:/api
         ports:
