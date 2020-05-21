@@ -282,25 +282,37 @@ Response
 <img src="./screenshots/trending-repos.png" alt="Trending Repositories today; uri = http://localhost:80/api/cached/trending" height="auto" width="500"/>
 </p>
 
-Tech 
-------
-* [Flask]
-* [Mamba]
-* [Beautifulsoup4]
-* [Docker]
-* [Docker-Compose]
-* [Redis]
-* [Node-Redis]
-* [Gunicorn]
-* [Redis-Python-API]
-* [Vue.js]
-* [Vue Router]
-* [Vuex]
-* [Bootstrap]
-* [Nginx]
+## Tech
+- __Environment__
+  - [Docker]
+  - [Docker-Compose]
 
-Author
---------
+- __Frontend__
+  - [Vue.js]
+  - [Vue Router]
+  - [Vuex]
+  - [Bootstrap]
+
+- __Web Server__
+  - [Nginx]
+
+- __Backend__
+  - [Gunicorn]
+  - [Redis]
+  - [Flask]
+    - [Beautifulsoup4]
+    - [Redis Cluster]
+    - [Redis-Python-API]
+  - [GitHub REST API v3]
+- __Testing__
+  - [Mamba]
+- __Other__
+  - [Node-Redis]
+
+
+
+## Author
+
 * Osarodion Irabor
 
 [Flask]: http://flask.pocoo.org/
@@ -317,6 +329,7 @@ Author
 [Node-Redis]:https://github.com/NodeRedis/node-redis
 [Gunicorn]:https://gunicorn.org/
 [Redis-Python-API]:https://github.com/andymccurdy/redis-py
+[Redis Cluster]:https://pypi.org/project/redis-py-cluster/
 [Vue.js]:https://vuejs.org/
 [Vue Router]:https://router.vuejs.org/
 [Vuex]:https://vuex.vuejs.org/
