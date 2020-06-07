@@ -21,9 +21,10 @@ with description('Module: Trending') as self:
                 assert type(y['avatar']) == str, "avatar type String"
                 built_by = y['built_by']
                 assert type(built_by) == list, "built_by type List"
-                assert type(built_by[0]['avatar'])==str, "built_by.avatar type String"
-                assert type(built_by[0]['profile']) == str, "built_by.profile type String" 
-                assert type(built_by[0]['username']) == str, "built_by.username type String"
+                if len(built_by) > 0:
+                    assert type(built_by[0]['avatar'])==str, "built_by.avatar type String"
+                    assert type(built_by[0]['profile']) == str, "built_by.profile type String" 
+                    assert type(built_by[0]['username']) == str, "built_by.username type String"
                 if 'description' in y: assert type(y['description']) == str, "description type String"
                 assert type(y['forks']) == int, "forks type Integer"
                 assert type(y['stars']) == int, "stars type Integer"

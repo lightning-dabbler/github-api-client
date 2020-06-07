@@ -44,7 +44,7 @@
         </div>
         <p class="repo-stars text-muted">{{present_freq_stars}}</p>
       </div>
-      <div class="card-footer">
+      <div v-if="built_by.length > 0" class="card-footer">
         <div class="card-title text-muted font-weight-normal">Built By:</div>
         <a
           v-for="(worker,index) in built_by"
