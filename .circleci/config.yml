@@ -32,4 +32,4 @@ jobs:
       - run:
           working_directory: ./api
           command: |
-            sh run_tests.sh
+            ./run-tests.sh

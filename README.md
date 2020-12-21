@@ -41,13 +41,7 @@
 
 #### Run <a id="unix-run"></a>
 ```bash
-bash prod_run.sh # http://localhost:80
-# or
-sh prod_run.sh 
-# or
-sudo bash prod_run.sh
-# or
-sudo sh prod_run.sh
+./prod-run.sh # http://localhost:80
 ```
 
 ### Windows

@@ -1,6 +1,6 @@
 Dockerfile*
 **/.DS_Store
 tests 
-run_tests.sh
+run-tests.sh
 entrypoint.sh
 debug.log

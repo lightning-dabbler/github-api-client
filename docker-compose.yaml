@@ -24,7 +24,6 @@ services:
         depends_on:
             - redis_prod
         entrypoint: 
-            - sh
             - /api/entrypoint.sh
 
     github_web_nginx:
@@ -46,7 +45,7 @@ services:
     redis_prod:
         image: redis:6.0-rc2
         container_name: redis-cache-prod
-        entrypoint: sh /redis-cluster.sh
+        entrypoint: /redis-cluster.sh
         depends_on:
             - redis-1
             - redis-2
