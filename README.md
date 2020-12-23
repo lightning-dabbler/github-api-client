@@ -41,7 +41,7 @@
 
 #### Run <a id="unix-run"></a>
 ```bash
-./prod-run.sh # http://localhost:80
+./prod-run # http://localhost:80
 ```
 
 ### Windows
