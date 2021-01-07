@@ -16,7 +16,7 @@ jobs:
       - run:
           working_directory: ./api
           command: |
-            pip install --upgrade pip
+            sudo pip install --upgrade pip
             python -m pip install -r deps/requirements.txt
       - run:
           command: | 
