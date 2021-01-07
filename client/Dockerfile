@@ -6,7 +6,8 @@ WORKDIR /client
 
 COPY . .
 
-RUN npm install -g npm \
+RUN npm cache clean --force \ 
+    && npm install -g npm \
     && npm install -g --force yarn \
     && yarn install \
     && yarn build

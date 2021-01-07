@@ -26,8 +26,6 @@ services:
             - web-dev
         depends_on:
             - redis
-        entrypoint: 
-            - /api/entrypoint.sh
 
     github_web:
         container_name: gh_client_side-dev

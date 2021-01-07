@@ -23,8 +23,6 @@ services:
             - redis-net
         depends_on:
             - redis_prod
-        entrypoint: 
-            - /api/entrypoint.sh
 
     github_web_nginx:
         container_name: gh_client_side-nginx

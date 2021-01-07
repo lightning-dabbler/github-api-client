@@ -7,3 +7,4 @@ __pycache__
 yarn-error.log
 debug.log
 .env
+.python-version

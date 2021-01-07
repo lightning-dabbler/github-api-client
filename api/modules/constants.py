@@ -1,4 +1,4 @@
 import os
 
-GITHUB_API = os.getenv('GITHUB_API')
-GITHUB_TRENDING_URL = os.getenv('GITHUB_TRENDING_URL')
+GITHUB_API = os.getenv("GITHUB_API")
+GITHUB_TRENDING_URL = os.getenv("GITHUB_TRENDING_URL")

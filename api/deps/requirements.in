@@ -1,0 +1,7 @@
+Flask~=1.1
+mamba~=0.11
+requests~=2.23
+beautifulsoup4~=4.9
+Flask-Cors~=3.0
+gunicorn~=20.0
+redis-py-cluster~=2.0

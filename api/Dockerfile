@@ -1,18 +1,14 @@
-FROM python:3.7-slim
+FROM python:3.7.5-slim
 
 EXPOSE 2064
 
-WORKDIR /build
+WORKDIR /api
 
-COPY Pipfile /build/
+COPY . .
 
+RUN pip install --upgrade pip 
 
-RUN pip install --upgrade pip \
-    && pip install pipenv \
-    && pipenv lock --clear
-
-RUN pipenv install --system --deploy --ignore-pipfile --skip-lock --verbose
-
+RUN python -m pip install -r deps/requirements.txt
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y locales
 
@@ -24,8 +20,4 @@ ENV LANG en_US.UTF-8
 
 ENV PYTHONPATH /api/modules
 
-WORKDIR /api
-
-COPY . /api
-
-CMD gunicorn -c gunicorn.conf.py wsgi:app
+CMD gunicorn -c gunicorn.conf.py wsgi:app 

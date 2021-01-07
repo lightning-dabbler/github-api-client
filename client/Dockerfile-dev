@@ -4,6 +4,8 @@ EXPOSE 8089
 
 WORKDIR /client
 
+RUN npm cache clean --force
+
 RUN npm install -g npm
 
 RUN npm install -g --force yarn
