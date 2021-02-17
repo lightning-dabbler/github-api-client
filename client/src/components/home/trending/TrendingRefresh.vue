@@ -2,15 +2,19 @@
   <section id="trending-refresh" class="container">
     <div class="row align-items-center">
       <div class="col-md-6 text-center mb-1">
-        <button type="button" class="refresh-button btn btn-light" @click.prevent="refreshTrending">
+        <button
+          type="button"
+          class="refresh-button btn btn-light"
+          @click.prevent="refreshTrending"
+        >
           <span class="refresh-symbol">Refresh</span>
         </button>
       </div>
       <div class="col-md-6 text-center mb-1">
-        <p
-          class="last-pulled mb-0"
-          v-if="getTrendingFlags.headers"
-        ><span class="font-weight-bold">Last Pulled:</span> {{getTrendingFlags.headers.date}}</p>
+        <p class="last-pulled mb-0" v-if="getTrendingFlags.headers">
+          <span class="font-weight-bold">Last Pulled:</span>
+          {{ getTrendingFlags.headers.date || getTrendingFlags.headers.Date }}
+        </p>
       </div>
     </div>
   </section>
@@ -38,17 +42,17 @@ export default {
       await this.$store.dispatch("callTrending", {
         developers,
         since,
-        refresh: true
+        refresh: true,
       });
       this.$store.commit("updateTrendingLoader", false);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
 @import "@/static/css/custom.scss";
-$last-pulled-bg-color:#DEF7D1;
-$hover-refresh-button: #E8EDE5;
+$last-pulled-bg-color: #def7d1;
+$hover-refresh-button: #e8ede5;
 
 #trending-refresh {
   border-bottom: 1px solid $ternary-color;
@@ -61,7 +65,7 @@ $hover-refresh-button: #E8EDE5;
   background-color: $hover-refresh-button;
 }
 .last-pulled {
-  background-color:$last-pulled-bg-color;
+  background-color: $last-pulled-bg-color;
 }
 
 span.refresh-symbol::before {
