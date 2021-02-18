@@ -16,7 +16,7 @@ with description("Module: Trending") as self:
             assert type(x[1]) == list, "Second Item in Tuple is of type List"
             assert type(x[2]) == dict, "Third Item in Tuple is of type Dictionary"
 
-            header_date = x[2]["date"] == str, "header.date type String"
+            header_date = x[2]["Date"] == str, "header.Date type String"
 
             for y in x[1]:
                 assert (
@@ -69,7 +69,7 @@ with description("Module: Trending") as self:
             assert type(x[1]) == list, "Second Item in Tuple is of type List"
             assert type(x[2]) == dict, "Third Item in Tuple is of type Dictionary"
 
-            header_date = x[2]["date"] == str, "header.date type String"
+            header_date = x[2]["Date"] == str, "header.Date type String"
 
             for y in x[1]:
                 assert (

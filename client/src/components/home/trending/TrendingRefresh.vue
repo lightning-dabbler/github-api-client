@@ -13,7 +13,7 @@
       <div class="col-md-6 text-center mb-1">
         <p class="last-pulled mb-0" v-if="getTrendingFlags.headers">
           <span class="font-weight-bold">Last Pulled:</span>
-          {{ getTrendingFlags.headers.date || getTrendingFlags.headers.Date }}
+          {{ getTrendingFlags.headers.Date }}
         </p>
       </div>
     </div>
