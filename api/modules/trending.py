@@ -64,7 +64,7 @@ def __parse_html_response(html, developer_flag):
 
 
 def __construct_developer_data(base_url, item, html_tag):
-    img_tag = html_tag.select_one("div > a > img.rounded-1")
+    img_tag = html_tag.select_one("div > a > img.rounded.avatar-user")
     name = html_tag.select_one("div h1.h3 > a")
     repo_a_tag = html_tag.select_one("article h1.h4 > a")
     repo_description = html_tag.select_one("article div.f6.mt-1")
